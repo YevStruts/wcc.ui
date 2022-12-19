@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: wco-ui
+    image: wco-ui-i
+    build:
+      context: .
+    ports:
+      - 8181:80
