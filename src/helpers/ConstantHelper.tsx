@@ -1,4 +1,4 @@
-const API = "https://localhost:7138/api";
+const API = "http://localhost:5001/api";
 
 export const ApiUrls = {
     player_rating: `${API}/player/rating`,
