@@ -10,6 +10,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import SignInButton from "../components/SignInButton";
+import Logo from "../components/Logo";
 
 const pages = [
     { title: "News", url: "/news" },
@@ -18,8 +19,6 @@ const pages = [
 ];
 
 const Header = () => {
-    const Logo = "WCO";
-
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -38,7 +37,7 @@ const Header = () => {
             <Container>
                 <Toolbar disableGutters>
                     <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: "none", md: "flex" } }}>
-                        {Logo}
+                        <Logo width="100%" height="40px" />
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -83,7 +82,7 @@ const Header = () => {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
                     >
-                        {Logo}
+                        <Logo width="100%" height="40px" />
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                         {pages.map((page) => (
