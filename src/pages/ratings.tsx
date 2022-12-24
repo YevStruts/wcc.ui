@@ -3,13 +3,13 @@ import { Grid } from "@mui/material";
 import Layout from "../layout/layout";
 import { GetRating } from "../services/PlayerService";
 import PageTitle from "../components/PageTitle";
-import { Player } from "../models/Player";
+import { PlayerModel } from "../models/PlayerModel";
 import GridRating from "../components/GridRating";
 
 const Title = "WORLD COSSACKS ORGANISATION RANKING JANUARY 2022";
 
 const Ratings = () => {
-    const [players, setPlayers] = useState<Player[]>([]);
+    const [players, setPlayers] = useState<PlayerModel[]>([]);
 
     useEffect(() => {
         GetRating().then((players) => {

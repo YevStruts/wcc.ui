@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useRoutes } from "react-router-dom";
 import { GetToken } from "../helpers/AuthHelper";
-import News from "../pages/news";
+import NewsItem from "../pages/news-item";
+import NewsList from "../pages/news-list";
 import Ratings from "../pages/ratings";
 
 (function () {
@@ -16,7 +17,8 @@ import Ratings from "../pages/ratings";
 const Routes = () => {
     return useRoutes([
         { path: "/", element: <Ratings /> },
-        { path: "news", element: <News /> },
+        { path: "news-list", element: <NewsList /> },
+        { path: "news-item", element: <NewsItem /> },
         { path: "ratings", element: <Ratings /> },
         // ...
     ]);

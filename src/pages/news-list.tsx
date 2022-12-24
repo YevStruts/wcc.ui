@@ -3,16 +3,16 @@ import { useEffect, useState } from "react";
 import ActionAreaCard from "../components/ActionAreaCard";
 import PageTitle from "../components/PageTitle";
 import Layout from "../layout/layout";
-import { NewsItem } from "../models/NewsItem";
-import { GetNews } from "../services/NewsService";
+import { NewsItemModel } from "../models/NewsItemModel";
+import { GetNewsList } from "../services/NewsService";
 
 const Title = "NEWS";
 
-const News = () => {
-    const [news, setNewsList] = useState<NewsItem[]>([]);
+const NewsList = () => {
+    const [newsList, setNewsList] = useState<NewsItemModel[]>([]);
 
     useEffect(() => {
-        GetNews().then((news) => {
+        GetNewsList().then((news) => {
             setNewsList(news);
         });
     }, []);
@@ -25,7 +25,7 @@ const News = () => {
                 </Grid>
                 <Grid item xs={12}>
                     <Grid container spacing={2}>
-                        {news.map(({ id, name, description, image_url }: any) => {
+                        {newsList.map(({ id, name, description, image_url }: any) => {
                             return (
                                 <Grid item xs={12} sm={6} md={4} key={id}>
                                     <ActionAreaCard
@@ -43,4 +43,4 @@ const News = () => {
         </Layout>
     );
 };
-export default News;
+export default NewsList;

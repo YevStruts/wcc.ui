@@ -1,4 +1,4 @@
-export interface NewsItem {
+export interface NewsItemModel {
     id: number;
     name: string;
     description: string;
