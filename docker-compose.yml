@@ -2,8 +2,8 @@ version: "3.8"
 
 services:
   app:
-    container_name: wco.ui
-    image: wco.ui.i
+    container_name: wcc.ui
+    image: wcc.ui.i
     build:
       context: .
     ports:
