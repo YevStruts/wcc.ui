@@ -14,7 +14,6 @@ import Logo from "../components/Logo";
 
 const pages = [
     { title: "News", url: "/news" },
-    { title: "Poll", url: "/poll" },
     { title: "Ratings", url: "/ratings" },
 ];
 
