@@ -4,7 +4,8 @@ const API = "http://localhost:5001/api";
 export const ApiUrls = {
     player_rating: `${API}/player/rating`,
     player_poll: `${API}/player/poll`,
-    news_list: `${API}/news/list`,
+    news: `${API}/news/list`,
+    news_article: `${API}/news/article`,
     discord_authorize: `${API}/discord/authorize`,
     discord_exchange: `${API}/discord/exchange`,
 };

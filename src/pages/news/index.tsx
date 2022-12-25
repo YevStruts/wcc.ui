@@ -1,10 +1,10 @@
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import ActionAreaCard from "../components/ActionAreaCard";
-import PageTitle from "../components/PageTitle";
-import Layout from "../layout/layout";
-import { NewsItemModel } from "../models/NewsItemModel";
-import { GetNewsList } from "../services/NewsService";
+import ActionAreaCard from "../../components/ActionAreaCard";
+import PageTitle from "../../components/PageTitle";
+import Layout from "../../layout/layout";
+import { NewsItemModel } from "../../models/NewsItemModel";
+import { GetNewsList } from "../../services/NewsService";
 
 const Title = "NEWS";
 

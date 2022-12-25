@@ -13,7 +13,7 @@ import SignInButton from "../components/SignInButton";
 import Logo from "../components/Logo";
 
 const pages = [
-    { title: "News", url: "/news-list" },
+    { title: "News", url: "/news" },
     { title: "Ratings", url: "/ratings" },
 ];
 

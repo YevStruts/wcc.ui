@@ -11,10 +11,14 @@ interface ActionAreaCardProps {
     image_url: string;
 }
 
+const handleOnCartClick = (id: number) => {
+    window.location.href = "/news/article?id=" + id;
+};
+
 const ActionAreaCard = ({ id, name, description, image_url }: ActionAreaCardProps) => {
     return (
         <Card sx={{ maxWidth: 345 }}>
-            <CardActionArea>
+            <CardActionArea onClick={() => handleOnCartClick(id)}>
                 <CardMedia component="img" height="140" image={image_url} alt="green iguana" />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">

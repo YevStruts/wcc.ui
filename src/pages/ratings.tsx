@@ -6,7 +6,7 @@ import PageTitle from "../components/PageTitle";
 import { PlayerModel } from "../models/PlayerModel";
 import GridRating from "../components/GridRating";
 
-const Title = "WORLD COSSACKS ORGANISATION RANKING JANUARY 2022";
+const Title = "WORLD COSSACKS COMMUNITY RANKING JANUARY 2022";
 
 const Ratings = () => {
     const [players, setPlayers] = useState<PlayerModel[]>([]);
