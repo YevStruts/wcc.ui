@@ -8,7 +8,6 @@ import {
     TableCell,
     tableCellClasses,
 } from "@mui/material";
-import { PlayerModel } from "../models/PlayerModel";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -30,8 +29,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
+export interface PlayerProps {
+    id: number;
+    name: string;
+}
+
 interface GridRatingProps {
-    players: PlayerModel[];
+    players: PlayerProps[];
 }
 
 const GridRating = ({ players }: GridRatingProps) => {

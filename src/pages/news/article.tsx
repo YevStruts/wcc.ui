@@ -3,12 +3,18 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PageTitle from "../../components/PageTitle";
 import Layout from "../../layout/layout";
-import { NewsItemModel } from "../../models/NewsItemModel";
 import { GetNewsItem } from "../../services/NewsService";
 
-const NewsItem = () => {
+export interface ArticleProps {
+    id: number;
+    name: string;
+    description: string;
+    image_url: string;
+}
+
+const Article = () => {
     const [searchParams] = useSearchParams();
-    const [newsItem, setNewsItem] = useState<NewsItemModel>();
+    const [newsItem, setNewsItem] = useState<ArticleProps>();
 
     useEffect(() => {
         let id = searchParams.get("id") ?? "0";
@@ -32,4 +38,4 @@ const NewsItem = () => {
         </Layout>
     );
 };
-export default NewsItem;
+export default Article;

@@ -8,4 +8,5 @@ export const ApiUrls = {
     news_article: `${API}/news/article`,
     discord_authorize: `${API}/discord/authorize`,
     discord_exchange: `${API}/discord/exchange`,
+    tournaments: `${API}/tournaments/list`,
 };

@@ -15,6 +15,7 @@ import Logo from "../components/Logo";
 const pages = [
     { title: "News", url: "/news" },
     { title: "Ratings", url: "/ratings" },
+    { title: "Tournaments", url: "/tournaments" },
 ];
 
 const Header = () => {

@@ -1,25 +1,20 @@
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import ActionAreaCard from "../../components/ActionAreaCard";
+import TournamentCard, { TournamentCardProps } from "../../components/TournamentCard";
 import PageTitle from "../../components/PageTitle";
 import Layout from "../../layout/layout";
-import { GetNewsList } from "../../services/NewsService";
-import { ArticleProps } from "./article";
+import { GetTournamentsList } from "../../services/TournamentsService";
 
-const Title = "NEWS";
+const Title = "Tournaments";
 
-const News = () => {
-    const [newsList, setNewsList] = useState<ArticleProps[]>([]);
+const Tournaments = () => {
+    const [tournamentsList, setTournamentsList] = useState<TournamentCardProps[]>([]);
 
     useEffect(() => {
-        GetNewsList().then((news) => {
-            setNewsList(news);
+        GetTournamentsList().then((tournaments) => {
+            setTournamentsList(tournaments);
         });
     }, []);
-
-    const handleOnCartClick = (id: number) => {
-        window.location.href = "/news/article?id=" + id;
-    };
 
     return (
         <Layout>
@@ -29,15 +24,16 @@ const News = () => {
                 </Grid>
                 <Grid item xs={12}>
                     <Grid container spacing={2}>
-                        {newsList.map(({ id, name, description, image_url }: any) => {
+                        {tournamentsList.map(({ id, name, image_url, count_players, date_start, date_created }: TournamentCardProps) => {
                             return (
                                 <Grid item xs={12} sm={6} md={4} key={id}>
-                                    <ActionAreaCard
+                                    <TournamentCard
                                         id={id}
                                         name={name}
-                                        description={description}
                                         image_url={image_url}
-                                        on_click={() => handleOnCartClick(id)}
+                                        count_players={count_players}
+                                        date_start={date_start}
+                                        date_created={date_created}
                                     />
                                 </Grid>
                             );
@@ -48,4 +44,4 @@ const News = () => {
         </Layout>
     );
 };
-export default News;
+export default Tournaments;
