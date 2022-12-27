@@ -16,9 +16,10 @@ export interface TournamentCardProps {
   count_players: number;
   date_start: string;
   date_created: string;
+  on_learnmore_click: () => void;
 }
 
-export default function TournamentCard({ id, name, image_url, count_players, date_start, date_created }: TournamentCardProps) {
+export default function TournamentCard({ id, name, image_url, count_players, date_start, date_created, on_learnmore_click }: TournamentCardProps) {
 
   let date_start_formatted = format(new Date(date_start), 'MMMM dd, yyyy');
   let date_created_formatted = format(new Date(date_created), 'MMMM dd, yyyy');
@@ -57,7 +58,7 @@ export default function TournamentCard({ id, name, image_url, count_players, dat
         </Grid>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small" onClick={on_learnmore_click}>Learn More</Button>
       </CardActions>
     </Card>
   );

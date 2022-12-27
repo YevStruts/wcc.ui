@@ -5,6 +5,7 @@ import Ratings from "../pages/ratings";
 import News from "../pages/news";
 import Article from "../pages/news/article";
 import Tournaments from "../pages/tournaments";
+import Tournament from "../pages/tournaments/tournament";
 
 (function () {
     let token = GetToken();
@@ -22,6 +23,7 @@ const Routes = () => {
         { path: "news/:id", element: <Article /> },
         { path: "ratings", element: <Ratings /> },
         { path: "tournaments", element: <Tournaments /> },
+        { path: "tournaments/:id", element: <Tournament /> },
         // ...
     ]);
 };

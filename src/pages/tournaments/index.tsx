@@ -7,6 +7,10 @@ import { GetTournamentsList } from "../../services/TournamentsService";
 
 const Title = "Tournaments";
 
+function handleOnLearnMoreClick(id: number): void {
+    window.location.href = "/tournaments/" + id;
+}
+
 const Tournaments = () => {
     const [tournamentsList, setTournamentsList] = useState<TournamentCardProps[]>([]);
 
@@ -34,6 +38,7 @@ const Tournaments = () => {
                                         count_players={count_players}
                                         date_start={date_start}
                                         date_created={date_created}
+                                        on_learnmore_click={() => handleOnLearnMoreClick(id)}
                                     />
                                 </Grid>
                             );

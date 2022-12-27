@@ -1,26 +1,26 @@
 import { Grid } from "@mui/material";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import PageTitle from "../../components/PageTitle";
 import Layout from "../../layout/layout";
-import { GetNewsItem } from "../../services/NewsService";
+import { GetTournament } from "../../services/TournamentsService";
 
-export interface ArticleProps {
+export interface TournamentProps {
     id: number;
     name: string;
     description: string;
     image_url: string;
 }
 
-const Article = () => {
+const Tournament = () => {
     const params = useParams();
 
-    const [newsItem, setNewsItem] = useState<ArticleProps>();
+    const [tournament, setTournament] = useState<TournamentProps>();
 
     useEffect(() => {
         let id = params.id ?? "0";
-        GetNewsItem(id).then((article) => {
-            setNewsItem(article);
+        GetTournament(id).then((tournament) => {
+            setTournament(tournament);
         });
     }, []);
 
@@ -28,15 +28,15 @@ const Article = () => {
         <Layout>
             <Grid container>
                 <Grid item xs={12} textAlign={"center"} mb={5}>
-                    <PageTitle text={newsItem?.name ?? ""} />
+                    <PageTitle text={tournament?.name ?? ""} />
                 </Grid>
                 <Grid item xs={12}>
                     <Grid container spacing={2}>
-                        {newsItem?.description ?? ""}
+                        Single Tournament
                     </Grid>
                 </Grid>
             </Grid>
         </Layout>
     );
 };
-export default Article;
+export default Tournament;

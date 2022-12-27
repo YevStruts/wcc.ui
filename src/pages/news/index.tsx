@@ -8,6 +8,10 @@ import { ArticleProps } from "./article";
 
 const Title = "NEWS";
 
+function handleOnCartClick(id: number): void {
+    window.location.href = "/news/" + id;
+}
+
 const News = () => {
     const [newsList, setNewsList] = useState<ArticleProps[]>([]);
 
@@ -16,10 +20,6 @@ const News = () => {
             setNewsList(news);
         });
     }, []);
-
-    const handleOnCartClick = (id: number) => {
-        window.location.href = "/news/" + id;
-    };
 
     return (
         <Layout>
@@ -49,3 +49,4 @@ const News = () => {
     );
 };
 export default News;
+
