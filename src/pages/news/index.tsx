@@ -18,7 +18,7 @@ const News = () => {
     }, []);
 
     const handleOnCartClick = (id: number) => {
-        window.location.href = "/news/article?id=" + id;
+        window.location.href = "/news/" + id;
     };
 
     return (

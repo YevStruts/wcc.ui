@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PageTitle from "../../components/PageTitle";
 import Layout from "../../layout/layout";
@@ -13,11 +13,13 @@ export interface ArticleProps {
 }
 
 const Article = () => {
-    const [searchParams] = useSearchParams();
+    const params = useParams();
+
     const [newsItem, setNewsItem] = useState<ArticleProps>();
 
     useEffect(() => {
-        let id = searchParams.get("id") ?? "0";
+        debugger;
+        let id = params.id ?? "0";
         GetNewsItem(id).then((article) => {
             setNewsItem(article);
         });

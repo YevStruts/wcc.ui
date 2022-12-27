@@ -25,12 +25,7 @@ export default function TournamentCard({ id, name, image_url, count_players, dat
 
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        alt="green iguana"
-        height="140"
-        image={image_url}
-      />
+      <CardMedia component="img" alt="green iguana" height="140" image={image_url} />
       <CardContent>
         <Grid container>
           <Grid item xs={12} pb={1}>

@@ -19,7 +19,7 @@ const Routes = () => {
     return useRoutes([
         { path: "/", element: <Ratings /> },
         { path: "news", element: <News /> },
-        { path: "news/article", element: <Article /> },
+        { path: "news/:id", element: <Article /> },
         { path: "ratings", element: <Ratings /> },
         { path: "tournaments", element: <Tournaments /> },
         // ...
