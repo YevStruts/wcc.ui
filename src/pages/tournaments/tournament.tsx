@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import PageTitle from "../../components/PageTitle";
+import TournamentBracket from "../../components/TournamentBracket";
 import Layout from "../../layout/layout";
 import { GetTournament } from "../../services/TournamentsService";
 
@@ -18,7 +19,7 @@ const Tournament = () => {
     const [tournament, setTournament] = useState<TournamentProps>();
 
     useEffect(() => {
-        let id = params.id ?? "0";
+        let id = parseInt(params.id ?? "0");
         GetTournament(id).then((tournament) => {
             setTournament(tournament);
         });
@@ -32,7 +33,7 @@ const Tournament = () => {
                 </Grid>
                 <Grid item xs={12}>
                     <Grid container spacing={2}>
-                        Single Tournament
+                        <TournamentBracket id={1}></TournamentBracket>
                     </Grid>
                 </Grid>
             </Grid>
