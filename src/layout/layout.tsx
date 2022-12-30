@@ -5,7 +5,6 @@ import { useSearchParams } from "react-router-dom";
 import { Exchange } from "../services/DiscordService";
 import { SignIn } from "../helpers/AuthHelper";
 import Header from "./header";
-import Footer from "./footer";
 
 interface LayoutProps {
     children?: ReactNode;
@@ -35,7 +34,7 @@ const Layout = ({ children }: LayoutProps) => {
             <Grid pt={5} mb={5}>
                 <Container>{children}</Container>
             </Grid>
-            <Footer />
+            {/* <Footer /> */}
         </Grid>
     );
 };
