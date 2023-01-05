@@ -7,6 +7,7 @@ import TournamentBracket from "../../components/TournamentBracket";
 import Layout from "../../layout/layout";
 import { GetTournament } from "../../services/TournamentsService";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { GetSchedule } from "../../services/GameService";
 
 export interface TournamentProps {
     id: number;
@@ -15,10 +16,47 @@ export interface TournamentProps {
     image_url: string;
 }
 
+export interface PlayerServerType {
+    id: number,
+    name: string,
+    score: number
+}
+  
+export interface GameServerType {
+    id: number,
+    orderId: number,
+    name: string,
+    scheduled: number,
+    home: PlayerServerType,
+    visitor: PlayerServerType,
+    replayUrls: string[],
+    youtubeUrls: string[],
+}
+
+const schedule_default : GameServerType[] = [{
+    id: 0,
+    orderId: 0,
+    name: "",
+    scheduled: Number(new Date()),
+    home: {
+        id: 0,
+        name: "TBD",
+        score: 0
+    },
+    visitor: {
+        id: 0,
+        name: "TBD",
+        score: 0
+    },
+    replayUrls: [],
+    youtubeUrls: []
+}];
+
 const Tournament = () => {
     const params = useParams();
 
     const [tournament, setTournament] = useState<TournamentProps>();
+    const [schedule, setSchedule] = useState<GameServerType[]>();
 
     useEffect(() => {
         let id = parseInt(params.id ?? "0");
@@ -26,6 +64,15 @@ const Tournament = () => {
             setTournament(tournament);
         });
     }, []);
+
+    useEffect(() => {
+        if (tournament !== undefined) {
+            GetSchedule(tournament.id).then((schedule: GameServerType[]) => {
+                schedule.sort((a, b) => a.orderId > b.orderId ? 1 : -1);
+                setSchedule(schedule);
+            });
+        };
+    }, [ tournament ]);
 
     return (
         <Layout>
@@ -58,7 +105,7 @@ const Tournament = () => {
                             <Typography>Games</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <GamesList />
+                            <GamesList schedule={schedule ?? schedule_default}/>
                         </AccordionDetails>
                     </Accordion>
                     <Accordion defaultExpanded>
@@ -70,7 +117,7 @@ const Tournament = () => {
                             <Typography>Bracket</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <TournamentBracket id={1}></TournamentBracket>
+                            <TournamentBracket schedule={schedule ?? schedule_default}></TournamentBracket>
                         </AccordionDetails>
                     </Accordion>
                 </Grid>
