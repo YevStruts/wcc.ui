@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Button, ButtonProps, Grid, styled, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import GamesList from "../../components/GamesList";
@@ -10,6 +10,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { GetSchedule } from "../../services/GameService";
 import TournamentRules, { Rule } from "../../components/TournamentRules";
 import { GetRule } from "../../services/RuleService";
+import { grey, orange } from "@mui/material/colors";
 
 export interface TournamentProps {
     id: number;
@@ -74,6 +75,14 @@ const schedule_default : GameServerType[] = [{
     replayUrls: [],
     youtubeUrls: []
 }];
+
+const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
+    color: theme.palette.getContrastText(orange[500]),
+    backgroundColor: grey[600],
+    '&:hover': {
+      backgroundColor: orange[700],
+    },
+}));
 
 const Tournament = () => {
     const params = useParams();
@@ -149,6 +158,9 @@ const Tournament = () => {
                             <TournamentBracket schedule={schedule ?? schedule_default}></TournamentBracket>
                         </AccordionDetails>
                     </Accordion>
+                </Grid>
+                <Grid item xs={12} textAlign={"center"} m={5}>
+                    <ColorButton variant="outlined">Join</ColorButton>
                 </Grid>
             </Grid>
         </Layout>
