@@ -8,6 +8,8 @@ import Layout from "../../layout/layout";
 import { GetTournament } from "../../services/TournamentsService";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { GetSchedule } from "../../services/GameService";
+import TournamentRules, { Rule } from "../../components/TournamentRules";
+import { GetRule } from "../../services/RuleService";
 
 export interface TournamentProps {
     id: number;
@@ -33,6 +35,27 @@ export interface GameServerType {
     youtubeUrls: string[],
 }
 
+const rule_default : Rule = {
+    id: "0",
+    name: "Default",
+    season: "-",
+    mapShape: "-",
+    terrainType: "-",
+    startingResources: "-",
+    minerals: "-",
+    mapSize: "-",
+    startOptions: "-",
+    baloonOptions: "-",
+    cannons: "-",
+    peaceTime: "-",
+    eighteenthCenturyOptions: "-",
+    capture: "-",
+    dipCenterAndMarket: "-",
+    allies: "-",
+    limitOfPopulation: "-",
+    gameSpeed: "-"
+};
+
 const schedule_default : GameServerType[] = [{
     id: 0,
     orderId: 0,
@@ -57,6 +80,7 @@ const Tournament = () => {
 
     const [tournament, setTournament] = useState<TournamentProps>();
     const [schedule, setSchedule] = useState<GameServerType[]>();
+    const [rule, setRule] = useState<Rule>();
 
     useEffect(() => {
         let id = parseInt(params.id ?? "0");
@@ -72,6 +96,14 @@ const Tournament = () => {
                 setSchedule(schedule);
             });
         };
+    }, [ tournament ]);
+
+    useEffect(() => {
+        if (tournament !== undefined) {
+            GetRule(tournament.id).then((rule: Rule) => {
+                setRule(rule);
+            });
+        }
     }, [ tournament ]);
 
     return (
@@ -90,10 +122,7 @@ const Tournament = () => {
                         <Typography>Rules</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                        <Typography>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            malesuada lacus ex, sit amet blandit leo lobortis eget.
-                        </Typography>
+                            <TournamentRules rule={rule ?? rule_default} />
                         </AccordionDetails>
                     </Accordion>
                     <Accordion>

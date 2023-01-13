@@ -9,4 +9,5 @@ export const ApiUrls = {
     discord_exchange: `${API}/discord/exchange`,
     game: `${API}/game/`,
     tournament: `${API}/tournament/`,
+    rule: `${API}/rule/`,
 };
