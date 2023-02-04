@@ -5,8 +5,6 @@ import { GetAuthorizeUrl } from "../services/DiscordService";
 
 const { useCallback } = React;
 
-const settings = ["Logout"];
-
 const SignInButton = () => {
     const signIn = useCallback(() => {
         GetAuthorizeUrl().then((data) => (window.location.href = data.redirectUrl));
@@ -22,11 +20,21 @@ const SignInButton = () => {
         setAnchorElUser(null);
     };
 
+    const handleManageMenu = () => {
+        // window.location.href = "/";
+        console.log("handleManageMenu : click");
+    };
+
     const handleSignOutMenu = () => {
         setAnchorElUser(null);
         SignOut();
         window.location.href = "/";
     };
+
+    const settings = [
+        { id: 1, name: "Manage", onclick: handleManageMenu },
+        { id: 2, name: "Logout", onclick: handleSignOutMenu }
+    ];
 
     let authData = GetAuthData();
     let avatar_url = `https://cdn.discordapp.com/avatars/${authData.id}/${authData.avatar}.png`;
@@ -55,8 +63,8 @@ const SignInButton = () => {
                     onClose={handleCloseUserMenu}
                 >
                     {settings.map((setting) => (
-                        <MenuItem key={setting} onClick={handleSignOutMenu}>
-                            <Typography textAlign="center">{setting}</Typography>
+                        <MenuItem key={setting.id} onClick={setting.onclick}>
+                            <Typography textAlign="center">{setting.name}</Typography>
                         </MenuItem>
                     ))}
                 </Menu>
