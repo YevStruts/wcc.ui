@@ -21,8 +21,7 @@ const SignInButton = () => {
     };
 
     const handleManageMenu = () => {
-        // window.location.href = "/";
-        console.log("handleManageMenu : click");
+        window.location.href = "/manage";
     };
 
     const handleSignOutMenu = () => {
