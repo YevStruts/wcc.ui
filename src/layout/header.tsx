@@ -11,9 +11,11 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import SignInButton from "../components/SignInButton";
 import Logo from "../components/Logo";
+import Strings from "../components/LocalizedStrings"
+import LanguageSwitcher from "../components/LanguageSwitcher";
 
 const pages = [
-    { title: "News", url: "/news" },
+    { title: Strings.news, url: "/news" },
     { title: "Ratings", url: "/ratings" },
     { title: "Tournaments", url: "/tournaments" },
 ];
@@ -94,6 +96,9 @@ const Header = () => {
                                 {page.title}
                             </Button>
                         ))}
+                    </Box>
+                    <Box>
+                        <LanguageSwitcher />
                     </Box>
                     <SignInButton />
                 </Toolbar>
