@@ -1,12 +1,13 @@
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import ActionAreaCard from "../../components/ActionAreaCard";
+import Strings from "../../components/LocalizedStrings";
 import PageTitle from "../../components/PageTitle";
 import Layout from "../../layout/layout";
 import { GetNewsList } from "../../services/NewsService";
 import { ArticleProps } from "./article";
 
-const Title = "NEWS";
+const Title = Strings.news;
 
 function handleOnCartClick(id: number): void {
     window.location.href = "/news/" + id;

@@ -2,6 +2,7 @@ import { Avatar, Box, Button, IconButton, Menu, MenuItem, Tooltip, Typography } 
 import React from "react";
 import { GetAuthData, SignOut } from "../helpers/AuthHelper";
 import { GetAuthorizeUrl } from "../services/DiscordService";
+import Strings from "./LocalizedStrings";
 
 const { useCallback } = React;
 
@@ -31,8 +32,8 @@ const SignInButton = () => {
     };
 
     const settings = [
-        { id: 1, name: "Manage", onclick: handleManageMenu },
-        { id: 2, name: "Logout", onclick: handleSignOutMenu }
+        { id: 1, name: Strings.manage, onclick: handleManageMenu },
+        { id: 2, name: Strings.logout, onclick: handleSignOutMenu }
     ];
 
     let authData = GetAuthData();
@@ -72,7 +73,7 @@ const SignInButton = () => {
     }
     return (
         <Button color="inherit" onClick={signIn}>
-            Sign In
+            {Strings.signin}
         </Button>
     );
 };

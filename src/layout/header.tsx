@@ -16,8 +16,8 @@ import LanguageSwitcher from "../components/LanguageSwitcher";
 
 const pages = [
     { title: Strings.news, url: "/news" },
-    { title: "Ratings", url: "/ratings" },
-    { title: "Tournaments", url: "/tournaments" },
+    { title: Strings.ratings, url: "/ratings" },
+    { title: Strings.tournaments, url: "/tournaments" },
 ];
 
 const Header = () => {

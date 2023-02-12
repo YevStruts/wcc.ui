@@ -11,6 +11,7 @@ import { GetSchedule } from "../../services/GameService";
 import TournamentRules, { Rule } from "../../components/TournamentRules";
 import { GetRule } from "../../services/RuleService";
 import { grey, orange } from "@mui/material/colors";
+import Strings from "../../components/LocalizedStrings";
 
 export interface TournamentProps {
     id: number;
@@ -128,7 +129,7 @@ const Tournament = () => {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                        <Typography>Rules</Typography>
+                        <Typography>{Strings.tournament_rules}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <TournamentRules rule={rule ?? rule_default} />
@@ -140,7 +141,7 @@ const Tournament = () => {
                             aria-controls="panel2a-content"
                             id="panel2a-header"
                         >
-                            <Typography>Games</Typography>
+                            <Typography>{Strings.tournament_games}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <GamesList schedule={schedule ?? schedule_default}/>
@@ -152,7 +153,7 @@ const Tournament = () => {
                             aria-controls="panel3a-content"
                             id="panel3a-header"
                         >
-                            <Typography>Bracket</Typography>
+                            <Typography>{Strings.tournament_bracket}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <TournamentBracket schedule={schedule ?? schedule_default}></TournamentBracket>

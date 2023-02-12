@@ -8,6 +8,7 @@ import {
     TableCell,
     tableCellClasses,
 } from "@mui/material";
+import Strings from "./LocalizedStrings";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -46,8 +47,8 @@ const GridRating = ({ players }: GridRatingProps) => {
                     <TableRow>
                         <StyledTableCell width={100}>#</StyledTableCell>
                         <StyledTableCell width={30}>{/* progress */}</StyledTableCell>
-                        <StyledTableCell width={500}>Name</StyledTableCell>
-                        <StyledTableCell>Comment</StyledTableCell>
+                        <StyledTableCell width={500}>{Strings.ratings_name}</StyledTableCell>
+                        <StyledTableCell>{Strings.ratings_comment}</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

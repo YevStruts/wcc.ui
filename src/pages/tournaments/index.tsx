@@ -4,8 +4,9 @@ import TournamentCard, { TournamentCardProps } from "../../components/Tournament
 import PageTitle from "../../components/PageTitle";
 import Layout from "../../layout/layout";
 import { GetTournamentsList } from "../../services/TournamentsService";
+import Strings from "../../components/LocalizedStrings";
 
-const Title = "Tournaments";
+const Title = Strings.tournaments_title;
 
 function handleOnLearnMoreClick(id: number): void {
     window.location.href = "/tournaments/" + id;

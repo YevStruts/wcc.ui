@@ -10,6 +10,7 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { Link } from 'react-router-dom';
 import { FormatDateTime } from "../helpers/DateTimeHelper"
 import { GameServerType } from '../pages/tournaments/tournament';
+import Strings from './LocalizedStrings';
 
 export default function GamesList(props: { schedule: GameServerType[] }) {
   return (
@@ -17,11 +18,11 @@ export default function GamesList(props: { schedule: GameServerType[] }) {
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell align="left">Date</TableCell>
-            <TableCell align="center">Games</TableCell>
-            <TableCell align="center">Score</TableCell>
+            <TableCell align="left">{Strings.tournament_games_date}</TableCell>
+            <TableCell align="center">{Strings.tournament_games_games}</TableCell>
+            <TableCell align="center">{Strings.tournament_games_score}</TableCell>
             {/* <TableCell align="right">Replay</TableCell> */}
-            <TableCell align="left">Youtube</TableCell>
+            <TableCell align="left">{Strings.tournament_games_youtube}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

@@ -4,8 +4,9 @@ import Layout from "../layout/layout";
 import { GetRating } from "../services/PlayerService";
 import PageTitle from "../components/PageTitle";
 import GridRating, { PlayerProps } from "../components/GridRating";
+import Strings from "../components/LocalizedStrings";
 
-const Title = "WORLD COSSACKS COMMUNITY RANKING JANUARY 2022";
+const Title = Strings.ratings_title + " JANUARY 2022";
 
 const Ratings = () => {
     const [players, setPlayers] = useState<PlayerProps[]>([]);

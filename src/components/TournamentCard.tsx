@@ -8,6 +8,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { Grid } from '@mui/material';
 import { format } from 'date-fns'
+import Strings from './LocalizedStrings';
 
 export interface TournamentCardProps {
   id: number;
@@ -39,7 +40,7 @@ export default function TournamentCard({ id, name, image_url, count_players, dat
           </Grid>
           <Grid item xs={11}>
             <Typography variant="body2" color="text.secondary">
-              {count_players} participants
+              {count_players} {Strings.tournaments_card_participants}
             </Typography>
           </Grid>
           <Grid item xs={1}>
@@ -52,13 +53,13 @@ export default function TournamentCard({ id, name, image_url, count_players, dat
           </Grid>
           <Grid item xs={12}>
             <Typography variant="body2" color="text.secondary">
-              Created at {date_created_formatted}
+              {Strings.tournaments_card_created_at} {date_created_formatted}
             </Typography>
           </Grid>
         </Grid>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={on_learnmore_click}>Learn More</Button>
+        <Button size="small" onClick={on_learnmore_click}>{Strings.tournaments_card_learn_more}</Button>
       </CardActions>
     </Card>
   );

@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Strings from "./LocalizedStrings";
 
 export interface Rule {
     id: string,
@@ -49,27 +50,27 @@ const TournamentRules = (props: { rule : Rule }) => {
                     <Table sx={{ minWidth: 150 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
-                            <TableCell>Setting</TableCell>
-                            <TableCell>Value</TableCell>
+                            <TableCell>{Strings.tournament_rules_settings_setting}</TableCell>
+                            <TableCell>{Strings.tournament_rules_settings_value}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            <RuleRow name="Season" description={props.rule.season}></RuleRow>
-                            <RuleRow name="Map shape" description={props.rule.mapShape}></RuleRow>
-                            <RuleRow name="Terrain type" description={props.rule.terrainType}></RuleRow>
-                            <RuleRow name="Starting resources" description={props.rule.startingResources}></RuleRow>
-                            <RuleRow name="Minerals" description={props.rule.minerals}></RuleRow>
-                            <RuleRow name="Map size" description={props.rule.mapSize}></RuleRow>
-                            <RuleRow name="Start options" description={props.rule.startOptions}></RuleRow>
-                            <RuleRow name="Baloon options" description={props.rule.baloonOptions}></RuleRow>
-                            <RuleRow name="Cannons" description={props.rule.cannons}></RuleRow>
-                            <RuleRow name="Peace time" description={props.rule.peaceTime}></RuleRow>
-                            <RuleRow name="Eighteenth century options" description={props.rule.eighteenthCenturyOptions}></RuleRow>
-                            <RuleRow name="Capture" description={props.rule.capture}></RuleRow>
-                            <RuleRow name="Dip. center and market" description={props.rule.dipCenterAndMarket}></RuleRow>
-                            <RuleRow name="Allies" description={props.rule.allies}></RuleRow>
-                            <RuleRow name="Limit of population" description={props.rule.limitOfPopulation}></RuleRow>
-                            <RuleRow name="Game speed" description={props.rule.gameSpeed}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_season} description={props.rule.season}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_map_shape} description={props.rule.mapShape}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_terrain_type} description={props.rule.terrainType}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_starting_resources} description={props.rule.startingResources}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_minerals} description={props.rule.minerals}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_map_size} description={props.rule.mapSize}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_start_options} description={props.rule.startOptions}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_baloon_options} description={props.rule.baloonOptions}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_cannons} description={props.rule.cannons}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_peace_time} description={props.rule.peaceTime}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_18_century_options} description={props.rule.eighteenthCenturyOptions}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_capture} description={props.rule.capture}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_dc_and_mrkt} description={props.rule.dipCenterAndMarket}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_allies} description={props.rule.allies}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_limit_of_population} description={props.rule.limitOfPopulation}></RuleRow>
+                            <RuleRow name={Strings.tournament_rules_settings_game_speed} description={props.rule.gameSpeed}></RuleRow>
                         </TableBody>
                     </Table>
                 </TableContainer>
