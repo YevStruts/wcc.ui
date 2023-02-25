@@ -1,5 +1,6 @@
 import { Autocomplete, AutocompleteProps, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import GroupSizesColors from "../../components/GroupSizesColors";
 import PageTitle from "../../components/PageTitle";
 import Layout from "../../layout/layout";
 
@@ -41,6 +42,26 @@ const Manage = () => {
         { label: 'Lords of Kingdom', id: 1 },
     ];
 
+    function getCountOfPlayersList() {
+        return (
+            <Autocomplete
+                id="count-of-players"
+                options={countPlayersOptions}
+                getOptionLabel={(option) => option.toString() }
+                sx={{ width: 200 }}
+                renderInput={(params) => <TextField {...params} label="Count of Players" />}
+                onChange={onCountPlayersChange}
+            />
+        )
+    }
+
+    function getListOfGames() {
+        if (tournamentSize !== undefined && tournamentSize > 0) {
+            var stage = tournamentSize / 2;
+            console.log("stage:" + stage);
+        }
+    }
+
     return (
         <Layout>
             <Grid container>
@@ -49,36 +70,23 @@ const Manage = () => {
                 </Grid>
                 <Grid item xs={12} mb={5}>
                     <Grid container>
-                        <Grid item xs={3}>
-                        <Autocomplete
-                            options={options}
-                            renderInput={(params) => (
-                                <TextField {...params} label="tournament" />
-                            )}
-                            onChange={onTournamentChange}
-                        />
+                        <Grid item xs={5}>
+                            <Autocomplete
+                                options={options}
+                                renderInput={(params) => (
+                                    <TextField {...params} label="tournament" />
+                                )}
+                                onChange={onTournamentChange}
+                            />
                         </Grid>
-                        <Grid item xs={1} textAlign={"center"}>
-                            <Button variant="outlined" sx={{ width: 80 }}>Load</Button>
+                        <Grid item xs={2}></Grid>
+                        <Grid item xs={5}>
+                            <GroupSizesColors />
                         </Grid>
-                        <Grid item xs={1} textAlign={"center"}>
-                            <Button variant="outlined" sx={{ width: 80 }}>Create</Button>
-                        </Grid>
-                        <Grid item xs={1} textAlign={"center"}>
-                            <Button variant="outlined" sx={{ width: 80 }}>Delete</Button>
-                        </Grid>
-                        <Grid item xs={6}></Grid>
                     </Grid>
                 </Grid>
                 <Grid item xs={12} mb={3}>
-                    <Autocomplete
-                        id="count-of-players"
-                        options={countPlayersOptions}
-                        getOptionLabel={(option) => option.toString() }
-                        sx={{ width: 200 }}
-                        renderInput={(params) => <TextField {...params} label="Count of Players" />}
-                        onChange={onCountPlayersChange}
-                    />
+                    
                 </Grid>
                 <Grid item xs={12}>
                     <Paper>
@@ -91,7 +99,7 @@ const Manage = () => {
                                 })}
                             </Grid>
                             <Grid item xs={6}>
-                                {[...Array(tournamentSize)].map((e, i) => 
+                                {/* {[...Array(tournamentSize)].map((e, i) => 
                                     <Autocomplete
                                         key={i}
                                         options={players}
@@ -100,7 +108,7 @@ const Manage = () => {
                                         <TextField {...params} label="player" variant="standard" />
                                     )}
                                 />
-                                )}
+                                )} */}
                             </Grid>
                         </Grid>
                     </Paper>

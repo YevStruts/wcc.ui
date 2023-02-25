@@ -32,7 +32,7 @@ const SignInButton = () => {
     };
 
     const settings = [
-        { id: 1, name: Strings.manage, onclick: handleManageMenu },
+        // { id: 1, name: Strings.manage, onclick: handleManageMenu },
         { id: 2, name: Strings.logout, onclick: handleSignOutMenu }
     ];
 
