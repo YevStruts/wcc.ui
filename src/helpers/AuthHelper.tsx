@@ -1,5 +1,5 @@
-export const SignIn = (code: string, id: string, username: string, avatar: string) => {
-    localStorage.setItem("token", code);
+export const SignIn = (token: string, id: string, username: string, avatar: string) => {
+    localStorage.setItem("token", token);
     localStorage.setItem("userId", id);
     localStorage.setItem("username", username);
     localStorage.setItem("user_avatar", avatar);

@@ -19,7 +19,7 @@ const Layout = ({ children }: LayoutProps) => {
         if (code !== null && state !== null) {
             Exchange(code, state)
                 .then((response) => {
-                    SignIn(response.data.code, response.data.id, response.data.username, response.data.avatar);
+                    SignIn(response.data.token, response.data.id, response.data.username, response.data.avatar);
                     window.location.href = "/";
                 })
                 .catch(function (error) {
