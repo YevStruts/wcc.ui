@@ -26,7 +26,7 @@ export default function TournamentCard({ id, name, image_url, count_players, dat
   let date_created_formatted = format(new Date(date_created), 'MMMM dd, yyyy');
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card>
       <CardMedia component="img" alt="green iguana" height="140" image={image_url} />
       <CardContent>
         <Grid container>

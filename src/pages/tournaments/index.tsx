@@ -28,7 +28,7 @@ const Tournaments = () => {
                     <PageTitle text={Title} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={5}>
                         {tournamentsList.map(({ id, name, image_url, count_players, date_start, date_created }: TournamentCardProps) => {
                             return (
                                 <Grid item xs={12} sm={6} md={4} key={id}>
