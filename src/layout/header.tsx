@@ -39,7 +39,7 @@ const Header = () => {
             <Container>
                 <Toolbar disableGutters>
                     <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: "none", md: "flex" } }}>
-                        <Logo width="100%" height="40px" />
+                        <Logo width="142px" height="40px" />
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -84,7 +84,7 @@ const Header = () => {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
                     >
-                        <Logo width="100%" height="40px" />
+                        <Logo width="142px" height="40px" />
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                         {pages.map((page) => (
