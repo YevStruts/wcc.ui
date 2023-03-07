@@ -27,10 +27,10 @@ const Header = () => {
         setAnchorElNav(event.currentTarget);
     };
 
-    const handleCloseNavMenu = (data: string) => () => {
+    const handleCloseNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(null);
-        if (typeof window !== "undefined") {
-            window.location.href = data;
+        if (event.currentTarget.dataset.url !== undefined) {
+            window.location.href = event.currentTarget.dataset.url;
         }
     };
 
@@ -72,7 +72,7 @@ const Header = () => {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page.title} onClick={handleCloseNavMenu(page.url)}>
+                                <MenuItem key={page.title} data-url={page.url} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">{page.title}</Typography>
                                 </MenuItem>
                             ))}
@@ -90,7 +90,7 @@ const Header = () => {
                         {pages.map((page) => (
                             <Button
                                 key={page.title}
-                                onClick={handleCloseNavMenu(page.url)}
+                                onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: "white", display: "block" }}
                             >
                                 {page.title}
