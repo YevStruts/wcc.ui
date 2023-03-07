@@ -29,7 +29,7 @@ const News = () => {
                     <PageTitle text={Title} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={5}>
                         {newsList.map(({ id, name, description, image_url }: any) => {
                             return (
                                 <Grid item xs={12} sm={6} md={4} key={id}>

@@ -14,7 +14,7 @@ interface ActionAreaCardProps {
 
 const ActionAreaCard = ({ id, name, description, image_url, on_click }: ActionAreaCardProps) => {
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card>
             <CardActionArea onClick={on_click}>
                 <CardMedia component="img" height="140" image={image_url} alt="green iguana" />
                 <CardContent>
