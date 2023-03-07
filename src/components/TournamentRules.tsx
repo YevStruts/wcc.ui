@@ -42,10 +42,10 @@ const TournamentRules = (props: { rule : Rule }) => {
 
     return (
         <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
                 <Typography>some text</Typography>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 150 }} size="small" aria-label="a dense table">
                         <TableHead>
