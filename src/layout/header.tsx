@@ -28,6 +28,7 @@ const Header = () => {
     };
 
     const handleCloseNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+        debugger;
         setAnchorElNav(null);
         if (event.currentTarget.dataset.url !== undefined) {
             window.location.href = event.currentTarget.dataset.url;
@@ -90,6 +91,7 @@ const Header = () => {
                         {pages.map((page) => (
                             <Button
                                 key={page.title}
+                                data-url={page.url}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: "white", display: "block" }}
                             >
