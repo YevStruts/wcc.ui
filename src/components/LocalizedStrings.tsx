@@ -21,6 +21,7 @@ let Strings = new LocalizedStrings({
         tournaments_card_learn_more: "LEARN MORE",
         /* single tournament */
         tournament_rules: "Rules",
+        tournament_participants: "Participants",
         tournament_games: "Games",
         tournament_bracket: "Bracket",
         tournament_rules_settings_setting: "Setting",
@@ -65,6 +66,7 @@ let Strings = new LocalizedStrings({
         tournaments_card_learn_more: "ДЕТАЛІ",
         /* single tournament */
         tournament_rules: "Правила",
+        tournament_participants: "Учасники",
         tournament_games: "Ігри",
         tournament_bracket: "Сітка",
         tournament_rules_settings_setting: "Налаштування",

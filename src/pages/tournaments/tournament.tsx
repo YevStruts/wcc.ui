@@ -8,10 +8,11 @@ import Layout from "../../layout/layout";
 import { GetTournament } from "../../services/TournamentsService";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { GetSchedule } from "../../services/GameService";
-import TournamentRules, { Rule } from "../../components/TournamentRules";
 import { GetRule } from "../../services/RuleService";
 import { grey, orange } from "@mui/material/colors";
 import Strings from "../../components/LocalizedStrings";
+
+var decode = require('decode-html');
 
 export interface TournamentProps {
     id: number;
@@ -37,26 +38,6 @@ export interface GameServerType {
     youtubeUrls: string[],
 }
 
-const rule_default : Rule = {
-    id: "0",
-    name: "Default",
-    season: "-",
-    mapShape: "-",
-    terrainType: "-",
-    startingResources: "-",
-    minerals: "-",
-    mapSize: "-",
-    startOptions: "-",
-    baloonOptions: "-",
-    cannons: "-",
-    peaceTime: "-",
-    eighteenthCenturyOptions: "-",
-    capture: "-",
-    dipCenterAndMarket: "-",
-    allies: "-",
-    limitOfPopulation: "-",
-    gameSpeed: "-"
-};
 
 const schedule_default : GameServerType[] = [{
     id: 0,
@@ -90,7 +71,6 @@ const Tournament = () => {
 
     const [tournament, setTournament] = useState<TournamentProps>();
     const [schedule, setSchedule] = useState<GameServerType[]>();
-    const [rule, setRule] = useState<Rule>();
 
     useEffect(() => {
         let id = parseInt(params.id ?? "0");
@@ -110,9 +90,8 @@ const Tournament = () => {
 
     useEffect(() => {
         if (tournament !== undefined) {
-            GetRule(tournament.id).then((rule: Rule) => {
-                setRule(rule);
-            });
+            // GetParticipants(tournament.id).then(() => {
+            // });
         }
     }, [ tournament ]);
 
@@ -123,7 +102,7 @@ const Tournament = () => {
                     <PageTitle text={tournament?.name ?? ""} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Accordion>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
@@ -132,10 +111,22 @@ const Tournament = () => {
                         <Typography>{Strings.tournament_rules}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <TournamentRules rule={rule ?? rule_default} />
+                            <div dangerouslySetInnerHTML={{__html: decode(tournament?.description ?? "")}} />
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion>
+                    <Accordion defaultExpanded>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                        >
+                            <Typography>{Strings.tournament_participants}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            details...
+                        </AccordionDetails>
+                    </Accordion>
+                    <Accordion disabled>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
@@ -147,7 +138,7 @@ const Tournament = () => {
                             <GamesList schedule={schedule ?? schedule_default}/>
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion defaultExpanded>
+                    <Accordion disabled>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel3a-content"
