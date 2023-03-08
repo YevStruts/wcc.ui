@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Button, ButtonProps, Grid, styled, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, ButtonProps, Grid, styled, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import GamesList from "../../components/GamesList";
@@ -14,19 +14,20 @@ import Strings from "../../components/LocalizedStrings";
 
 var decode = require('decode-html');
 
-export interface TournamentProps {
-    id: number;
-    name: string;
-    description: string;
-    image_url: string;
-}
-
 export interface PlayerServerType {
     id: number,
     name: string,
     score: number
 }
-  
+
+export interface TournamentProps {
+    id: number;
+    name: string;
+    description: string;
+    image_url: string;
+    participant: PlayerServerType[];
+}
+
 export interface GameServerType {
     id: number,
     orderId: number,
@@ -123,7 +124,15 @@ const Tournament = () => {
                             <Typography>{Strings.tournament_participants}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            details...
+                            <Grid container spacing={5}>
+                                {tournament?.participant.map(({ id, name }: PlayerServerType) => {
+                                    return (
+                                        <Grid  item xs={12} sm={6} md={4} key={id}>
+                                            {name}
+                                        </Grid>
+                                    );
+                                })}
+                            </Grid>                            
                         </AccordionDetails>
                     </Accordion>
                     <Accordion disabled>
