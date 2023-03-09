@@ -5,7 +5,7 @@ import GamesList from "../../components/GamesList";
 import PageTitle from "../../components/PageTitle";
 import TournamentBracket from "../../components/TournamentBracket";
 import Layout from "../../layout/layout";
-import { GetTournament } from "../../services/TournamentsService";
+import { GetTournament, Join } from "../../services/TournamentsService";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { GetSchedule } from "../../services/GameService";
 import { GetRule } from "../../services/RuleService";
@@ -72,11 +72,13 @@ const Tournament = () => {
 
     const [tournament, setTournament] = useState<TournamentProps>();
     const [schedule, setSchedule] = useState<GameServerType[]>();
+    const [participated, setParticipated] = useState<boolean>();
 
     useEffect(() => {
         let id = parseInt(params.id ?? "0");
         GetTournament(id).then((tournament) => {
             setTournament(tournament);
+            debugger;
         });
     }, []);
 
@@ -96,6 +98,14 @@ const Tournament = () => {
         }
     }, [ tournament ]);
 
+    function join() {
+        if (tournament !== undefined) {
+            Join(tournament.id).then((result) => {
+                debugger;
+            });
+        }
+    }
+
     return (
         <Layout>
             <Grid container>
@@ -111,7 +121,7 @@ const Tournament = () => {
                         >
                         <Typography>{Strings.tournament_rules}</Typography>
                         </AccordionSummary>
-                        <AccordionDetails>
+                        <AccordionDetails sx={{padding: 5}}>
                             <div dangerouslySetInnerHTML={{__html: decode(tournament?.description ?? "")}} />
                         </AccordionDetails>
                     </Accordion>
@@ -123,12 +133,12 @@ const Tournament = () => {
                         >
                             <Typography>{Strings.tournament_participants}</Typography>
                         </AccordionSummary>
-                        <AccordionDetails>
+                        <AccordionDetails  sx={{padding: 5}}>
                             <Grid container spacing={5}>
-                                {tournament?.participant.map(({ id, name }: PlayerServerType) => {
+                                {tournament?.participant.map(({ id, name }: PlayerServerType, index) => {
                                     return (
                                         <Grid  item xs={12} sm={6} md={4} key={id}>
-                                            {name}
+                                            {index+1}. {name}
                                         </Grid>
                                     );
                                 })}
@@ -143,7 +153,7 @@ const Tournament = () => {
                         >
                             <Typography>{Strings.tournament_games}</Typography>
                         </AccordionSummary>
-                        <AccordionDetails>
+                        <AccordionDetails  sx={{padding: 5}}>
                             <GamesList schedule={schedule ?? schedule_default}/>
                         </AccordionDetails>
                     </Accordion>
@@ -155,13 +165,17 @@ const Tournament = () => {
                         >
                             <Typography>{Strings.tournament_bracket}</Typography>
                         </AccordionSummary>
-                        <AccordionDetails>
+                        <AccordionDetails  sx={{padding: 5}}>
                             <TournamentBracket schedule={schedule ?? schedule_default}></TournamentBracket>
                         </AccordionDetails>
                     </Accordion>
                 </Grid>
                 <Grid item xs={12} textAlign={"center"} m={5}>
-                    <ColorButton variant="outlined">Join</ColorButton>
+                    <ColorButton
+                        variant="outlined"
+                        onClick={() => { join() }}>
+                            {Strings.tournament_join}
+                    </ColorButton>
                 </Grid>
             </Grid>
         </Layout>

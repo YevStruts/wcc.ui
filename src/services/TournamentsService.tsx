@@ -8,3 +8,7 @@ export const GetTournament = (id : number) => {
 export const GetTournamentsList = () => {
     return axios.get(ApiUrls.tournament + `list`).then((response) => response.data);
 };
+
+export const Join = (id: number) => {
+    return axios.post(ApiUrls.tournament + `join/` + id).then((response) => response.data);
+};

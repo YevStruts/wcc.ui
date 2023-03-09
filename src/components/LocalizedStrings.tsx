@@ -46,6 +46,7 @@ let Strings = new LocalizedStrings({
         tournament_games_games: "Games",
         tournament_games_score: "Score",
         tournament_games_youtube: "Youtube",
+        tournament_join: "Join"
     },
     uk: {
         /* header */
@@ -91,6 +92,7 @@ let Strings = new LocalizedStrings({
         tournament_games_games: "Ігри",
         tournament_games_score: "Рахунок",
         tournament_games_youtube: "Відео",
+        tournament_join: "Приєднатися"
     }
 });
 

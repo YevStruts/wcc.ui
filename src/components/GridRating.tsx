@@ -55,7 +55,7 @@ const GridRating = ({ players }: GridRatingProps) => {
                     {players.map(({ id, name, comment }: any) => {
                         return (
                             <StyledTableRow key={id}>
-                                <StyledTableCell>{id}</StyledTableCell>
+                                <StyledTableCell>-</StyledTableCell>
                                 <StyledTableCell></StyledTableCell>
                                 <StyledTableCell>{name}</StyledTableCell>
                                 <StyledTableCell>{comment}</StyledTableCell>
