@@ -6,7 +6,7 @@ import PageTitle from "../components/PageTitle";
 import GridRating, { PlayerProps } from "../components/GridRating";
 import Strings from "../components/LocalizedStrings";
 
-const Title = Strings.ratings_title + " JANUARY 2022";
+const Title = Strings.ratings_title + " БЕРЕЗЕНЬ 2023";
 
 const Ratings = () => {
     const [players, setPlayers] = useState<PlayerProps[]>([]);
