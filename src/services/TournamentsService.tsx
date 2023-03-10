@@ -12,3 +12,11 @@ export const GetTournamentsList = () => {
 export const Join = (id: number) => {
     return axios.post(ApiUrls.tournament + `join/` + id).then((response) => response.data);
 };
+
+export const Leave = (id: number) => {
+    return axios.post(ApiUrls.tournament + `leave/` + id).then((response) => response.data);
+};
+
+export const GetParticipationStatus = (tournamentId: number) => {
+    return axios.get(ApiUrls.tournament + `getparticipationstatus/` + tournamentId).then((response) => response.data);
+};

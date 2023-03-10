@@ -5,7 +5,7 @@ import GamesList from "../../components/GamesList";
 import PageTitle from "../../components/PageTitle";
 import TournamentBracket from "../../components/TournamentBracket";
 import Layout from "../../layout/layout";
-import { GetTournament, Join } from "../../services/TournamentsService";
+import { GetParticipationStatus, GetTournament, Join, Leave } from "../../services/TournamentsService";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { GetSchedule } from "../../services/GameService";
 import { GetRule } from "../../services/RuleService";
@@ -72,13 +72,13 @@ const Tournament = () => {
 
     const [tournament, setTournament] = useState<TournamentProps>();
     const [schedule, setSchedule] = useState<GameServerType[]>();
-    const [participated, setParticipated] = useState<boolean>();
+    const [showJoin, setShowJoin] = useState(false);
+    const [showLeave, setShowLeave] = useState(false);
 
     useEffect(() => {
         let id = parseInt(params.id ?? "0");
         GetTournament(id).then((tournament) => {
             setTournament(tournament);
-            debugger;
         });
     }, []);
 
@@ -93,15 +93,32 @@ const Tournament = () => {
 
     useEffect(() => {
         if (tournament !== undefined) {
-            // GetParticipants(tournament.id).then(() => {
-            // });
+            GetParticipationStatus(tournament.id).then((result) => {
+                /* result => true - already participated */
+                setShowJoin(!result);
+                setShowLeave(result);
+            });
         }
     }, [ tournament ]);
 
     function join() {
         if (tournament !== undefined) {
             Join(tournament.id).then((result) => {
-                debugger;
+                /* result => true - joined successfully */
+                setShowJoin(!result);
+                setShowLeave(result);
+                window.location.reload();
+            });
+        }
+    }
+
+    function leave() {
+        if (tournament !== undefined) {
+            Leave(tournament.id).then((result) => {
+                /* result => true - leaved successfully */
+                setShowLeave(!result);
+                setShowJoin(result);
+                window.location.reload();
             });
         }
     }
@@ -171,11 +188,16 @@ const Tournament = () => {
                     </Accordion>
                 </Grid>
                 <Grid item xs={12} textAlign={"center"} m={5}>
-                    <ColorButton
-                        variant="outlined"
-                        onClick={() => { join() }}>
+                    {showJoin && 
+                        <ColorButton variant="outlined" onClick={() => { join() }}>
                             {Strings.tournament_join}
-                    </ColorButton>
+                        </ColorButton>
+                    }
+                    {showLeave && 
+                        <ColorButton variant="outlined" onClick={() => { leave() }}>
+                            {Strings.tournament_leave}
+                        </ColorButton>
+                    }
                 </Grid>
             </Grid>
         </Layout>
