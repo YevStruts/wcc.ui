@@ -9,7 +9,7 @@ interface LanguageCodeProps {
 }
 
 const SupportedLanguages: Array<LanguageCodeProps> = [
-    { id: 1, code: "gb" },
+    // { id: 1, code: "gb" },
     { id: 2, code: "ua" }
 ]
 

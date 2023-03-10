@@ -28,7 +28,6 @@ const Header = () => {
     };
 
     const handleCloseNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        debugger;
         setAnchorElNav(null);
         if (event.currentTarget.dataset.url !== undefined) {
             window.location.href = event.currentTarget.dataset.url;
