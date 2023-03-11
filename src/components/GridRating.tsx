@@ -7,6 +7,7 @@ import {
     Table,
     TableCell,
     tableCellClasses,
+    Avatar,
 } from "@mui/material";
 import Strings from "./LocalizedStrings";
 
@@ -33,6 +34,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export interface PlayerProps {
     id: number;
     name: string;
+    avatarUrl: string;
 }
 
 interface GridRatingProps {
@@ -52,11 +54,13 @@ const GridRating = ({ players }: GridRatingProps) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {players.map(({ id, name, comment }: any) => {
+                    {players.map(({ id, name, comment, avatarUrl }: any) => {
                         return (
                             <StyledTableRow key={id}>
                                 <StyledTableCell>-</StyledTableCell>
-                                <StyledTableCell></StyledTableCell>
+                                <StyledTableCell>
+                                    <Avatar alt={name} src={avatarUrl} sx={{ width: 24, height: 24 }}/>
+                                </StyledTableCell>
                                 <StyledTableCell>{name}</StyledTableCell>
                                 <StyledTableCell>{comment}</StyledTableCell>
                             </StyledTableRow>
