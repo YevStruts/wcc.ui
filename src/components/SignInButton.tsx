@@ -37,7 +37,8 @@ const SignInButton = () => {
     ];
 
     let authData = GetAuthData();
-    let avatar_url = `https://cdn.discordapp.com/avatars/${authData.id}/${authData.avatar}.png`;
+    let avatar_url = authData.avatar !== null && authData.avatar.length > 0 ?
+        `https://cdn.discordapp.com/avatars/${authData.id}/${authData.avatar}.png` : ``;
     if (authData.username !== null) {
         return (
             <Box sx={{ flexGrow: 0 }}>
