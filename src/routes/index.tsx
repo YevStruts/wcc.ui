@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRoutes } from "react-router-dom";
-import { GetToken } from "../helpers/AuthHelper";
+import { GetLanguage, GetToken } from "../helpers/AuthHelper";
 import Ratings from "../pages/ratings";
 import News from "../pages/news";
 import Article from "../pages/news/article";
@@ -14,6 +14,12 @@ import Manage from "../pages/manage";
         axios.defaults.headers.common["Authorization"] = "Bearer " + token;
     } else {
         delete axios.defaults.headers.common["Authorization"];
+    }
+    let language = GetLanguage();
+    if (language !== null && language !== undefined) {
+        axios.defaults.headers.common["locale"] = language;
+    } else {
+        axios.defaults.headers.common["locale"] = "uk";
     }
 })();
 

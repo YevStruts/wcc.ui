@@ -16,6 +16,10 @@ export const GetToken = () => {
     return localStorage.getItem("token");
 };
 
+export const GetLanguage = () => {
+    return localStorage.getItem("Language");
+};
+
 interface AuthData {
     token: string | null;
     id: string | null;
