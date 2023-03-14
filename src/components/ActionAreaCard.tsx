@@ -4,6 +4,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
+var decode = require('decode-html');
+
 interface ActionAreaCardProps {
     id: number;
     name: string;
@@ -22,7 +24,7 @@ const ActionAreaCard = ({ id, name, description, image_url, on_click }: ActionAr
                         {name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {description}
+                        <div dangerouslySetInnerHTML={{__html: decode(description ?? "")}} />
                     </Typography>
                 </CardContent>
             </CardActionArea>

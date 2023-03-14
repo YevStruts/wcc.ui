@@ -5,6 +5,8 @@ import PageTitle from "../../components/PageTitle";
 import Layout from "../../layout/layout";
 import { GetNewsItem } from "../../services/NewsService";
 
+var decode = require('decode-html');
+
 export interface ArticleProps {
     id: number;
     name: string;
@@ -32,7 +34,7 @@ const Article = () => {
                 </Grid>
                 <Grid item xs={12}>
                     <Grid container spacing={2}>
-                        {newsItem?.description ?? ""}
+                        <div dangerouslySetInnerHTML={{__html: decode(newsItem?.description ?? "")}} />
                     </Grid>
                 </Grid>
             </Grid>
