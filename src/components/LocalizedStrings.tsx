@@ -10,6 +10,9 @@ let Strings = new LocalizedStrings({
         signin: "Sign In",
         manage: "Manage",
         logout: "Logout",
+        settings: "Settings",
+        settings_nickname: "Nickname",
+        settings_save: "Save",
         /* ratings page */
         ratings_title: "RANKING",
         ratings_name: "Name",
@@ -57,6 +60,9 @@ let Strings = new LocalizedStrings({
         signin: "Вхід",
         manage: "Управління",
         logout: "Вийти",
+        settings: "Налаштування",
+        settings_nickname: "Нікнейм",
+        settings_save: "Зберегти",
         /* ratings page */
         ratings_title: "РЕЙТИНГ",
         ratings_name: "Імя",

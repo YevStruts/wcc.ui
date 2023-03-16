@@ -14,6 +14,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 }
 
 export const ApiUrls = {
+    player: `${API}/player/`,
     player_rating: `${API}/player/list`,
     player_poll: `${API}/player/poll`,
     news: `${API}/news/`,
@@ -22,4 +23,5 @@ export const ApiUrls = {
     game: `${API}/game/`,
     tournament: `${API}/tournament/`,
     rule: `${API}/rule/`,
+    settings: `${API}/settings/`,
 };

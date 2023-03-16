@@ -7,6 +7,7 @@ import Article from "../pages/news/article";
 import Tournaments from "../pages/tournaments";
 import Tournament from "../pages/tournaments/tournament";
 import Manage from "../pages/manage";
+import Settings from "../pages/settings";
 
 (function () {
     let token = GetToken();
@@ -32,6 +33,7 @@ const Routes = () => {
         { path: "tournaments", element: <Tournaments /> },
         { path: "tournaments/:id", element: <Tournament /> },
         { path: "manage", element: <Manage /> },
+        { path: "settings", element: <Settings /> },
         // ...
     ]);
 };

@@ -25,6 +25,11 @@ const SignInButton = () => {
         window.location.href = "/manage";
     };
 
+    const handleSettingsMenu = () => {
+        setAnchorElUser(null);
+        window.location.href = "/settings";
+    };
+
     const handleSignOutMenu = () => {
         setAnchorElUser(null);
         SignOut();
@@ -33,6 +38,7 @@ const SignInButton = () => {
 
     const settings = [
         // { id: 1, name: Strings.manage, onclick: handleManageMenu },
+        { id: 3, name: Strings.settings, onclick: handleSettingsMenu },
         { id: 2, name: Strings.logout, onclick: handleSignOutMenu }
     ];
 
