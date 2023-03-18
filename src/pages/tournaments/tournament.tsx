@@ -95,8 +95,8 @@ const Tournament = () => {
         if (tournament !== undefined) {
             GetParticipationStatus(tournament.id).then((result) => {
                 /* result => true - already participated */
-                setShowJoin(!result);
-                setShowLeave(result);
+                // setShowJoin(!result);
+                // setShowLeave(result);
             });
         }
     }, [ tournament ]);
