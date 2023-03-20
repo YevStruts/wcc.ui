@@ -142,7 +142,7 @@ const Tournament = () => {
                             <div dangerouslySetInnerHTML={{__html: decode(tournament?.description ?? "")}} />
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion defaultExpanded>
+                    <Accordion>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
@@ -162,7 +162,7 @@ const Tournament = () => {
                             </Grid>                            
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion disabled>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"

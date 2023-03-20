@@ -31,7 +31,7 @@ export default function GamesList(props: { schedule: GameServerType[] }) {
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell align="left">{FormatDateTime(row.scheduled, "MMMM dd, yyyy")}</TableCell>
+              <TableCell align="left">{FormatDateTime(row.scheduled, "yyyy-MM-dd")}</TableCell>
               <TableCell component="th" scope="row" align="center">
                 {row.home.name} - {row.visitor.name}
               </TableCell>
@@ -45,9 +45,9 @@ export default function GamesList(props: { schedule: GameServerType[] }) {
               </TableCell> */}
               <TableCell align="left">
                 {row.youtubeUrls?.map((url, index) => (
-                  <Link key={index} to={url}>
+                  <a key={index} href={url} target="_blank">
                     <SmartDisplayIcon htmlColor='#F30F0A' />
-                  </Link>
+                  </a>
                 ))}
               </TableCell>
             </TableRow>
