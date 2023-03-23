@@ -1,7 +1,7 @@
 const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 const API = isDevelopment ?
     "http://localhost:5001/api" :
-    "http://wcc-cossacks.com:5001/api";
+    "https://wcc-cossacks.com:5001/api";
 
 // const API = isDevelopment ?
 //     "https://localhost:5002/api" :
