@@ -174,7 +174,7 @@ const Tournament = () => {
                             <GamesList schedule={schedule ?? schedule_default}/>
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion disabled>
+                    <Accordion>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel3a-content"
