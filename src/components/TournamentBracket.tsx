@@ -48,8 +48,9 @@ export default function TournamentBracket(props: { schedule: GameServerType[] })
           sourceGame: games[homeIndex],
           sourcePool: {}
         };
+        ConvertToBracketGame(homeIndex, games[homeIndex], games);
       }
-    
+
       /* set right (visitor) */
       let visitorIndex = (index * 2) + 2;
       if (games.length > visitorIndex) {
@@ -59,8 +60,9 @@ export default function TournamentBracket(props: { schedule: GameServerType[] })
           sourceGame: games[visitorIndex],
           sourcePool: {}
         };
+        ConvertToBracketGame(visitorIndex, games[visitorIndex], games);
       }
-    
+
       return game;
     };
 
