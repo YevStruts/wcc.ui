@@ -8,31 +8,35 @@ export default function TournamentBracket(props: { schedule: GameServerType[] })
         let games : Game[] = [];
         schedule.sort((a, b) => a.orderId > b.orderId ? 1 : -1)
         .map((item,i) => {
-          games.push({
-            id: item.id.toString(),
-            name: item.name,
-            scheduled: item.scheduled,
-            sides: {
-              home: {
-                team: {
-                  id: item.home.id.toString(),
-                  name: item.home.name
+          /* TODO: Qualifying !!! Hardcoded */
+          if (item.name !== 'Qualifying')
+          {
+            games.push({
+              id: item.id.toString(),
+              name: item.name,
+              scheduled: item.scheduled,
+              sides: {
+                home: {
+                  team: {
+                    id: item.home.id.toString(),
+                    name: item.home.name
+                  },
+                  score: {
+                    score: item.home.score
+                  }
                 },
-                score: {
-                  score: item.home.score
-                }
-              },
-              visitor: {
-                team: {
-                  id: item.visitor.id.toString(),
-                  name: item.visitor.name
-                },
-                score: {
-                  score: item.visitor.score
+                visitor: {
+                  team: {
+                    id: item.visitor.id.toString(),
+                    name: item.visitor.name
+                  },
+                  score: {
+                    score: item.visitor.score
+                  }
                 }
               }
-            }
-          });
+            });
+          }
           return {};
         });
         return games;
