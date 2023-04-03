@@ -14,7 +14,7 @@ let Strings = new LocalizedStrings({
         settings_nickname: "Nickname",
         settings_save: "Save",
         /* ratings page */
-        ratings_title: "RANKING",
+        ratings_title: "RANKING MARCH 2023",
         ratings_name: "Name",
         ratings_comment: "Comment",
         /* tournaments page */
@@ -65,7 +65,7 @@ let Strings = new LocalizedStrings({
         settings_nickname: "Нікнейм",
         settings_save: "Зберегти",
         /* ratings page */
-        ratings_title: "РЕЙТИНГ",
+        ratings_title: "РЕЙТИНГ БЕРЕЗЕНЬ 2023",
         ratings_name: "Імя",
         ratings_comment: "Коментар",
         /* tournaments page */

@@ -54,10 +54,10 @@ const GridRating = ({ players }: GridRatingProps) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {players.map(({ id, name, comment, avatarUrl }: any) => {
+                    {players.map(({ id, name, comment, avatarUrl }: any, index) => {
                         return (
                             <StyledTableRow key={id}>
-                                <StyledTableCell>-</StyledTableCell>
+                                <StyledTableCell>{index + 1}</StyledTableCell>
                                 <StyledTableCell>
                                     <Avatar alt={name} src={avatarUrl} sx={{ width: 24, height: 24 }}/>
                                 </StyledTableCell>
