@@ -30,8 +30,8 @@ const Ratings = () => {
                             <Grid item xs={10}>
                                 <Stack direction="row" spacing={2}>
                                     <EmojiEventsIcon style={{ color: 'gold' }} fontSize="large"></EmojiEventsIcon>
-                                    <Typography fontSize={24}>{Strings.ratings_worldchampion}</Typography>
-                                    <Typography color="grey" fontSize={24}>vacant</Typography>
+                                    <Typography fontSize={20}>{Strings.ratings_worldchampion}</Typography>
+                                    <Typography color="grey" fontSize={20}>vacant</Typography>
                                 </Stack>
                             </Grid>
                         </Grid>
