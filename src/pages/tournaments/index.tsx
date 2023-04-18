@@ -17,7 +17,7 @@ const Tournaments = () => {
 
     useEffect(() => {
         GetTournamentsList().then((tournaments) => {
-            setTournamentsList(tournaments);
+            setTournamentsList(tournaments.reverse());
         });
     }, []);
 
