@@ -1,12 +1,12 @@
 import axios from "axios";
-import { ApiUrls } from "../helpers/ConstantHelper";
+import { Constants } from "../helpers/ConstantHelper";
 
 export const GetSettings = () => {
-    return axios.get(ApiUrls.settings).then((response) => response.data);
+    return axios.get(Constants.ApiUrls.settings).then((response) => response.data);
 }
 
 export const SaveSettings = (nickename: string) => {
-    return axios.post(ApiUrls.settings, {
+    return axios.post(Constants.ApiUrls.settings, {
         nickname: nickename
     });
 }

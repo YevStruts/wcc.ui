@@ -1,12 +1,19 @@
 import { Avatar, Box, Button, IconButton, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
-import React from "react";
+import React, {  } from "react";
 import { GetAuthData, SignOut } from "../helpers/AuthHelper";
 import { GetAuthorizeUrl } from "../services/DiscordService";
 import Strings from "./LocalizedStrings";
+import { Constants } from "../helpers/ConstantHelper";
 
 const { useCallback } = React;
 
-const SignInButton = () => {
+export interface WhoAmI
+{
+    username: string,
+    role: string
+};
+
+const SignInButton = ({ whoami: WhoAmI }: any) => {
     const signIn = useCallback(() => {
         GetAuthorizeUrl().then((data) => (window.location.href = data.redirectUrl));
     }, []);
@@ -36,11 +43,15 @@ const SignInButton = () => {
         window.location.href = "/";
     };
 
-    const settings = [
-        // { id: 1, name: Strings.manage, onclick: handleManageMenu },
-        { id: 3, name: Strings.settings, onclick: handleSettingsMenu },
-        { id: 2, name: Strings.logout, onclick: handleSignOutMenu }
-    ];
+    const manageSetting = { id: 1, name: Strings.manage, onclick: handleManageMenu };
+    const settingsSetting = { id: 3, name: Strings.settings, onclick: handleSettingsMenu };
+    const logoutSetting = { id: 2, name: Strings.logout, onclick: handleSignOutMenu };
+
+    var settings = [ settingsSetting, logoutSetting ];
+
+    if (WhoAmI !== undefined && (WhoAmI.role === Constants.Roles.Admin || WhoAmI.role === Constants.Roles.Manager)) {
+        settings.unshift(manageSetting)
+    }
 
     let authData = GetAuthData();
     let avatar_url = authData.avatar !== null && authData.avatar.length > 0 ?

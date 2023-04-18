@@ -9,10 +9,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import SignInButton from "../components/SignInButton";
+import SignInButton, { WhoAmI } from "../components/SignInButton";
 import Logo from "../components/Logo";
 import Strings from "../components/LocalizedStrings"
 import LanguageSwitcher from "../components/LanguageSwitcher";
+import { GetWhoAmI } from "../services/UserService";
 
 const pages = [
     { title: Strings.news, url: "/news" },
@@ -21,7 +22,15 @@ const pages = [
 ];
 
 const Header = () => {
+
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+    const [whoAmI, setWhoAmI] = React.useState<WhoAmI>();
+
+    React.useEffect(() => {
+        GetWhoAmI().then((whoami) => {
+            setWhoAmI(whoami);
+        });
+    }, []);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -101,7 +110,7 @@ const Header = () => {
                     <Box>
                         <LanguageSwitcher />
                     </Box>
-                    <SignInButton />
+                    <SignInButton whoami={whoAmI} />
                 </Toolbar>
             </Container>
         </AppBar>
