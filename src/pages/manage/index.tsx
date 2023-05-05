@@ -1,66 +1,50 @@
-import { Autocomplete, AutocompleteProps, Button, Grid, Paper, TextField, Typography } from "@mui/material";
-import { useState } from "react";
-import GroupSizesColors from "../../components/GroupSizesColors";
+import { Autocomplete, Grid, Paper, TextField } from "@mui/material";
+import { useEffect, useState } from "react";
 import PageTitle from "../../components/PageTitle";
 import Layout from "../../layout/layout";
+import { GetTournamentsList } from "../../services/TournamentsService";
+import { GetSchedule } from "../../services/GameService";
+import { GameServerType } from "../tournaments/tournament";
 
 const Title = "MANAGE";
-
-// One time slot every 30 minutes.
-const countPlayersOptions = [ 2, 4, 8, 16, 32 ];
 
 interface TournamentProps {
     id: number,
     label: string
 }
 
-interface PlayerProps {
-    id: number,
-    name: string
-}
-
 const Manage = () => {
+    const [tournamentList, setTournamentList] = useState<TournamentProps[]>();
     const [tournament, setTournament] = useState<TournamentProps>();
-    const [tournamentSize, setTournamentSize] = useState<number>();
-    const [players, setPlayers] = useState<PlayerProps[]>([]);
+    const [schedule, setSchedule] = useState<GameServerType[]>();
+
+    useEffect(() => {
+        GetTournamentsList().then(data => {
+            let tmp : TournamentProps[] = [];
+            data.forEach((item : { id: number, name: string }) => {
+                tmp.push({ id: item.id, label: item.name });
+            });
+            setTournamentList(tmp);
+        })
+    },[]);
+    
+    useEffect(() => {
+        if (tournament !== undefined) {
+            GetSchedule(tournament.id).then((schedule: GameServerType[]) => {
+                schedule.sort((a, b) => a.orderId > b.orderId ? 1 : -1);
+                setSchedule(schedule);
+                console.log(schedule)
+            });
+        };
+    }, [ tournament ]);
 
     function onTournamentChange (event: object, value: any) {
         setTournament(value);
-    }
+    };
 
-    function onCountPlayersChange (event: object, value: any) {
-        setTournamentSize(value);
-        setPlayers([
-            { id: 1, name: "Johnson"},
-            { id: 2, name: "Kelly"},
-            { id: 3, name: "Bellew"},
-            { id: 4, name: "Stevenson"}
-        ]);
-    }
-
-    const options = [
-        { label: 'Lords of Kingdom', id: 1 },
-    ];
-
-    function getCountOfPlayersList() {
-        return (
-            <Autocomplete
-                id="count-of-players"
-                options={countPlayersOptions}
-                getOptionLabel={(option) => option.toString() }
-                sx={{ width: 200 }}
-                renderInput={(params) => <TextField {...params} label="Count of Players" />}
-                onChange={onCountPlayersChange}
-            />
-        )
-    }
-
-    function getListOfGames() {
-        if (tournamentSize !== undefined && tournamentSize > 0) {
-            var stage = tournamentSize / 2;
-            console.log("stage:" + stage);
-        }
-    }
+    function onGameChange (event: object, value: any) {
+        console.log(value);
+    };
 
     return (
         <Layout>
@@ -72,16 +56,29 @@ const Manage = () => {
                     <Grid container>
                         <Grid item xs={5}>
                             <Autocomplete
-                                options={options}
+                                options={tournamentList ?? []}
+                                getOptionLabel={(option) => option.label}
                                 renderInput={(params) => (
                                     <TextField {...params} label="tournament" />
                                 )}
                                 onChange={onTournamentChange}
                             />
                         </Grid>
-                        <Grid item xs={2}></Grid>
-                        <Grid item xs={5}>
-                            <GroupSizesColors />
+                    </Grid>
+                </Grid>
+                <Grid item xs={12} mb={3}>
+                    <Grid container>
+                        <Grid container>
+                            <Grid item xs={5}>
+                                <Autocomplete
+                                    options={schedule ?? []}
+                                    getOptionLabel={(option) => option.name}
+                                    renderInput={(params) => (
+                                        <TextField {...params} label="games" />
+                                    )}
+                                    onChange={onGameChange}
+                                />
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -91,24 +88,45 @@ const Manage = () => {
                 <Grid item xs={12}>
                     <Paper>
                         <Grid container p={5}>
-                            <Grid item xs={6}>
-                                {players.map(({ id, name }: PlayerProps) => {
-                                    return (
-                                        <div>{name}</div>
-                                    )
-                                })}
+                            <Grid item xs={12} mb={3}>
+                                <TextField id="game-name" label="Name" variant="outlined" />
                             </Grid>
-                            <Grid item xs={6}>
-                                {/* {[...Array(tournamentSize)].map((e, i) => 
-                                    <Autocomplete
-                                        key={i}
-                                        options={players}
-                                        disableCloseOnSelect
-                                        renderInput={(params) => (
-                                        <TextField {...params} label="player" variant="standard" />
-                                    )}
-                                />
-                                )} */}
+                            <Grid item xs={12} mb={3}>
+                                <Grid container>
+                                    <Grid item xs={5}>
+                                        <Grid container>
+                                            <Grid item xs={10}>
+                                                <Autocomplete
+                                                    disablePortal
+                                                    id="combo-box-demo"
+                                                    options={[ "player1" ]}
+                                                    renderInput={(params) => <TextField {...params} label="Player" />}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={2} textAlign={"center"} p={2}>
+                                                0
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid item xs={2} textAlign={"center"} p={2}>
+                                        -
+                                    </Grid>
+                                    <Grid item xs={5}>
+                                        <Grid container>
+                                            <Grid item xs={2} textAlign={"center"} p={2}>
+                                                0
+                                            </Grid>
+                                            <Grid item xs={10}>
+                                                <Autocomplete
+                                                    disablePortal
+                                                    id="combo-box-demo"
+                                                    options={[ "player2" ]}
+                                                    renderInput={(params) => <TextField {...params} label="Player" />}
+                                                />
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </Paper>

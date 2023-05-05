@@ -57,7 +57,7 @@ const GridRating = ({ players }: GridRatingProps) => {
                     {players.map(({ id, name, comment, avatarUrl }: any, index) => {
                         return (
                             <StyledTableRow key={id}>
-                                <StyledTableCell>{index + 1}</StyledTableCell>
+                                <StyledTableCell>{name == "[-WN-]Stalman" || name == "[PKS]Fenek" || name == "[KGR]Ahmed" ? "4" : index + 1}</StyledTableCell>
                                 <StyledTableCell>
                                     <Avatar alt={name} src={avatarUrl} sx={{ width: 24, height: 24 }}/>
                                 </StyledTableCell>
