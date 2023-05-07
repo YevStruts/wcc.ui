@@ -35,6 +35,7 @@ export interface PlayerProps {
     id: number;
     name: string;
     avatarUrl: string;
+    position: number;
 }
 
 interface GridRatingProps {
@@ -54,10 +55,10 @@ const GridRating = ({ players }: GridRatingProps) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {players.map(({ id, name, comment, avatarUrl }: any, index) => {
+                    {players.map(({ id, name, comment, avatarUrl, position }: any, index) => {
                         return (
                             <StyledTableRow key={id}>
-                                <StyledTableCell>{name == "[-WN-]Stalman" || name == "[PKS]Fenek" || name == "[KGR]Ahmed" ? "4" : index + 1}</StyledTableCell>
+                                <StyledTableCell>{position}</StyledTableCell>
                                 <StyledTableCell>
                                     <Avatar alt={name} src={avatarUrl} sx={{ width: 24, height: 24 }}/>
                                 </StyledTableCell>
