@@ -9,7 +9,7 @@ export default function TournamentBracket(props: { schedule: GameServerType[] })
         schedule.sort((a, b) => a.orderId > b.orderId ? 1 : -1)
         .map((item,i) => {
           /* TODO: Qualifying !!! Hardcoded */
-          if (item.name !== 'Qualifying')
+          if (item.name !== 'Qualifying' && item.name !== 'Third place')
           {
             games.push({
               id: item.id.toString(),
