@@ -5,6 +5,10 @@ export const GetTournament = (id : number) => {
     return axios.get(Constants.ApiUrls.tournament + id).then((response) => response.data);
 };
 
+export const GetTournamentParticipants = (id : number) => {
+    return axios.get(Constants.ApiUrls.tournament + `participant/` + id).then((response) => response.data);
+};
+
 export const GetTournamentsList = () => {
     return axios.get(Constants.ApiUrls.tournament + `list`).then((response) => response.data);
 };

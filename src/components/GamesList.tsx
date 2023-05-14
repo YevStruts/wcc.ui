@@ -27,7 +27,7 @@ export default function GamesList(props: { schedule: GameServerType[] }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.schedule.map((row) => (
+          {props.schedule.filter(rec => rec.name != 'none').map((row) => (
             <TableRow
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

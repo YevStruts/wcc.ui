@@ -2,7 +2,7 @@ import { Autocomplete, Grid, Paper, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import PageTitle from "../../components/PageTitle";
 import Layout from "../../layout/layout";
-import { GetTournamentsList } from "../../services/TournamentsService";
+import { GetTournament, GetTournamentParticipants, GetTournamentsList } from "../../services/TournamentsService";
 import { GetSchedule } from "../../services/GameService";
 import { GameServerType } from "../tournaments/tournament";
 
@@ -13,10 +13,18 @@ interface TournamentProps {
     label: string
 }
 
+interface PlayerProps {
+    id: number,
+    name: string,
+    avatarUrl: string
+}
+
 const Manage = () => {
     const [tournamentList, setTournamentList] = useState<TournamentProps[]>();
     const [tournament, setTournament] = useState<TournamentProps>();
     const [schedule, setSchedule] = useState<GameServerType[]>();
+    const [players, setPlayers] = useState<PlayerProps[]>();
+    const [gameName, setGameName] = useState<string>();
 
     useEffect(() => {
         GetTournamentsList().then(data => {
@@ -30,6 +38,22 @@ const Manage = () => {
     
     useEffect(() => {
         if (tournament !== undefined) {
+            GetTournamentParticipants(tournament.id).then((data) => {
+                let tmp : PlayerProps[] = [];
+                data.forEach((item : { id: number, name: string }) => {
+                    tmp.push({ id: item.id, name: item.name, avatarUrl: `` });
+                });
+                setPlayers(tmp);
+            });
+            // GetTournament(tournament.id).then((data) => {
+            //     debugger;
+            //     setTournament(data);
+            //     let tmp : PlayerProps[] = [];
+            //     data.participant.forEach((item : { id: number, name: string }) => {
+            //         tmp.push({ id: item.id, name: item.name });
+            //     });
+            //     setPlayers(tmp);
+            // });
             GetSchedule(tournament.id).then((schedule: GameServerType[]) => {
                 schedule.sort((a, b) => a.orderId > b.orderId ? 1 : -1);
                 setSchedule(schedule);
@@ -43,7 +67,7 @@ const Manage = () => {
     };
 
     function onGameChange (event: object, value: any) {
-        console.log(value);
+        setGameName(value.name);
     };
 
     return (
@@ -89,7 +113,7 @@ const Manage = () => {
                     <Paper>
                         <Grid container p={5}>
                             <Grid item xs={12} mb={3}>
-                                <TextField id="game-name" label="Name" variant="outlined" />
+                                <TextField id="game-name" placeholder="Name" variant="outlined" value={gameName} size="small" fullWidth  />
                             </Grid>
                             <Grid item xs={12} mb={3}>
                                 <Grid container>
@@ -99,12 +123,14 @@ const Manage = () => {
                                                 <Autocomplete
                                                     disablePortal
                                                     id="combo-box-demo"
-                                                    options={[ "player1" ]}
+                                                    options={players ?? []}
+                                                    getOptionLabel={(option) => option.name}
                                                     renderInput={(params) => <TextField {...params} label="Player" />}
+                                                    size="small"
                                                 />
                                             </Grid>
-                                            <Grid item xs={2} textAlign={"center"} p={2}>
-                                                0
+                                            <Grid item xs={2} textAlign={"center"} pl={1}>
+                                                <TextField inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}  size="small"/>
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -113,15 +139,17 @@ const Manage = () => {
                                     </Grid>
                                     <Grid item xs={5}>
                                         <Grid container>
-                                            <Grid item xs={2} textAlign={"center"} p={2}>
-                                                0
+                                            <Grid item xs={2} textAlign={"center"} pr={1}>
+                                                <TextField inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} size="small" />
                                             </Grid>
                                             <Grid item xs={10}>
                                                 <Autocomplete
                                                     disablePortal
                                                     id="combo-box-demo"
-                                                    options={[ "player2" ]}
+                                                    options={players ?? []}
+                                                    getOptionLabel={(option) => option.name}
                                                     renderInput={(params) => <TextField {...params} label="Player" />}
+                                                    size="small"
                                                 />
                                             </Grid>
                                         </Grid>
