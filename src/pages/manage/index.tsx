@@ -1,4 +1,4 @@
-import { Autocomplete, Grid, Paper, TextField } from "@mui/material";
+import { Autocomplete, Button, Grid, Paper, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import PageTitle from "../../components/PageTitle";
 import Layout from "../../layout/layout";
@@ -25,6 +25,16 @@ const Manage = () => {
     const [schedule, setSchedule] = useState<GameServerType[]>();
     const [players, setPlayers] = useState<PlayerProps[]>();
     const [gameName, setGameName] = useState<string>();
+
+    const [player1, setPlayer1] = useState<PlayerProps>();
+    const [player2, setPlayer2] = useState<PlayerProps>();
+
+    const [score1, setScore1] = useState<number>();
+    const [score2, setScore2] = useState<number>();
+
+    const [youtube1, setYouTube1] = useState<string>();
+    const [youtube2, setYouTube2] = useState<string>();
+    const [youtube3, setYouTube3] = useState<string>();
 
     useEffect(() => {
         GetTournamentsList().then(data => {
@@ -68,6 +78,16 @@ const Manage = () => {
 
     function onGameChange (event: object, value: any) {
         setGameName(value.name);
+
+        setPlayer1({ id: value.home.id, name: value.home.name, avatarUrl: `` });       
+        setPlayer2({ id: value.visitor.id, name: value.visitor.name, avatarUrl: `` });
+
+        setScore1(value.home.score);
+        setScore2(value.visitor.score);
+
+        setYouTube1(value.youtubeUrls.length >= 1 ? value.youtubeUrls[0] : ``);
+        setYouTube2(value.youtubeUrls.length >= 2 ? value.youtubeUrls[1] : ``);
+        setYouTube3(value.youtubeUrls.length >= 3 ? value.youtubeUrls[2] : ``);
     };
 
     return (
@@ -122,15 +142,16 @@ const Manage = () => {
                                             <Grid item xs={10}>
                                                 <Autocomplete
                                                     disablePortal
-                                                    id="combo-box-demo"
+                                                    id="cb-player-1"
                                                     options={players ?? []}
                                                     getOptionLabel={(option) => option.name}
                                                     renderInput={(params) => <TextField {...params} label="Player" />}
                                                     size="small"
+                                                    value={player1 || null}
                                                 />
                                             </Grid>
                                             <Grid item xs={2} textAlign={"center"} pl={1}>
-                                                <TextField inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}  size="small"/>
+                                                <TextField inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}  size="small" value={score1} />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -140,21 +161,34 @@ const Manage = () => {
                                     <Grid item xs={5}>
                                         <Grid container>
                                             <Grid item xs={2} textAlign={"center"} pr={1}>
-                                                <TextField inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} size="small" />
+                                                <TextField inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} size="small" value={score2} />
                                             </Grid>
                                             <Grid item xs={10}>
                                                 <Autocomplete
                                                     disablePortal
-                                                    id="combo-box-demo"
+                                                    id="cb-player-2"
                                                     options={players ?? []}
                                                     getOptionLabel={(option) => option.name}
                                                     renderInput={(params) => <TextField {...params} label="Player" />}
                                                     size="small"
+                                                    value={player2 || null}
                                                 />
                                             </Grid>
                                         </Grid>
                                     </Grid>
                                 </Grid>
+                            </Grid>
+                            <Grid item xs={12} mb={1}>
+                                <TextField id="game-yt-1" placeholder="YouTube #1" variant="outlined" size="small" fullWidth value={youtube1} />
+                            </Grid>
+                            <Grid item xs={12} mb={1}>
+                                <TextField id="game-yt-1" placeholder="YouTube #2" variant="outlined" size="small" fullWidth value={youtube2} />
+                            </Grid>
+                            <Grid item xs={12} mb={3}>
+                                <TextField id="game-yt-1" placeholder="YouTube #3" variant="outlined" size="small" fullWidth value={youtube3} />
+                            </Grid>
+                            <Grid item xs={12} mb={1}>
+                                <Button variant="contained">Save</Button>
                             </Grid>
                         </Grid>
                     </Paper>
