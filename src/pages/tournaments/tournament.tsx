@@ -26,6 +26,7 @@ export interface TournamentProps {
     description: string;
     image_url: string;
     participant: PlayerServerType[];
+    isenrollment: boolean,
 }
 
 export interface GameServerType {
@@ -95,8 +96,10 @@ const Tournament = () => {
         if (tournament !== undefined) {
             GetParticipationStatus(tournament.id).then((result) => {
                 /* result => true - already participated */
-                // setShowJoin(!result);
-                // setShowLeave(result);
+                if (tournament.isenrollment) {
+                    setShowJoin(!result);
+                    setShowLeave(result);
+                }
             });
         }
     }, [ tournament ]);
