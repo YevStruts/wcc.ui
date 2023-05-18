@@ -26,7 +26,7 @@ export interface TournamentProps {
     description: string;
     image_url: string;
     participant: PlayerServerType[];
-    isenrollment: boolean,
+    isEnrollment: boolean,
 }
 
 export interface GameServerType {
@@ -96,7 +96,7 @@ const Tournament = () => {
         if (tournament !== undefined) {
             GetParticipationStatus(tournament.id).then((result) => {
                 /* result => true - already participated */
-                if (tournament.isenrollment) {
+                if (tournament.isEnrollment) {
                     setShowJoin(!result);
                     setShowLeave(result);
                 }
@@ -145,7 +145,7 @@ const Tournament = () => {
                             <div dangerouslySetInnerHTML={{__html: decode(tournament?.description ?? "")}} />
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
@@ -165,7 +165,7 @@ const Tournament = () => {
                             </Grid>                            
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion defaultExpanded>
+                    <Accordion>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
