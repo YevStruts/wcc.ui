@@ -46,7 +46,7 @@ export default function GamesList(props: { schedule: GameServerType[] }) {
                 ))}
               </TableCell> */}
               <TableCell align="left">
-                {row.youtubeUrls?.map((url, index) => (
+                {row.youtubeUrls?.filter(rec => rec != '').map((url, index) => (
                   <a key={index} href={url} target="_blank">
                     <SmartDisplayIcon htmlColor='#F30F0A' />
                   </a>
