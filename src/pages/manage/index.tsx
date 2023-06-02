@@ -1,4 +1,4 @@
-import { Autocomplete, Button, Grid, Paper, TextField } from "@mui/material";
+import { Autocomplete, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import PageTitle from "../../components/PageTitle";
 import Layout from "../../layout/layout";
@@ -150,7 +150,7 @@ const Manage = () => {
                             <Grid item xs={5}>
                                 <Autocomplete
                                     options={schedule ?? []}
-                                    getOptionLabel={(option) => option.name}
+                                    getOptionLabel={(option) => option.name + ` ` + option.home.name + ` - ` + option.visitor.name}
                                     renderInput={(params) => (
                                         <TextField {...params} label="games" />
                                     )}

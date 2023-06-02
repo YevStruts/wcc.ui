@@ -76,10 +76,14 @@ const Tournament = () => {
     const [showJoin, setShowJoin] = useState(false);
     const [showLeave, setShowLeave] = useState(false);
 
+    // TODO: temporary solution to disable bracket section
+    const [displayBracket, setDisplayBracket] = useState(true);
+
     useEffect(() => {
         let id = parseInt(params.id ?? "0");
         GetTournament(id).then((tournament) => {
             setTournament(tournament);
+            setDisplayBracket(id !== 4);
         });
     }, []);
 
@@ -145,7 +149,7 @@ const Tournament = () => {
                             <div dangerouslySetInnerHTML={{__html: decode(tournament?.description ?? "")}} />
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion defaultExpanded>
+                    <Accordion>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
@@ -165,7 +169,7 @@ const Tournament = () => {
                             </Grid>                            
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
@@ -186,11 +190,13 @@ const Tournament = () => {
                             <Typography>{Strings.tournament_bracket}</Typography>
                         </AccordionSummary>
                         <AccordionDetails  sx={{padding: 5}}>
-                            <TournamentBracket schedule={schedule ?? schedule_default}></TournamentBracket>
+                            {displayBracket &&
+                                <TournamentBracket schedule={schedule ?? schedule_default}></TournamentBracket>
+                            }
                         </AccordionDetails>
                     </Accordion>
                 </Grid>
-                <Grid item xs={12} textAlign={"center"} m={5}>
+                <Grid item xs={12} textAlign={"center"} m={1}>
                     {showJoin && 
                         <ColorButton variant="outlined" onClick={() => { join() }}>
                             {Strings.tournament_join}
@@ -201,6 +207,9 @@ const Tournament = () => {
                             {Strings.tournament_leave}
                         </ColorButton>
                     }
+                </Grid>
+                <Grid item xs={12} mb={4}>
+                    <Typography fontSize={14}>TL: {Strings.tournament_technical_lose}</Typography>
                 </Grid>
             </Grid>
         </Layout>

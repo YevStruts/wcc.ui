@@ -52,7 +52,8 @@ let Strings = new LocalizedStrings({
         tournament_games_score: "Score",
         tournament_games_youtube: "Youtube",
         tournament_join: "Join",
-        tournament_leave: "Leave"
+        tournament_leave: "Leave",
+        tournament_technical_lose: "technical lose"
     },
     uk: {
         /* header */
@@ -104,7 +105,8 @@ let Strings = new LocalizedStrings({
         tournament_games_score: "Рахунок",
         tournament_games_youtube: "Відео",
         tournament_join: "Приєднатися",
-        tournament_leave: "Відмовитися"
+        tournament_leave: "Відмовитися",
+        tournament_technical_lose: "Технічна поразка"
     }
 });
 
