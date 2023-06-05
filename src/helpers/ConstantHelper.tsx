@@ -31,5 +31,10 @@ export const Constants = {
         settings: `${API}/settings/`,
         rating: `${API}/rating/`,
         user_whoami: `${API}/user/whoami`
+    },
+    TournamentTypes: {
+        Rating: 1,
+        Olympic: 2,
+        Switz: 3
     }
 };

@@ -1,5 +1,5 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, ButtonProps, Grid, styled, Typography } from "@mui/material";
-import { useState, useEffect } from "react";
+import { Accordion, AccordionDetails, AccordionSummary, Autocomplete, Box, Button, ButtonProps, FormControl, Grid, InputLabel, MenuItem, Pagination, Select, SelectChangeEvent, styled, TextField, Typography } from "@mui/material";
+import { useState, useEffect, ChangeEvent, ReactNode } from "react";
 import { useParams } from "react-router-dom";
 import GamesList from "../../components/GamesList";
 import PageTitle from "../../components/PageTitle";
@@ -27,6 +27,7 @@ export interface TournamentProps {
     image_url: string;
     participant: PlayerServerType[];
     isEnrollment: boolean,
+    tournamentTypeId: number
 }
 
 export interface GameServerType {
@@ -79,9 +80,13 @@ const Tournament = () => {
     // TODO: temporary solution to disable bracket section
     const [displayBracket, setDisplayBracket] = useState(true);
 
+    const [round, setRound] = useState<number>(2);
+    const [scheduleForRound, setScheduleForRound] = useState<GameServerType[]>();
+
     useEffect(() => {
         let id = parseInt(params.id ?? "0");
         GetTournament(id).then((tournament) => {
+            debugger;
             setTournament(tournament);
             setDisplayBracket(id !== 4);
         });
@@ -92,6 +97,14 @@ const Tournament = () => {
             GetSchedule(tournament.id).then((schedule: GameServerType[]) => {
                 schedule.sort((a, b) => a.orderId > b.orderId ? 1 : -1);
                 setSchedule(schedule);
+                
+                if (tournament.tournamentTypeId === 3) {
+                    var scheduleForRound = schedule?.filter((element) => {
+                        return element.name.includes('R' + 1);
+                    });
+                    setRound(1);
+                    setScheduleForRound(scheduleForRound);
+                }
             });
         };
     }, [ tournament ]);
@@ -128,6 +141,44 @@ const Tournament = () => {
                 window.location.reload();
             });
         }
+    }
+
+    function ConditionalSchedule(props: { isSwitz: boolean; }) {
+        const isSwitz = props.isSwitz;
+
+        function handleChange(event: SelectChangeEvent<any>, child: ReactNode): void {
+            var scheduleForRound = schedule?.filter((element) => {
+                return element.name.includes('R' + event.target.value);
+            });
+            setRound(event.target.value);
+            setScheduleForRound(scheduleForRound);
+        }
+
+        return (
+          <>
+            { isSwitz ?
+                <>
+                <FormControl style={{width: 120}}>
+                        <InputLabel id="demo-simple-select-label">Round</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={round}
+                            label="Round"
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                        </Select>
+                </FormControl>
+                <Box mb={5}></Box>
+                <GamesList schedule={scheduleForRound ?? schedule_default} />
+                </>
+            :
+                <GamesList schedule={schedule ?? schedule_default}/>
+            }
+          </>
+        );
     }
 
     return (
@@ -178,7 +229,7 @@ const Tournament = () => {
                             <Typography>{Strings.tournament_games}</Typography>
                         </AccordionSummary>
                         <AccordionDetails  sx={{padding: 5}}>
-                            <GamesList schedule={schedule ?? schedule_default}/>
+                            <ConditionalSchedule isSwitz={tournament?.tournamentTypeId === 3 ?? false} />
                         </AccordionDetails>
                     </Accordion>
                     <Accordion>
