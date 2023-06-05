@@ -11,6 +11,7 @@ import { GetSchedule } from "../../services/GameService";
 import { GetRule } from "../../services/RuleService";
 import { grey, orange } from "@mui/material/colors";
 import Strings from "../../components/LocalizedStrings";
+import TournamentSwitzBracket from "../../components/TournamentSwitzBracket";
 
 var decode = require('decode-html');
 
@@ -78,7 +79,7 @@ const Tournament = () => {
     const [showLeave, setShowLeave] = useState(false);
 
     // TODO: temporary solution to disable bracket section
-    const [displayBracket, setDisplayBracket] = useState(true);
+    // const [displayBracket, setDisplayBracket] = useState(true);
 
     const [round, setRound] = useState<number>(2);
     const [scheduleForRound, setScheduleForRound] = useState<GameServerType[]>();
@@ -88,7 +89,7 @@ const Tournament = () => {
         GetTournament(id).then((tournament) => {
             debugger;
             setTournament(tournament);
-            setDisplayBracket(id !== 4);
+            // setDisplayBracket(id !== 4);
         });
     }, []);
 
@@ -120,6 +121,14 @@ const Tournament = () => {
             });
         }
     }, [ tournament ]);
+
+    useEffect(() => {
+        if (tournament !== undefined && tournament.tournamentTypeId === 3) {
+            // GetSwitzTable(tournament.id).then((result) => {
+            //     console.log(result);
+            // });
+        }
+    }, [ tournament]);
 
     function join() {
         if (tournament !== undefined) {
@@ -241,7 +250,10 @@ const Tournament = () => {
                             <Typography>{Strings.tournament_bracket}</Typography>
                         </AccordionSummary>
                         <AccordionDetails  sx={{padding: 5}}>
-                            {displayBracket &&
+                            {tournament?.tournamentTypeId === 3 &&
+                                <TournamentSwitzBracket tournamentId={tournament?.id ?? 2}></TournamentSwitzBracket>
+                            }
+                            {tournament?.tournamentTypeId !== 3 &&
                                 <TournamentBracket schedule={schedule ?? schedule_default}></TournamentBracket>
                             }
                         </AccordionDetails>
