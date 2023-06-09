@@ -53,7 +53,13 @@ let Strings = new LocalizedStrings({
         tournament_games_youtube: "Youtube",
         tournament_join: "Join",
         tournament_leave: "Leave",
-        tournament_technical_lose: "technical lose"
+        tournament_technical_lose: "technical lose",
+        /* tournament switz table */
+        tournament_table_name: "Name",
+        tournament_table_games: "Rounds",
+        tournament_table_scoreswon: "Wins",
+        tournament_table_scoresloss: "Losses",
+        tournament_table_scores: "Scores",
     },
     uk: {
         /* header */
@@ -106,7 +112,13 @@ let Strings = new LocalizedStrings({
         tournament_games_youtube: "Відео",
         tournament_join: "Приєднатися",
         tournament_leave: "Відмовитися",
-        tournament_technical_lose: "Технічна поразка"
+        tournament_technical_lose: "Технічна поразка",
+        /* tournament switz table */
+        tournament_table_name: "Ім'я",
+        tournament_table_games: "Раунди",
+        tournament_table_scoreswon: "Перемоги",
+        tournament_table_scoresloss: "Поразки",
+        tournament_table_scores: "Очки",
     }
 });
 

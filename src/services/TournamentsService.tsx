@@ -24,3 +24,7 @@ export const Leave = (id: number) => {
 export const GetParticipationStatus = (tournamentId: number) => {
     return axios.get(Constants.ApiUrls.tournament + `getparticipationstatus/` + tournamentId).then((response) => response.data);
 };
+
+export const GetSwitzTable = (tournamentId: number) => {
+    return axios.get(Constants.ApiUrls.tournament + `getswitztable/` + tournamentId).then((response) => response.data);
+}

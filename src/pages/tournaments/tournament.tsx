@@ -5,7 +5,7 @@ import GamesList from "../../components/GamesList";
 import PageTitle from "../../components/PageTitle";
 import TournamentBracket from "../../components/TournamentBracket";
 import Layout from "../../layout/layout";
-import { GetParticipationStatus, GetTournament, Join, Leave } from "../../services/TournamentsService";
+import { GetParticipationStatus, GetSwitzTable, GetTournament, Join, Leave } from "../../services/TournamentsService";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { GetSchedule } from "../../services/GameService";
 import { GetRule } from "../../services/RuleService";
@@ -42,6 +42,16 @@ export interface GameServerType {
     youtubeUrls: string[],
 }
 
+export interface TableItemType {
+    name: string,
+    avatar: string,
+    gamesCount: number,
+    scoresWon: number,
+    scoresLoss: number,
+    averageRatingOppWon: number,
+    averageRatingOppLoss: number,
+    scores: number
+}
 
 const schedule_default : GameServerType[] = [{
     id: 0,
@@ -70,6 +80,8 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
     },
 }));
 
+const rows : TableItemType[] = [];
+  
 const Tournament = () => {
     const params = useParams();
 
@@ -77,6 +89,7 @@ const Tournament = () => {
     const [schedule, setSchedule] = useState<GameServerType[]>();
     const [showJoin, setShowJoin] = useState(false);
     const [showLeave, setShowLeave] = useState(false);
+    const [table, setTable] = useState<TableItemType[]>();
 
     // TODO: temporary solution to disable bracket section
     // const [displayBracket, setDisplayBracket] = useState(true);
@@ -87,7 +100,6 @@ const Tournament = () => {
     useEffect(() => {
         let id = parseInt(params.id ?? "0");
         GetTournament(id).then((tournament) => {
-            debugger;
             setTournament(tournament);
             // setDisplayBracket(id !== 4);
         });
@@ -101,9 +113,9 @@ const Tournament = () => {
                 
                 if (tournament.tournamentTypeId === 3) {
                     var scheduleForRound = schedule?.filter((element) => {
-                        return element.name.includes('R' + 1);
+                        return element.name.includes('R' + 2);
                     });
-                    setRound(1);
+                    // setRound(2);
                     setScheduleForRound(scheduleForRound);
                 }
             });
@@ -124,9 +136,30 @@ const Tournament = () => {
 
     useEffect(() => {
         if (tournament !== undefined && tournament.tournamentTypeId === 3) {
-            // GetSwitzTable(tournament.id).then((result) => {
-            //     console.log(result);
-            // });
+            GetSwitzTable(tournament.id).then((data : TableItemType[]) => {
+                data.sort((a, b) => {
+                    // 1. Scores
+                    if (a.scores < b.scores) return 1;
+                    if (a.scores > b.scores) return -1;
+                    // 2. Difference ScoresWon - ScoresLoss
+                    if (a.scoresWon - a.scoresLoss < b.scoresWon - b.scoresLoss) return 1;
+                    if (a.scoresWon - a.scoresLoss > b.scoresWon - b.scoresLoss) return -1;
+                    // 3. Who has more scorewon
+                    if (a.scoresWon < b.scoresWon) return 1;
+                    if (a.scoresWon > b.scoresWon) return -1;
+                    // 4. Who has less scoreloss
+                    if (a.scoresLoss > b.scoresLoss) return 1;
+                    if (a.scoresLoss < b.scoresLoss) return -1;
+                    // 5. Who has higher average rating oponent won
+                    if (a.averageRatingOppWon > b.averageRatingOppWon) return 1;
+                    if (a.averageRatingOppWon < b.averageRatingOppWon) return -1;
+                    // 6. Who has less average rating oponent loss
+                    if (a.averageRatingOppLoss < b.averageRatingOppLoss) return -1;
+                    if (a.averageRatingOppLoss > b.averageRatingOppLoss) return 1;
+                    return 0;
+                });
+                setTable(data);
+            });
         }
     }, [ tournament]);
 
@@ -251,7 +284,7 @@ const Tournament = () => {
                         </AccordionSummary>
                         <AccordionDetails  sx={{padding: 5}}>
                             {tournament?.tournamentTypeId === 3 &&
-                                <TournamentSwitzBracket tournamentId={tournament?.id ?? 2}></TournamentSwitzBracket>
+                                <TournamentSwitzBracket record={table ?? rows }></TournamentSwitzBracket>
                             }
                             {tournament?.tournamentTypeId !== 3 &&
                                 <TournamentBracket schedule={schedule ?? schedule_default}></TournamentBracket>
