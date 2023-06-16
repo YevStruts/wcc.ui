@@ -94,7 +94,7 @@ const Tournament = () => {
     // TODO: temporary solution to disable bracket section
     // const [displayBracket, setDisplayBracket] = useState(true);
 
-    const [round, setRound] = useState<number>(2);
+    const [round, setRound] = useState<number>(3);
     const [scheduleForRound, setScheduleForRound] = useState<GameServerType[]>();
 
     useEffect(() => {
@@ -113,7 +113,7 @@ const Tournament = () => {
                 
                 if (tournament.tournamentTypeId === 3) {
                     var scheduleForRound = schedule?.filter((element) => {
-                        return element.name.includes('R' + 2);
+                        return element.name.includes('R' + 3);
                     });
                     // setRound(2);
                     setScheduleForRound(scheduleForRound);
@@ -211,6 +211,7 @@ const Tournament = () => {
                         >
                             <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
                         </Select>
                 </FormControl>
                 <Box mb={5}></Box>
@@ -230,7 +231,7 @@ const Tournament = () => {
                     <PageTitle text={tournament?.name ?? ""} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Accordion defaultExpanded>
+                    <Accordion>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
@@ -274,7 +275,7 @@ const Tournament = () => {
                             <ConditionalSchedule isSwitz={tournament?.tournamentTypeId === 3 ?? false} />
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel3a-content"
