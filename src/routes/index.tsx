@@ -8,6 +8,7 @@ import Tournaments from "../pages/tournaments";
 import Tournament from "../pages/tournaments/tournament";
 import Manage from "../pages/manage";
 import Settings from "../pages/settings";
+import Rules from "../pages/rules";
 
 (function () {
     let token = GetToken();
@@ -28,6 +29,7 @@ const Routes = () => {
     return useRoutes([
         { path: "/", element: <Ratings /> },
         { path: "news", element: <News /> },
+        { path: "rules", element: <Rules /> },
         { path: "news/:id", element: <Article /> },
         { path: "ratings", element: <Ratings /> },
         { path: "tournaments", element: <Tournaments /> },

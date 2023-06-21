@@ -17,6 +17,7 @@ import { GetWhoAmI } from "../services/UserService";
 
 const pages = [
     { title: Strings.news, url: "/news" },
+    { title: Strings.rules, url: "/rules" },
     { title: Strings.ratings, url: "/ratings" },
     { title: Strings.tournaments, url: "/tournaments" },
 ];

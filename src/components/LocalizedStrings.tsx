@@ -5,6 +5,7 @@ let Strings = new LocalizedStrings({
     en:{
         /* header */
         news: "News",
+        rules: "Rules",
         ratings: "Ratings",
         tournaments: "Tournaments",
         signin: "Sign In",
@@ -64,6 +65,7 @@ let Strings = new LocalizedStrings({
     uk: {
         /* header */
         news: "Новини",
+        rules: "Правила",
         ratings: "Рейтинги",
         tournaments: "Турніри",
         signin: "Вхід",
