@@ -14,7 +14,7 @@ const Ratings = () => {
 
     useEffect(() => {
         GetRating().then((players) => {
-            setPlayers(players);
+            setPlayers(players.filter((p: PlayerProps) => p.name != "[-UNION-]Artempro"));
         });
     }, []);
 

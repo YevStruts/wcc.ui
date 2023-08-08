@@ -15,10 +15,11 @@ let Strings = new LocalizedStrings({
         settings_nickname: "Nickname",
         settings_save: "Save",
         /* ratings page */
-        ratings_title: "RANKING MAY 2023",
+        ratings_title: "RANKING",
         ratings_worldchampion: "World Champion",
         ratings_name: "Name",
         ratings_comment: "Comment",
+        ratings_score: "Score",
         /* tournaments page */
         tournaments_title: "Tournaments",
         tournaments_card_participants: "participants",
@@ -75,10 +76,11 @@ let Strings = new LocalizedStrings({
         settings_nickname: "Нікнейм",
         settings_save: "Зберегти",
         /* ratings page */
-        ratings_title: "РЕЙТИНГ ТРАВЕНЬ 2023",
+        ratings_title: "РЕЙТИНГ",
         ratings_worldchampion: "Чемпіон Світу",
         ratings_name: "Імя",
         ratings_comment: "Коментар",
+        ratings_score: "Рейтинг",
         /* tournaments page */
         tournaments_title: "Турніри",
         tournaments_card_participants: "учасників",

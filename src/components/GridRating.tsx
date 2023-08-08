@@ -36,6 +36,7 @@ export interface PlayerProps {
     name: string;
     avatarUrl: string;
     position: number;
+    totalPoints: number;
 }
 
 interface GridRatingProps {
@@ -50,12 +51,13 @@ const GridRating = ({ players }: GridRatingProps) => {
                     <TableRow>
                         <StyledTableCell width={100}>#</StyledTableCell>
                         <StyledTableCell width={30}>{/* progress */}</StyledTableCell>
-                        <StyledTableCell width={500}>{Strings.ratings_name}</StyledTableCell>
+                        <StyledTableCell width={300}>{Strings.ratings_name}</StyledTableCell>
+                        <StyledTableCell width={200}>{Strings.ratings_score}</StyledTableCell>
                         <StyledTableCell>{Strings.ratings_comment}</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {players.map(({ id, name, comment, avatarUrl, position }: any, index) => {
+                    {players.map(({ id, name, comment, avatarUrl, position, totalPoints }: any, index) => {
                         return (
                             <StyledTableRow key={id}>
                                 <StyledTableCell>{position}</StyledTableCell>
@@ -63,6 +65,7 @@ const GridRating = ({ players }: GridRatingProps) => {
                                     <Avatar alt={name} src={avatarUrl} sx={{ width: 24, height: 24 }}/>
                                 </StyledTableCell>
                                 <StyledTableCell>{name}</StyledTableCell>
+                                <StyledTableCell>{totalPoints}</StyledTableCell>
                                 <StyledTableCell>{comment}</StyledTableCell>
                             </StyledTableRow>
                         );
