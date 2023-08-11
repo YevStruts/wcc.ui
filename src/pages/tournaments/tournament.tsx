@@ -94,7 +94,7 @@ const Tournament = () => {
     // TODO: temporary solution to disable bracket section
     // const [displayBracket, setDisplayBracket] = useState(true);
 
-    const [round, setRound] = useState<number>(8);
+    const [round, setRound] = useState<number>(9);
     const [scheduleForRound, setScheduleForRound] = useState<GameServerType[]>();
 
     useEffect(() => {
@@ -113,7 +113,7 @@ const Tournament = () => {
                 
                 if (tournament.tournamentTypeId === 3) {
                     var scheduleForRound = schedule?.filter((element) => {
-                        return element.name.includes('R' + 8);
+                        return element.name.includes('' + 9);
                     });
                     // setRound(2);
                     setScheduleForRound(scheduleForRound);
@@ -217,6 +217,7 @@ const Tournament = () => {
                             <MenuItem value={6}>6</MenuItem>
                             <MenuItem value={7}>7</MenuItem>
                             <MenuItem value={8}>8</MenuItem>
+                            <MenuItem value={9}>1/8</MenuItem>
                         </Select>
                 </FormControl>
                 <Box mb={5}></Box>
@@ -280,7 +281,7 @@ const Tournament = () => {
                             <ConditionalSchedule isSwitz={tournament?.tournamentTypeId === 3 ?? false} />
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion defaultExpanded>
+                    <Accordion>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel3a-content"

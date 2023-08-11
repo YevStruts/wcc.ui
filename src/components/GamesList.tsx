@@ -19,7 +19,7 @@ export default function GamesList(props: { schedule: GameServerType[] }) {
         <TableHead>
           <TableRow>
             <TableCell align="left">{Strings.tournament_games_date}</TableCell>
-            <TableCell align="center">{Strings.tournament_games_phase}</TableCell>
+            {/* <TableCell align="center">{Strings.tournament_games_phase}</TableCell> */}
             <TableCell align="center">{Strings.tournament_games_games}</TableCell>
             <TableCell align="center">{Strings.tournament_games_score}</TableCell>
             {/* <TableCell align="right">Replay</TableCell> */}
@@ -33,7 +33,7 @@ export default function GamesList(props: { schedule: GameServerType[] }) {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell align="left">{FormatDateTime(row.scheduled, "yyyy-MM-dd")}</TableCell>
-              <TableCell align="center">{row.name}</TableCell>
+              {/* <TableCell align="center">{row.name}</TableCell> */}
               <TableCell component="th" scope="row" align="center">
                 {row.home.name} - {row.visitor.name}
               </TableCell>
