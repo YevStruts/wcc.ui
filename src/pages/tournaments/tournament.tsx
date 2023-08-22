@@ -218,6 +218,7 @@ const Tournament = () => {
                             <MenuItem value={7}>7</MenuItem>
                             <MenuItem value={8}>8</MenuItem>
                             <MenuItem value={9}>1/8</MenuItem>
+                            <MenuItem value={10}>1/4</MenuItem>
                         </Select>
                 </FormControl>
                 <Box mb={5}></Box>
