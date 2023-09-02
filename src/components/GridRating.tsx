@@ -8,6 +8,7 @@ import {
     TableCell,
     tableCellClasses,
     Avatar,
+    Link,
 } from "@mui/material";
 import Strings from "./LocalizedStrings";
 
@@ -58,13 +59,16 @@ const GridRating = ({ players }: GridRatingProps) => {
                 </TableHead>
                 <TableBody>
                     {players.map(({ id, name, comment, avatarUrl, position, totalPoints }: any, index) => {
+                        var profileUrl = "/profile/" + id;
                         return (
                             <StyledTableRow key={id}>
                                 <StyledTableCell>{position}</StyledTableCell>
                                 <StyledTableCell>
                                     <Avatar alt={name} src={avatarUrl} sx={{ width: 24, height: 24 }}/>
                                 </StyledTableCell>
-                                <StyledTableCell>{name}</StyledTableCell>
+                                <StyledTableCell>
+                                    <Link href={profileUrl} underline="none" color="white">{name}</Link>
+                                </StyledTableCell>
                                 <StyledTableCell>{totalPoints}</StyledTableCell>
                                 <StyledTableCell>{comment}</StyledTableCell>
                             </StyledTableRow>

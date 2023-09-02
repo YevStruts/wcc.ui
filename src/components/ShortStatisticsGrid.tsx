@@ -1,0 +1,44 @@
+import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+function createData(
+  name: string,
+  protein: number,
+) {
+  return { name, protein };
+}
+
+const rows = [
+  createData('Total Fights', 4.0),
+  createData('Wins', 4.3),
+  createData('Losses', 6.0),
+  createData('Draws', 4.3),
+];
+
+export default function DenseTable() {
+  return (
+    <TableContainer component={Paper}>
+      <Table size="small" aria-label="a dense table">
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow
+              key={row.name}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {row.name}
+              </TableCell>
+              <TableCell align="right">{row.protein}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
