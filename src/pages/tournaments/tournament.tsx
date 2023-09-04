@@ -94,7 +94,7 @@ const Tournament = () => {
     // TODO: temporary solution to disable bracket section
     // const [displayBracket, setDisplayBracket] = useState(true);
 
-    const [round, setRound] = useState<number>(9);
+    const [round, setRound] = useState<number>(10);
     const [scheduleForRound, setScheduleForRound] = useState<GameServerType[]>();
 
     useEffect(() => {
@@ -113,7 +113,7 @@ const Tournament = () => {
                 
                 if (tournament.tournamentTypeId === 3) {
                     var scheduleForRound = schedule?.filter((element) => {
-                        return element.name.includes('' + 9);
+                        return element.name.includes('' + 10);
                     });
                     // setRound(2);
                     setScheduleForRound(scheduleForRound);
@@ -219,6 +219,7 @@ const Tournament = () => {
                             <MenuItem value={8}>8</MenuItem>
                             <MenuItem value={9}>1/8</MenuItem>
                             <MenuItem value={10}>1/4</MenuItem>
+                            <MenuItem value={11}>1/2</MenuItem>
                         </Select>
                 </FormControl>
                 <Box mb={5}></Box>
