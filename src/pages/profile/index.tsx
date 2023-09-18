@@ -4,13 +4,19 @@ import PageTitle from "../../components/PageTitle";
 import Layout from "../../layout/layout";
 import { useParams } from "react-router-dom";
 import ShortStatisticsGrid from "../../components/ShortStatisticsGrid";
-import LastFightsTable from "../../components/LastFightsTable";
+import LastFightsTable, { LastFightsList } from "../../components/LastFightsTable";
+import { GetProfile } from "../../services/PlayerService";
 
 interface ProfileProps {
     id: number;
     name: string;
     avatar: string;
     age: number;
+    wins: number;
+    losses: number;
+    debut: Date,
+    lastfihgt: Date,
+    lastFightsList: LastFightsList[],
 }
 
 const Profile = () => {
@@ -19,15 +25,22 @@ const Profile = () => {
 
     useEffect(() => {
         let id = params.id ?? "0";
-        // GetNewsList().then((news) => {
-        //     setNewsList(news);
-        // });
-        setProfile({
-            id: 1,
-            name: "[-UNION-]Artempro",
-            avatar: "https://cdn.discordapp.com/avatars/328305220582899712/f46b07356d766b5c228dc3fcae3a29b6.png",
-            age: 20,
+        GetProfile(id).then((data) => {
+            debugger;
+            setProfile(data);
         });
+        
+        // setProfile({
+        //     id: 1,
+        //     name: "[-UNION-]Artempro",
+        //     avatar: "https://cdn.discordapp.com/avatars/328305220582899712/f46b07356d766b5c228dc3fcae3a29b6.png",
+        //     // main statistics
+        //     age: 20,
+        //     wins: 21,
+        //     losses: 0,
+        //     debut: new Date("2013-09-11"),
+        //     lastfihgt: new Date("2022-01-16")
+        // });
     }, []);
 
     return (
@@ -51,8 +64,8 @@ const Profile = () => {
                                 <Grid item xs={9}>21-0</Grid>
                                 <Grid item xs={3}>Debut</Grid>
                                 <Grid item xs={9}>Sept 11, 2013</Grid>
-                                <Grid item xs={3}>Title Fights</Grid>
-                                <Grid item xs={9}>0</Grid>
+                                {/* <Grid item xs={3}>Title Fights</Grid>
+                                <Grid item xs={9}>0</Grid> */}
                                 <Grid item xs={3}>Last Fight</Grid>
                                 <Grid item xs={9}>Sept 11, 2013</Grid>
                             </Grid>
@@ -70,7 +83,7 @@ const Profile = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <LastFightsTable></LastFightsTable>
+                    <LastFightsTable fights={profile?.lastFightsList}></LastFightsTable>
                 </Grid>
             </Grid>
         </Layout>

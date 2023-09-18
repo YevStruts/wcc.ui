@@ -9,16 +9,16 @@ import Paper from '@mui/material/Paper';
 
 function createData(
   name: string,
-  protein: number,
+  protein: string,
 ) {
   return { name, protein };
 }
 
 const rows = [
-  createData('Total Fights', 4.0),
-  createData('Wins', 4.3),
-  createData('Losses', 6.0),
-  createData('Draws', 4.3),
+  createData('-', ''),
+  createData('-', ''),
+  createData('-', ''),
+  createData('-', '')
 ];
 
 export default function DenseTable() {
