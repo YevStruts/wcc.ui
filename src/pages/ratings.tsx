@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Avatar, Grid, Paper, Stack, Typography } from "@mui/material";
+import { Avatar, Grid, Link, Paper, Stack, Typography } from "@mui/material";
 import Layout from "../layout/layout";
 import { GetRating } from "../services/PlayerService";
 import PageTitle from "../components/PageTitle";
@@ -32,7 +32,7 @@ const Ratings = () => {
                                     <EmojiEventsIcon style={{ color: 'gold' }} fontSize="large"></EmojiEventsIcon>
                                     <Typography fontSize={20}>{Strings.ratings_worldchampion}</Typography>
                                     <Avatar alt={"[-UNION-]Artempro"} src={"https://cdn.discordapp.com/avatars/328305220582899712/f46b07356d766b5c228dc3fcae3a29b6.png"} sx={{ width: 30, height: 30 }} />
-                                    <Typography color="white" fontSize={20}>[-UNION-]Artempro</Typography>
+                                    <Link href={"/profile/41"} underline="none" fontSize={20} color="white">[-UNION-]Artempro</Link>
                                 </Stack>
                             </Grid>
                         </Grid>

@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import ShortStatisticsGrid from "../../components/ShortStatisticsGrid";
 import LastFightsTable, { LastFightsList } from "../../components/LastFightsTable";
 import { GetProfile } from "../../services/PlayerService";
+import { FormatDateTime } from "../../helpers/DateTimeHelper";
 
 interface ProfileProps {
     id: number;
@@ -14,8 +15,8 @@ interface ProfileProps {
     age: number;
     wins: number;
     losses: number;
-    debut: Date,
-    lastfihgt: Date,
+    debut: number,
+    lastFight: number,
     lastFightsList: LastFightsList[],
 }
 
@@ -61,13 +62,13 @@ const Profile = () => {
                                 <Grid item xs={3}>Age</Grid>
                                 <Grid item xs={9}>{profile?.age}</Grid>
                                 <Grid item xs={3}>Record</Grid>
-                                <Grid item xs={9}>21-0</Grid>
+                                <Grid item xs={9}>{profile?.wins}-{profile?.losses}</Grid>
                                 <Grid item xs={3}>Debut</Grid>
-                                <Grid item xs={9}>Sept 11, 2013</Grid>
+                                <Grid item xs={9}>{FormatDateTime(profile?.debut ?? 0, "yyyy-MM-dd")}</Grid>
                                 {/* <Grid item xs={3}>Title Fights</Grid>
                                 <Grid item xs={9}>0</Grid> */}
                                 <Grid item xs={3}>Last Fight</Grid>
-                                <Grid item xs={9}>Sept 11, 2013</Grid>
+                                <Grid item xs={9}>{FormatDateTime(profile?.lastFight ?? 0, "yyyy-MM-dd")}</Grid>
                             </Grid>
                         </Grid>
                     </Grid>
