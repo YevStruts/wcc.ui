@@ -51,7 +51,7 @@ const Profile = () => {
                 <Grid item xs={12}>
                     <Grid container spacing={2}>
                         <Grid item xs={4} sx={{ margin: "auto" }}>
-                            <Avatar alt={profile?.name} src={profile?.avatar} sx={{ width: 160, height: 160 }}/>
+                            <Avatar alt={profile?.name} src={profile?.avatar} sx={{ margin: "auto", width: 160, height: 160 }}/>
                         </Grid>
                         <Grid item xs={8}>
                             <Grid container spacing={1}>
