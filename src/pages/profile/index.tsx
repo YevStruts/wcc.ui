@@ -27,7 +27,6 @@ const Profile = () => {
     useEffect(() => {
         let id = params.id ?? "0";
         GetProfile(id).then((data) => {
-            debugger;
             setProfile(data);
         });
         
@@ -51,8 +50,8 @@ const Profile = () => {
                 </Grid>
                 <Grid item xs={12}>
                     <Grid container spacing={2}>
-                        <Grid item xs={4}>
-                            <Avatar alt={profile?.name} src={profile?.avatar} sx={{ width: 60, height: 60 }}/>
+                        <Grid item xs={4} sx={{ margin: "auto" }}>
+                            <Avatar alt={profile?.name} src={profile?.avatar} sx={{ width: 160, height: 160 }}/>
                         </Grid>
                         <Grid item xs={8}>
                             <Grid container spacing={1}>
