@@ -33,6 +33,7 @@ const Ratings = () => {
                                     <Typography fontSize={20}>{Strings.ratings_worldchampion}</Typography>
                                     <Avatar alt={"[-UNION-]Artempro"} src={"https://cdn.discordapp.com/avatars/328305220582899712/f46b07356d766b5c228dc3fcae3a29b6.png"} sx={{ width: 30, height: 30 }} />
                                     <Link href={"/profile/41"} underline="none" fontSize={20} color="white">[-UNION-]Artempro</Link>
+                                    <span className="fi fi-un"></span>
                                 </Stack>
                             </Grid>
                         </Grid>

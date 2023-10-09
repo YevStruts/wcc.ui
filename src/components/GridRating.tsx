@@ -11,6 +11,7 @@ import {
     Link,
 } from "@mui/material";
 import Strings from "./LocalizedStrings";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -38,6 +39,7 @@ export interface PlayerProps {
     avatarUrl: string;
     position: number;
     totalPoints: number;
+    nation: string;
 }
 
 interface GridRatingProps {
@@ -53,13 +55,15 @@ const GridRating = ({ players }: GridRatingProps) => {
                         <StyledTableCell width={100}>#</StyledTableCell>
                         <StyledTableCell width={30}>{/* progress */}</StyledTableCell>
                         <StyledTableCell width={300}>{Strings.ratings_name}</StyledTableCell>
+                        <StyledTableCell width={100}></StyledTableCell>
                         <StyledTableCell width={200}>{Strings.ratings_score}</StyledTableCell>
                         <StyledTableCell>{Strings.ratings_comment}</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {players.map(({ id, name, comment, avatarUrl, position, totalPoints }: any, index) => {
+                    {players.map(({ id, name, comment, avatarUrl, position, totalPoints, nation }: any, index) => {
                         var profileUrl = "/profile/" + id;
+                        var nationality = "fi fi-" + nation;
                         return (
                             <StyledTableRow key={id}>
                                 <StyledTableCell>{position}</StyledTableCell>
@@ -68,6 +72,9 @@ const GridRating = ({ players }: GridRatingProps) => {
                                 </StyledTableCell>
                                 <StyledTableCell>
                                     <Link href={profileUrl} underline="none" color="white">{name}</Link>
+                                </StyledTableCell>
+                                <StyledTableCell>
+                                    <span className={nationality}></span>
                                 </StyledTableCell>
                                 <StyledTableCell>{totalPoints}</StyledTableCell>
                                 <StyledTableCell>{comment}</StyledTableCell>
