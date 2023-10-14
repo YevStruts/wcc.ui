@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Avatar, Grid, Link, Paper, Stack, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Avatar, Box, Grid, Link, Paper, Stack, Typography } from "@mui/material";
 import Layout from "../layout/layout";
 import { GetRating } from "../services/PlayerService";
 import PageTitle from "../components/PageTitle";
@@ -10,13 +10,30 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 const Title = Strings.ratings_title;
 
 const Ratings = () => {
+    const [playersDefault, setPlayersDefault] = useState<PlayerProps[]>([]);
     const [players, setPlayers] = useState<PlayerProps[]>([]);
 
     useEffect(() => {
         GetRating().then((players) => {
-            setPlayers(players.filter((p: PlayerProps) => p.name != "[-UNION-]Artempro"));
+            var playersDefault = players.filter((p: PlayerProps) => p.name != "[-UNION-]Artempro");
+            setPlayers(playersDefault);
+            setPlayersDefault(playersDefault);
         });
     }, []);
+
+    function filterPlayers(filterName : string, param : string) {
+        switch(filterName) {
+            case 'all':
+                setPlayers(playersDefault);
+                break;
+            case 'country':
+                setPlayers(playersDefault.filter((p: PlayerProps) => p.nation == param));
+                break;
+            case 'clan':
+                setPlayers(playersDefault.filter((p: PlayerProps) => p.name.includes(param) ));
+                break;
+        }
+    }
 
     return (
         <Layout>
@@ -24,17 +41,72 @@ const Ratings = () => {
                 <Grid item xs={12} textAlign={"center"} mb={5}>
                     <PageTitle text={Title} />
                 </Grid>
-                <Grid item xs={12} pt={2} pb={2}>
+                <Grid item xs={12} mt={2} textAlign="right">
+                    <Link
+                        component="button"
+                        variant="body2"
+                        onClick={() => {
+                            filterPlayers('all', '');
+                        }}
+                        >
+                        All
+                    </Link>
+                    <> | </>
+                    <Link
+                        component="button"
+                        variant="body2"
+                        onClick={() => {
+                            filterPlayers('country', 'ua');
+                        }}
+                        >
+                        Ukraine
+                    </Link>
+                    <> | </>
+                    <Link
+                        component="button"
+                        variant="body2"
+                        onClick={() => {
+                            filterPlayers('country', 'pl');
+                        }}
+                        >
+                        Poland
+                    </Link>
+                    <> | </>
+                    <Link
+                        component="button"
+                        variant="body2"
+                        onClick={() => {
+                            filterPlayers('clan', '[-CPS-]');
+                        }}
+                        >
+                        CPS
+                    </Link>
+                    <> | </>
+                    <Link
+                        component="button"
+                        variant="body2"
+                        onClick={() => {
+                            filterPlayers('clan', '[CD]');
+                        }}
+                        >
+                        CD
+                    </Link>
+                </Grid>
+                <Grid item xs={12} pb={2}>
                     <Paper elevation={1}>
                         <Grid container pb={1} pt={1} pl={3} pr={3}>
                             <Grid item xs={10}>
-                                <Stack direction="row" spacing={2}>
-                                    <EmojiEventsIcon style={{ color: 'gold' }} fontSize="large"></EmojiEventsIcon>
-                                    <Typography fontSize={20}>{Strings.ratings_worldchampion}</Typography>
-                                    <Avatar alt={"[-UNION-]Artempro"} src={"https://cdn.discordapp.com/avatars/328305220582899712/f46b07356d766b5c228dc3fcae3a29b6.png"} sx={{ width: 30, height: 30 }} />
-                                    <Link href={"/profile/41"} underline="none" fontSize={20} color="white">[-UNION-]Artempro</Link>
-                                    <span className="fi fi-un"></span>
-                                </Stack>
+                                <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
+                                    <Box sx={{ display: 'flex', flexDirection: 'row', minWidth: 170 }}>
+                                        <EmojiEventsIcon style={{ color: 'gold' }} fontSize="medium"></EmojiEventsIcon>
+                                        <Typography fontSize={16} ml={1}>{Strings.ratings_worldchampion}</Typography>
+                                    </Box>
+                                    <Box sx={{ display: 'flex', flexDirection: 'row', minWidth: 210 }}>
+                                        <Avatar alt={"[-UNION-]Artempro"} src={"https://cdn.discordapp.com/avatars/328305220582899712/f46b07356d766b5c228dc3fcae3a29b6.png"} sx={{ width: 24, height: 24 }}/>
+                                        <Link href={"/profile/41"} underline="none" fontSize={16} color="white" ml={1} mr={1}>[-UNION-]Artempro</Link>
+                                        <span className="fi fi-xx"></span>
+                                    </Box>
+                                </Box>
                             </Grid>
                         </Grid>
                     </Paper>

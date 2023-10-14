@@ -47,6 +47,9 @@ interface GridRatingProps {
 }
 
 const GridRating = ({ players }: GridRatingProps) => {
+    var positionCounter = 0;
+    var samePointsCount = 0;
+    var lastPointsCount = 0;
     return (
         <TableContainer>
             <Table aria-label="customized table">
@@ -64,9 +67,17 @@ const GridRating = ({ players }: GridRatingProps) => {
                     {players.map(({ id, name, comment, avatarUrl, position, totalPoints, nation }: any, index) => {
                         var profileUrl = "/profile/" + id;
                         var nationality = "fi fi-" + nation;
+                        if (lastPointsCount == 0 || lastPointsCount > totalPoints) {
+                            lastPointsCount = totalPoints;
+                            positionCounter++;
+                            samePointsCount = 0;
+                        } else if (lastPointsCount == totalPoints) {
+                            positionCounter++;
+                            samePointsCount++;
+                        }
                         return (
                             <StyledTableRow key={id}>
-                                <StyledTableCell>{position}</StyledTableCell>
+                                <StyledTableCell>{positionCounter - samePointsCount}</StyledTableCell>
                                 <StyledTableCell>
                                     <Avatar alt={name} src={avatarUrl} sx={{ width: 24, height: 24 }}/>
                                 </StyledTableCell>
