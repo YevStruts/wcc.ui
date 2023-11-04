@@ -233,6 +233,118 @@ const Tournament = () => {
         );
     }
 
+    function GetParticipants(isExpanded : boolean) {
+        return (
+            <Accordion defaultExpanded={isExpanded ?? false}>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                >
+                    <Typography>{Strings.tournament_participants}</Typography>
+                </AccordionSummary>
+                <AccordionDetails  sx={{padding: 5}}>
+                    <Grid container spacing={5}>
+                        {tournament?.participant.map(({ id, name }: PlayerServerType, index) => {
+                            return (
+                                <Grid  item xs={12} sm={6} md={4} key={id}>
+                                    {index+1}. {name}
+                                </Grid>
+                            );
+                        })}
+                    </Grid>                            
+                </AccordionDetails>
+            </Accordion>
+        )
+    }
+
+    function getChallonge() {
+        return <div dangerouslySetInnerHTML={{__html: decode(tournament?.description ?? "")}} />;
+    }
+    function getRules(isExpanded : boolean) {
+        return (
+            <Accordion defaultExpanded={isExpanded ?? false}>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                >
+                <Typography>{Strings.tournament_rules}</Typography>
+                </AccordionSummary>
+                <AccordionDetails sx={{padding: 5}}>
+                    <div dangerouslySetInnerHTML={{__html: decode(tournament?.description ?? "")}} />
+                </AccordionDetails>
+            </Accordion>
+        )
+    }
+    
+    function getGames(isExpanded : boolean) {
+        return (
+            <Accordion defaultExpanded={isExpanded ?? false}>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel2a-content"
+                    id="panel2a-header"
+                >
+                    <Typography>{Strings.tournament_games}</Typography>
+                </AccordionSummary>
+                <AccordionDetails  sx={{padding: 5}}>
+                    <ConditionalSchedule isSwitz={tournament?.tournamentTypeId === 3 ?? false} />
+                </AccordionDetails>
+            </Accordion>
+        )
+    }
+
+    function getBracket(isExpanded : boolean) {
+        return (
+            <Accordion defaultExpanded={isExpanded ?? false}>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel3a-content"
+                    id="panel3a-header"
+                >
+                    <Typography>{Strings.tournament_bracket}</Typography>
+                </AccordionSummary>
+                <AccordionDetails  sx={{padding: 5}}>
+                    {tournament?.tournamentTypeId === 3 &&
+                        <TournamentSwitzBracket record={table ?? rows }></TournamentSwitzBracket>
+                    }
+                    {tournament?.tournamentTypeId !== 3 &&
+                        <TournamentBracket schedule={schedule ?? schedule_default}></TournamentBracket>
+                    }
+                </AccordionDetails>
+            </Accordion>
+        )
+    }
+
+    function GetContent(tournamentTypeId : number) {
+        switch(tournamentTypeId) {
+            case 1 /*Rating*/:
+                return (
+                    <>
+                        {getGames(true)}
+                    </>
+                )
+            case 2 /*Olympic's*/:
+            case 3 /*Switzerland's*/:
+                return (
+                    <>
+                        {getRules(false)}
+                        {getGames(true)}
+                        {getBracket(true)}
+                    </>
+                )
+            case 4 /*Challonge*/:
+                return (
+                    <>
+                        {getChallonge()}
+                        {getGames(true)}
+                    </>
+                )
+        }
+        return getGames(true);
+    }
+
     return (
         <Layout>
             <Grid container>
@@ -240,67 +352,7 @@ const Tournament = () => {
                     <PageTitle text={tournament?.name ?? ""} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Accordion>
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1a-content"
-                            id="panel1a-header"
-                        >
-                        <Typography>{Strings.tournament_rules}</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails sx={{padding: 5}}>
-                            <div dangerouslySetInnerHTML={{__html: decode(tournament?.description ?? "")}} />
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion>
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1a-content"
-                            id="panel1a-header"
-                        >
-                            <Typography>{Strings.tournament_participants}</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails  sx={{padding: 5}}>
-                            <Grid container spacing={5}>
-                                {tournament?.participant.map(({ id, name }: PlayerServerType, index) => {
-                                    return (
-                                        <Grid  item xs={12} sm={6} md={4} key={id}>
-                                            {index+1}. {name}
-                                        </Grid>
-                                    );
-                                })}
-                            </Grid>                            
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion defaultExpanded>
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel2a-content"
-                            id="panel2a-header"
-                        >
-                            <Typography>{Strings.tournament_games}</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails  sx={{padding: 5}}>
-                            <ConditionalSchedule isSwitz={tournament?.tournamentTypeId === 3 ?? false} />
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion>
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel3a-content"
-                            id="panel3a-header"
-                        >
-                            <Typography>{Strings.tournament_bracket}</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails  sx={{padding: 5}}>
-                            {tournament?.tournamentTypeId === 3 &&
-                                <TournamentSwitzBracket record={table ?? rows }></TournamentSwitzBracket>
-                            }
-                            {tournament?.tournamentTypeId !== 3 &&
-                                <TournamentBracket schedule={schedule ?? schedule_default}></TournamentBracket>
-                            }
-                        </AccordionDetails>
-                    </Accordion>
+                    {GetContent(tournament?.tournamentTypeId ?? 1)}
                 </Grid>
                 <Grid item xs={12} textAlign={"center"} m={1}>
                     {showJoin && 
