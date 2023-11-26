@@ -258,7 +258,7 @@ const Tournament = () => {
         )
     }
 
-    function getChallonge() {
+    function getHtml() {
         return <div dangerouslySetInnerHTML={{__html: decode(tournament?.description ?? "")}} />;
     }
     function getRules(isExpanded : boolean) {
@@ -337,7 +337,7 @@ const Tournament = () => {
             case 4 /*Challonge*/:
                 return (
                     <>
-                        {getChallonge()}
+                        {getHtml()}
                         {getGames(true)}
                     </>
                 )
