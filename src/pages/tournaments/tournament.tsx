@@ -259,7 +259,7 @@ const Tournament = () => {
     }
 
     function getHtml() {
-        return <div dangerouslySetInnerHTML={{__html: decode(tournament?.description ?? "")}} />;
+        return <div dangerouslySetInnerHTML={{__html: decode(tournament?.description ?? "")}} style={{overflowX: "auto"}}/>;
     }
     function getRules(isExpanded : boolean) {
         return (
