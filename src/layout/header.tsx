@@ -9,11 +9,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import SignInButton, { WhoAmI } from "../components/SignInButton";
 import Logo from "../components/Logo";
 import Strings from "../components/LocalizedStrings"
 import LanguageSwitcher from "../components/LanguageSwitcher";
-import { GetWhoAmI } from "../services/UserService";
+import { WhoAmI, WhoAmIContext } from "../components/WhoAmIContext"
+import { useContext } from "react";
+import { Constants } from "../helpers/ConstantHelper";
+import SignInButton from "../components/SignInButton";
 
 const pages = [
     { title: Strings.news, url: "/news" },
@@ -25,13 +27,8 @@ const pages = [
 const Header = () => {
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-    const [whoAmI, setWhoAmI] = React.useState<WhoAmI>();
 
-    React.useEffect(() => {
-        GetWhoAmI().then((whoami) => {
-            setWhoAmI(whoami);
-        });
-    }, []);
+    const whoAmI = useContext(WhoAmIContext);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);

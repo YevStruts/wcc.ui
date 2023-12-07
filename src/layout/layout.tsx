@@ -1,10 +1,13 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import { Exchange } from "../services/DiscordService";
 import { SignIn } from "../helpers/AuthHelper";
 import Header from "./header";
+import { WhoAmI, WhoAmIContext } from "../components/WhoAmIContext";
+import { GetWhoAmI } from "../services/UserService";
+import { Constants } from "../helpers/ConstantHelper";
 
 interface LayoutProps {
     children?: ReactNode;
@@ -12,6 +15,13 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
     const [searchParams] = useSearchParams();
+    const [whoAmI, setWhoAmI] = useState<WhoAmI>({ role: Constants.Roles.User, username: "Anonymous" });
+
+    useEffect(() => {
+        GetWhoAmI().then((whoami) => {
+            setWhoAmI(whoami);
+        });
+    }, []);
 
     useEffect(() => {
         let code = searchParams.get("code");
@@ -29,13 +39,15 @@ const Layout = ({ children }: LayoutProps) => {
     }, []);
 
     return (
-        <Grid>
-            <Header />
-            <Grid pt={5} mb={5}>
-                <Container>{children}</Container>
+        <WhoAmIContext.Provider value={whoAmI} >
+            <Grid>
+                <Header />
+                <Grid pt={5} mb={5}>
+                    <Container>{children}</Container>
+                </Grid>
+                {/* <Footer /> */}
             </Grid>
-            {/* <Footer /> */}
-        </Grid>
+        </WhoAmIContext.Provider>
     );
 };
 

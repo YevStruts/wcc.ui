@@ -7,12 +7,6 @@ import { Constants } from "../helpers/ConstantHelper";
 
 const { useCallback } = React;
 
-export interface WhoAmI
-{
-    username: string,
-    role: string
-};
-
 const SignInButton = ({ whoami: WhoAmI }: any) => {
     const signIn = useCallback(() => {
         GetAuthorizeUrl().then((data) => (window.location.href = data.redirectUrl));
