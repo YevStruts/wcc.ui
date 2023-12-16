@@ -7,13 +7,14 @@ import TournamentBracket from "../../components/TournamentBracket";
 import Layout from "../../layout/layout";
 import { GetParticipationStatus, GetSwitzTable, GetTournament, Join, Leave } from "../../services/TournamentsService";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { AddGame, GetSchedule } from "../../services/GameService";
+import { AddGame, DeleteGame, EditGame, GetSchedule } from "../../services/GameService";
 import { WhoAmI, WhoAmIContext } from "../../components/WhoAmIContext"
 import { grey, orange } from "@mui/material/colors";
 import Strings from "../../components/LocalizedStrings";
 import TournamentSwitzBracket from "../../components/TournamentSwitzBracket";
 import { Constants } from "../../helpers/ConstantHelper";
 import GameType from "../../components/GameType";
+import ConfirmationDialog from "../../components/ConfirmationDialog";
 
 var decode = require('decode-html');
 
@@ -103,6 +104,9 @@ const Tournament = () => {
 
     const [gameType, setGameType] = useState<number>(1);
 
+    const [confirmationDialog, setConfirmationDialog] = useState<boolean>(false);
+    const [gameDelete, setGameDelete] = useState<number>(0);
+
     useEffect(() => {
         let id = parseInt(params.id ?? "0");
         GetTournament(id).then((tournament) => {
@@ -191,6 +195,31 @@ const Tournament = () => {
         }
     }
 
+    function OnGameEdit(id : number) {
+        EditGame(id).then((result) => {
+            // debugger;
+            /* result => true - leaved successfully */
+            // setShowLeave(!result);
+            // setShowJoin(result);
+            window.location.reload();
+        });
+    }
+
+    function OnGameDelete(id : number) {
+        setGameDelete(id);
+        setConfirmationDialog(true);
+    }
+
+    function OnGameDeleteConfirmed() {
+        DeleteGame(gameDelete).then((result) => {
+            /* result => true - leaved successfully */
+            // setShowLeave(!result);
+            // setShowJoin(result);
+            setConfirmationDialog(false);
+            window.location.reload();
+        });
+    }
+
     function ConditionalSchedule(props: { isSwitz: boolean; }) {
         const isSwitz = props.isSwitz;
 
@@ -230,11 +259,17 @@ const Tournament = () => {
                         </Select>
                 </FormControl>
                 <Box mb={5}></Box>
-                <GamesList schedule={scheduleForRound ?? schedule_default} />
+                <GamesList
+                    schedule={scheduleForRound ?? schedule_default}
+                    on_edit={OnGameEdit} 
+                    on_delete={OnGameDelete} />
                 </>
             :
-                <GamesList schedule={schedule ?? schedule_default}/>
+                <GamesList schedule={schedule ?? schedule_default}
+                    on_edit={OnGameEdit}
+                    on_delete={OnGameDelete} />
             }
+            <ConfirmationDialog state={confirmationDialog} setState={setConfirmationDialog} callback={() => OnGameDeleteConfirmed()} />
           </>
         );
     }
@@ -303,13 +338,12 @@ const Tournament = () => {
 
     function OnAddGameClicked(): void {
         if (tournament !== undefined) {
-            debugger;
             AddGame(tournament.id, gameType).then((result) => {
                 // debugger;
                 /* result => true - leaved successfully */
                 // setShowLeave(!result);
                 // setShowJoin(result);
-                // window.location.reload();
+                window.location.reload();
             });
         }
     }

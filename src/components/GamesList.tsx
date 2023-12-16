@@ -7,12 +7,22 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import SmartDisplayIcon from '@mui/icons-material/SmartDisplay';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
 import { FormatDateTime } from "../helpers/DateTimeHelper"
 import { GameServerType } from '../pages/tournaments/tournament';
 import Strings from './LocalizedStrings';
+import { Button } from '@mui/material';
 
-export default function GamesList(props: { schedule: GameServerType[] }) {
+interface GamesListProps {
+  schedule: GameServerType[],
+  on_edit: (id : number) => void,
+  on_delete: (id : number) => void,
+}
+
+export default function GamesList({ schedule, on_edit, on_delete } : GamesListProps) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -24,10 +34,11 @@ export default function GamesList(props: { schedule: GameServerType[] }) {
             <TableCell align="center">{Strings.tournament_games_score}</TableCell>
             {/* <TableCell align="right">Replay</TableCell> */}
             <TableCell align="left">{Strings.tournament_games_youtube}</TableCell>
+            <TableCell sx={{ width: 120 }}></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.schedule.filter(rec => rec.name != 'none').map((row) => (
+          {schedule.filter(rec => rec.name != 'none').map((row) => (
             <TableRow
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -51,6 +62,14 @@ export default function GamesList(props: { schedule: GameServerType[] }) {
                     <SmartDisplayIcon htmlColor='#F30F0A' />
                   </a>
                 ))}
+              </TableCell>
+              <TableCell>
+                <IconButton aria-label="edit" onClick={() => on_edit(row.id)}>
+                  <EditIcon />
+                </IconButton>
+                <IconButton aria-label="delete" onClick={() => on_delete(row.id)}>
+                  <DeleteIcon />
+                </IconButton>
               </TableCell>
             </TableRow>
           ))}

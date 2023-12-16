@@ -17,3 +17,17 @@ export const AddGame = (tournamentId: number, gametype: number) => {
         gametype: gametype
     }).then((response) => response.data);
 }
+
+export const EditGame = (id: number) => {
+    return axios.post(Constants.ApiUrls.game + `edit`,
+    {
+        id: id
+    }).then((response) => response.data);
+}
+
+export const DeleteGame = (id: number) => {
+    return axios.post(Constants.ApiUrls.game + `delete`,
+    {
+        id: id
+    }).then((response) => response.data);
+}
