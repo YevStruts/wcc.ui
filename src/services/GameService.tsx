@@ -9,3 +9,11 @@ export const GetSchedule = (id : number) => {
 export const SaveGame = (game : GameServerType) => {
     return axios.post(Constants.ApiUrls.game + `save`, game);
 };
+
+export const AddGame = (tournamentId: number, gametype: number) => {
+    return axios.post(Constants.ApiUrls.game + `add`,
+    {
+        tournamentId: tournamentId,
+        gametype: gametype
+    }).then((response) => response.data);
+}

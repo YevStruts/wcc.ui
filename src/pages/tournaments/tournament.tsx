@@ -1,5 +1,5 @@
 import { Accordion, AccordionDetails, AccordionSummary, Autocomplete, Box, Button, ButtonProps, FormControl, Grid, InputLabel, MenuItem, Pagination, Select, SelectChangeEvent, styled, TextField, Typography } from "@mui/material";
-import { useState, useEffect, ChangeEvent, ReactNode } from "react";
+import { useState, useEffect, ChangeEvent, ReactNode, useContext } from "react";
 import { useParams } from "react-router-dom";
 import GamesList from "../../components/GamesList";
 import PageTitle from "../../components/PageTitle";
@@ -7,11 +7,13 @@ import TournamentBracket from "../../components/TournamentBracket";
 import Layout from "../../layout/layout";
 import { GetParticipationStatus, GetSwitzTable, GetTournament, Join, Leave } from "../../services/TournamentsService";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { GetSchedule } from "../../services/GameService";
-import { GetRule } from "../../services/RuleService";
+import { AddGame, GetSchedule } from "../../services/GameService";
+import { WhoAmI, WhoAmIContext } from "../../components/WhoAmIContext"
 import { grey, orange } from "@mui/material/colors";
 import Strings from "../../components/LocalizedStrings";
 import TournamentSwitzBracket from "../../components/TournamentSwitzBracket";
+import { Constants } from "../../helpers/ConstantHelper";
+import GameType from "../../components/GameType";
 
 var decode = require('decode-html');
 
@@ -85,6 +87,8 @@ const rows : TableItemType[] = [];
 const Tournament = () => {
     const params = useParams();
 
+    const whoAmI = useContext(WhoAmIContext);
+
     const [tournament, setTournament] = useState<TournamentProps>();
     const [schedule, setSchedule] = useState<GameServerType[]>();
     const [showJoin, setShowJoin] = useState(false);
@@ -96,6 +100,8 @@ const Tournament = () => {
 
     const [round, setRound] = useState<number>(12);
     const [scheduleForRound, setScheduleForRound] = useState<GameServerType[]>();
+
+    const [gameType, setGameType] = useState<number>(1);
 
     useEffect(() => {
         let id = parseInt(params.id ?? "0");
@@ -295,6 +301,37 @@ const Tournament = () => {
         )
     }
 
+    function OnAddGameClicked(): void {
+        if (tournament !== undefined) {
+            debugger;
+            AddGame(tournament.id, gameType).then((result) => {
+                // debugger;
+                /* result => true - leaved successfully */
+                // setShowLeave(!result);
+                // setShowJoin(result);
+                // window.location.reload();
+            });
+        }
+    }
+
+    function addGame() {
+        if (whoAmI === undefined || (whoAmI.role !== Constants.Roles.Admin && whoAmI.role !== Constants.Roles.Manager)) {
+            return;
+        }
+        return (
+            <Grid container>
+                <Grid item xs={4} textAlign={"center"} mb={5}>
+                    <GameType gametype={gameType} on_gametype_change={setGameType}></GameType>
+                </Grid>
+                <Grid item xs={4} textAlign={"center"} mb={5}>
+                    <Button variant="text" onClick={() => OnAddGameClicked()}>Add Game</Button>
+                </Grid>
+                <Grid item xs={4} textAlign={"center"} mb={5}>
+                </Grid>
+            </Grid>
+        )
+    }
+
     function getBracket(isExpanded : boolean) {
         return (
             <Accordion defaultExpanded={isExpanded ?? false}>
@@ -323,6 +360,7 @@ const Tournament = () => {
                 return (
                     <>
                         {getGames(true)}
+                        {addGame()}
                     </>
                 )
             case 2 /*Olympic's*/:
@@ -339,6 +377,7 @@ const Tournament = () => {
                     <>
                         {getHtml()}
                         {getGames(true)}
+                        {addGame()}
                     </>
                 )
         }

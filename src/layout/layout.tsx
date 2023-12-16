@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
@@ -15,11 +15,12 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
     const [searchParams] = useSearchParams();
-    const [whoAmI, setWhoAmI] = useState<WhoAmI>({ role: Constants.Roles.User, username: "Anonymous" });
+    const whoAmI = useContext(WhoAmIContext);
 
     useEffect(() => {
         GetWhoAmI().then((whoami) => {
-            setWhoAmI(whoami);
+            whoAmI.role = whoami.role;
+            whoAmI.username = whoami.username;
         });
     }, []);
 
