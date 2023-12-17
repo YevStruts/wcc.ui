@@ -5,7 +5,8 @@ import { SaveGame } from "../services/GameService";
 import { GetPlayers } from "../services/PlayerService";
 
 interface EditGameProps {
-    game: GameServerType
+    game: GameServerType,
+    on_save_click: () => void
 }
 
 interface PlayerProps {
@@ -15,7 +16,7 @@ interface PlayerProps {
     score: number
 }
 
-const EditGame = ({ game }: EditGameProps) => {
+const EditGame = ({ game, on_save_click }: EditGameProps) => {
 
     const [gameId, setGameId] = useState<number>();
     const [gameName, setGameName] = useState<string>();
@@ -72,6 +73,8 @@ const EditGame = ({ game }: EditGameProps) => {
         game.youtubeUrls[2] = youtube3 ?? ``;
 
         SaveGame(game);
+
+        on_save_click();
     }
 
     return (

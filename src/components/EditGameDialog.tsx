@@ -17,9 +17,10 @@ interface EditGameDialogProps {
     game: GameServerType,
     state: boolean,
     setState: (value: boolean) => void,
+    on_close_dialog: () => void
 }
 
-export default function EditGameDialog({ game, state, setState } : EditGameDialogProps) {
+export default function EditGameDialog({ game, state, setState, on_close_dialog } : EditGameDialogProps) {
 
     const handleClickOpen = () => {
         setState(true);
@@ -29,12 +30,17 @@ export default function EditGameDialog({ game, state, setState } : EditGameDialo
         setState(false);
     };
 
+    const handleEditGameSave = () => {
+        setState(false);
+        on_close_dialog();
+    };
+
     return (
         <React.Fragment>
             <Dialog open={state} onClose={handleClose} maxWidth='lg'>
             <DialogTitle>Edit Game</DialogTitle>
             <DialogContent>
-                <EditGame game={game} />
+                <EditGame game={game} on_save_click={handleEditGameSave}/>
             </DialogContent>
             <DialogActions>
                 {/* <Button onClick={handleClose}>Cancel</Button>

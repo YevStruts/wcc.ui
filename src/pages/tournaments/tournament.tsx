@@ -209,6 +209,10 @@ const Tournament = () => {
         });
     }
 
+    function OnEditGameDialogClose() {
+        window.location.reload();
+    }
+
     function OnGameDelete(id : number) {
         setGameDelete(id);
         setConfirmationDialog(true);
@@ -274,7 +278,7 @@ const Tournament = () => {
                     on_delete={OnGameDelete} />
             }
             <ConfirmationDialog state={confirmationDialog} setState={setConfirmationDialog} callback={() => OnGameDeleteConfirmed()} />
-            <EditGameDialog game={game ?? schedule_default[0]} state={editGameDialog} setState={setEditGameDialog}></EditGameDialog>
+            <EditGameDialog game={game ?? schedule_default[0]} state={editGameDialog} setState={setEditGameDialog} on_close_dialog={OnEditGameDialogClose}></EditGameDialog>
           </>
         );
     }
