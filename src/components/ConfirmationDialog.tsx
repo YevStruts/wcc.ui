@@ -33,30 +33,27 @@ export default function ConfirmationDialog({ state, setState, callback } : Confi
 
     return (
         <React.Fragment>
-        <Button variant="outlined" onClick={handleClickOpen}>
-            Open alert dialog
-        </Button>
-        <Dialog
-            open={state}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-        >
-            <DialogTitle id="alert-dialog-title">
-            {"Use Google's location service?"}
-            </DialogTitle>
-            <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-                Do you want to delete ?
-            </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-            <Button onClick={onClickNo} autoFocus>No</Button>
-            <Button onClick={onClickYes}>
-                Yes
-            </Button>
-            </DialogActions>
-        </Dialog>
+            <Dialog
+                open={state}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                {"Use Google's location service?"}
+                </DialogTitle>
+                <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                    Do you want to delete ?
+                </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={onClickNo} autoFocus>No</Button>
+                <Button onClick={onClickYes}>
+                    Yes
+                </Button>
+                </DialogActions>
+            </Dialog>
         </React.Fragment>
     );
 }

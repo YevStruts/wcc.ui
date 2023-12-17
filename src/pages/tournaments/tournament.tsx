@@ -7,7 +7,7 @@ import TournamentBracket from "../../components/TournamentBracket";
 import Layout from "../../layout/layout";
 import { GetParticipationStatus, GetSwitzTable, GetTournament, Join, Leave } from "../../services/TournamentsService";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { AddGame, DeleteGame, EditGame, GetSchedule } from "../../services/GameService";
+import { AddGame, DeleteGame, EditGame, GetGame, GetSchedule } from "../../services/GameService";
 import { WhoAmI, WhoAmIContext } from "../../components/WhoAmIContext"
 import { grey, orange } from "@mui/material/colors";
 import Strings from "../../components/LocalizedStrings";
@@ -15,6 +15,7 @@ import TournamentSwitzBracket from "../../components/TournamentSwitzBracket";
 import { Constants } from "../../helpers/ConstantHelper";
 import GameType from "../../components/GameType";
 import ConfirmationDialog from "../../components/ConfirmationDialog";
+import EditGameDialog from "../../components/EditGameDialog";
 
 var decode = require('decode-html');
 
@@ -107,6 +108,9 @@ const Tournament = () => {
     const [confirmationDialog, setConfirmationDialog] = useState<boolean>(false);
     const [gameDelete, setGameDelete] = useState<number>(0);
 
+    const [editGameDialog, setEditGameDialog] = useState<boolean>(false);
+    const [game, setGame] = useState<GameServerType>();
+
     useEffect(() => {
         let id = parseInt(params.id ?? "0");
         GetTournament(id).then((tournament) => {
@@ -196,12 +200,12 @@ const Tournament = () => {
     }
 
     function OnGameEdit(id : number) {
-        EditGame(id).then((result) => {
-            // debugger;
-            /* result => true - leaved successfully */
-            // setShowLeave(!result);
-            // setShowJoin(result);
-            window.location.reload();
+        GetGame(id).then((game) => {
+            console.log(game);
+            setGame(game);
+            // setTournament(tournament);
+            // setDisplayBracket(id !== 4);
+            setEditGameDialog(true);
         });
     }
 
@@ -270,6 +274,7 @@ const Tournament = () => {
                     on_delete={OnGameDelete} />
             }
             <ConfirmationDialog state={confirmationDialog} setState={setConfirmationDialog} callback={() => OnGameDeleteConfirmed()} />
+            <EditGameDialog game={game ?? schedule_default[0]} state={editGameDialog} setState={setEditGameDialog}></EditGameDialog>
           </>
         );
     }

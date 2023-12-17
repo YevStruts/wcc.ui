@@ -8,3 +8,7 @@ export const GetRating = () => {
 export const GetProfile = (id : string) => {
     return axios.get(Constants.ApiUrls.player + 'profile/' + id).then((response) => response.data);
 };
+
+export const GetPlayers = () => {
+    return axios.get(Constants.ApiUrls.player + 'list').then((response) => response.data);
+};

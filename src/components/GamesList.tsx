@@ -15,6 +15,9 @@ import { FormatDateTime } from "../helpers/DateTimeHelper"
 import { GameServerType } from '../pages/tournaments/tournament';
 import Strings from './LocalizedStrings';
 import { Button } from '@mui/material';
+import { useContext } from 'react';
+import { WhoAmIContext } from './WhoAmIContext';
+import { Constants } from '../helpers/ConstantHelper';
 
 interface GamesListProps {
   schedule: GameServerType[],
@@ -23,6 +26,33 @@ interface GamesListProps {
 }
 
 export default function GamesList({ schedule, on_edit, on_delete } : GamesListProps) {
+  const whoAmI = useContext(WhoAmIContext);
+
+  function editGameHeader() {
+    if (whoAmI === undefined || (whoAmI.role !== Constants.Roles.Admin && whoAmI.role !== Constants.Roles.Manager)) {
+        return;
+    }
+    return (
+      <TableCell sx={{ width: 120 }}></TableCell>
+    )
+  }
+
+  function editGameColumn(id : number) {
+    if (whoAmI === undefined || (whoAmI.role !== Constants.Roles.Admin && whoAmI.role !== Constants.Roles.Manager)) {
+        return;
+    }
+    return (
+      <TableCell>
+        <IconButton aria-label="edit" onClick={() => on_edit(id)}>
+          <EditIcon />
+        </IconButton>
+        <IconButton aria-label="delete" onClick={() => on_delete(id)}>
+          <DeleteIcon />
+        </IconButton>
+      </TableCell>
+    )
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -34,7 +64,7 @@ export default function GamesList({ schedule, on_edit, on_delete } : GamesListPr
             <TableCell align="center">{Strings.tournament_games_score}</TableCell>
             {/* <TableCell align="right">Replay</TableCell> */}
             <TableCell align="left">{Strings.tournament_games_youtube}</TableCell>
-            <TableCell sx={{ width: 120 }}></TableCell>
+            {editGameHeader()}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -63,14 +93,7 @@ export default function GamesList({ schedule, on_edit, on_delete } : GamesListPr
                   </a>
                 ))}
               </TableCell>
-              <TableCell>
-                <IconButton aria-label="edit" onClick={() => on_edit(row.id)}>
-                  <EditIcon />
-                </IconButton>
-                <IconButton aria-label="delete" onClick={() => on_delete(row.id)}>
-                  <DeleteIcon />
-                </IconButton>
-              </TableCell>
+              {editGameColumn(row.id)}
             </TableRow>
           ))}
         </TableBody>

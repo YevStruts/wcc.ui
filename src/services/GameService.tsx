@@ -10,6 +10,10 @@ export const SaveGame = (game : GameServerType) => {
     return axios.post(Constants.ApiUrls.game + `save`, game);
 };
 
+export const GetGame = (id: number) => {
+    return axios.get(Constants.ApiUrls.game + id).then((response) => response.data);
+}
+
 export const AddGame = (tournamentId: number, gametype: number) => {
     return axios.post(Constants.ApiUrls.game + `add`,
     {
