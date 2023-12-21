@@ -16,6 +16,7 @@ import { WhoAmI, WhoAmIContext } from "../components/WhoAmIContext"
 import { useContext } from "react";
 import { Constants } from "../helpers/ConstantHelper";
 import SignInButton from "../components/SignInButton";
+import styled from "@emotion/styled";
 
 const pages = [
     { title: Strings.news, url: "/news" },
@@ -104,6 +105,18 @@ const Header = () => {
                                 {page.title}
                             </Button>
                         ))}
+                    </Box>
+                    <Box sx={{
+                            "img": {
+                            width: 150,
+                            height: 30,
+                            },
+                        }}
+                        width={150}
+                        pt={1}>
+                        <a href="https://www.buymeacoffee.com/wcc_cossacks" target="_blank">
+                            <img src="https://img.buymeacoffee.com/button-api/?text=Support WCC&emoji=&slug=wcc_cossacks&button_colour=FFDD00&font_colour=000000&font_family=Inter&outline_colour=000000&coffee_colour=ffffff" />
+                        </a>
                     </Box>
                     <Box>
                         <LanguageSwitcher />

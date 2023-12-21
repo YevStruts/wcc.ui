@@ -91,6 +91,26 @@ const Ratings = () => {
                         >
                         CD
                     </Link>
+                    <> | </>
+                    <Link
+                        component="button"
+                        variant="body2"
+                        onClick={() => {
+                            filterPlayers('clan', '[-H-]');
+                        }}
+                        >
+                        H
+                    </Link>
+                    <> | </>
+                    <Link
+                        component="button"
+                        variant="body2"
+                        onClick={() => {
+                            filterPlayers('clan', '[-WN-]');
+                        }}
+                        >
+                        WN
+                    </Link>
                 </Grid>
                 <Grid item xs={12} pb={2}>
                     <Paper elevation={1}>
