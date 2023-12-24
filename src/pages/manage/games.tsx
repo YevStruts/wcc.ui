@@ -2,11 +2,11 @@ import { Autocomplete, Button, Grid, Paper, TextField, Typography } from "@mui/m
 import { useEffect, useState } from "react";
 import PageTitle from "../../components/PageTitle";
 import Layout from "../../layout/layout";
-import { GetTournament, GetTournamentParticipants, GetTournamentsList } from "../../services/TournamentsService";
+import { GetTournamentParticipants, GetTournamentsList } from "../../services/TournamentsService";
 import { GetSchedule, SaveGame } from "../../services/GameService";
 import { GameServerType } from "../tournaments/tournament";
 
-const Title = "MANAGE";
+const Title = "Games";
 
 interface TournamentProps {
     id: number,
@@ -19,7 +19,7 @@ interface PlayerProps {
     avatarUrl: string
 }
 
-const Manage = () => {
+const Games = () => {
     const [tournamentList, setTournamentList] = useState<TournamentProps[]>();
     const [tournament, setTournament] = useState<TournamentProps>();
     const [schedule, setSchedule] = useState<GameServerType[]>();
@@ -261,4 +261,4 @@ const Manage = () => {
         </Layout>
     )
 }
-export default Manage;
+export default Games;

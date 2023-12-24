@@ -22,8 +22,12 @@ const SignInButton = ({ whoami: WhoAmI }: any) => {
         setAnchorElUser(null);
     };
 
-    const handleManageMenu = () => {
-        window.location.href = "/manage";
+    const handleManageGamesMenu = () => {
+        window.location.href = "/manage/games";
+    };
+
+    const handleManagePlayersMenu = () => {
+        window.location.href = "/manage/players";
     };
 
     const handleSettingsMenu = () => {
@@ -37,14 +41,15 @@ const SignInButton = ({ whoami: WhoAmI }: any) => {
         window.location.href = "/";
     };
 
-    const manageSetting = { id: 1, name: Strings.manage, onclick: handleManageMenu };
+    const manageGames = { id: 1, name: Strings.manage_games, onclick: handleManageGamesMenu };
+    const managePlayers = { id: 4, name: Strings.manage_players, onclick: handleManagePlayersMenu };
     const settingsSetting = { id: 3, name: Strings.settings, onclick: handleSettingsMenu };
     const logoutSetting = { id: 2, name: Strings.logout, onclick: handleSignOutMenu };
 
     var settings = [ settingsSetting, logoutSetting ];
 
     if (WhoAmI !== undefined && (WhoAmI.role === Constants.Roles.Admin || WhoAmI.role === Constants.Roles.Manager)) {
-        settings.unshift(manageSetting)
+        settings.unshift(manageGames, managePlayers)
     }
 
     let authData = GetAuthData();

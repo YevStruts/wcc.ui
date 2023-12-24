@@ -6,10 +6,11 @@ import News from "../pages/news";
 import Article from "../pages/news/article";
 import Tournaments from "../pages/tournaments";
 import Tournament from "../pages/tournaments/tournament";
-import Manage from "../pages/manage";
 import Settings from "../pages/settings";
 import Rules from "../pages/rules";
 import Profile from "../pages/profile";
+import Players from "../pages/manage/players";
+import Games from "../pages/manage/games";
 
 (function () {
     let token = GetToken();
@@ -35,7 +36,8 @@ const Routes = () => {
         { path: "ratings", element: <Ratings /> },
         { path: "tournaments", element: <Tournaments /> },
         { path: "tournaments/:id", element: <Tournament /> },
-        { path: "manage", element: <Manage /> },
+        { path: "manage/games", element: <Games /> },
+        { path: "manage/players", element: <Players /> },
         { path: "settings", element: <Settings /> },
         { path: "profile/:id", element: <Profile /> },
         // ...

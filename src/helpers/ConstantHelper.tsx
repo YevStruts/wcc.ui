@@ -30,7 +30,8 @@ export const Constants = {
         rule: `${API}/rule/`,
         settings: `${API}/settings/`,
         rating: `${API}/rating/`,
-        user_whoami: `${API}/user/whoami`
+        user_whoami: `${API}/user/whoami`,
+        country: `${API}/country`,
     },
     TournamentTypes: {
         Rating: 1,

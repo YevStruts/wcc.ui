@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Constants } from "../helpers/ConstantHelper";
+import { PlayersProps } from "../pages/manage/players";
 
 export const GetRating = () => {
     return axios.get(Constants.ApiUrls.rating + '2').then((response) => response.data);
@@ -11,4 +12,8 @@ export const GetProfile = (id : string) => {
 
 export const GetPlayers = () => {
     return axios.get(Constants.ApiUrls.player + 'list').then((response) => response.data);
+};
+
+export const UpdatePlayer = (player : PlayersProps) => {
+    return axios.post(Constants.ApiUrls.player + `update`, player);
 };
