@@ -9,12 +9,14 @@ const Title = Strings.settings;
 
 interface SettingsProps {
     id: number,
-    nickname: string
+    nickname: string,
+    token: string
 }
 
 const Settings = () => {
     const [settings, setSettings] = useState<SettingsProps>();
     const [nickname, setNickname] = useState("");
+    const [token, setToken] = useState("");
 
     useEffect(() => {
         GetSettings().then((response) => {
@@ -24,6 +26,7 @@ const Settings = () => {
 
     useEffect(() => {
         setNickname(settings?.nickname ?? "");
+        setToken(settings?.token ?? "");
     }, [ settings ]);
 
     function onSaveSettingsClick(): void {
@@ -48,6 +51,22 @@ const Settings = () => {
                         value={nickname}
                         sx={{mb:2}}
                     />
+                </Grid>
+                <Grid item xs={12} mb={1}>
+                    {/* <TextField id="outlined-basic" label={Strings.settings_nickname} variant="outlined" value={nickname} /> */}
+                    {token !== "" && 
+                        <TextField
+                            onChange={(newValue) => { setToken(newValue.target.value) }}
+                            id="filled-1"
+                            label="Token"
+                            variant="outlined"
+                            value={token}
+                            sx={{mb:2}}
+                            InputProps={{
+                                readOnly: true
+                            }}
+                        />
+                    }                    
                 </Grid>
                 <Grid item xs={12} textAlign={"center"}>
                     <Button size="small" variant="contained" onClick={onSaveSettingsClick}>{Strings.settings_save}</Button>
