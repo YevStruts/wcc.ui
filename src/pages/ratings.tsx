@@ -121,10 +121,10 @@ const Ratings = () => {
                                         <EmojiEventsIcon style={{ color: 'gold' }} fontSize="medium"></EmojiEventsIcon>
                                         <Typography fontSize={16} ml={1}>{Strings.ratings_worldchampion}</Typography>
                                     </Box>
-                                    <Box sx={{ display: 'flex', flexDirection: 'row', minWidth: 210 }}>
+                                    <Box sx={{ display: 'flex', flexDirection: 'row', minWidth: 210,  alignItems: "center" }}>
                                         <Avatar alt={"[-UNION-]Artempro"} src={"https://cdn.discordapp.com/avatars/328305220582899712/f46b07356d766b5c228dc3fcae3a29b6.png"} sx={{ width: 24, height: 24 }}/>
                                         <Link href={"/profile/41"} underline="none" fontSize={16} color="white" ml={1} mr={1}>[-UNION-]Artempro</Link>
-                                        <span className="fi fi-xx"></span>
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/White-blue-white_flag.svg" alt="svobodu rashke" height={13} width={17} />
                                     </Box>
                                 </Box>
                             </Grid>
