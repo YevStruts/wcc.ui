@@ -10,7 +10,7 @@ export const GetTournamentParticipants = (id : number) => {
 };
 
 export const GetTournamentsList = () => {
-    return axios.get(Constants.ApiUrls.tournament + `list`).then((response) => response.data);
+    return axios.get(Constants.ApiUrls.tournament).then((response) => response.data);
 };
 
 export const Join = (id: number) => {

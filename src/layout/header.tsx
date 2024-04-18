@@ -22,7 +22,8 @@ const pages = [
     { title: Strings.news, url: "/news" },
     { title: Strings.rules, url: "/rules" },
     { title: Strings.ratings, url: "/ratings" },
-    { title: Strings.tournaments, url: "/tournaments" },
+    // { title: Strings.tournaments, url: "/tournaments" },
+    { title: Strings.schedule, url: "/schedule"}
 ];
 
 const Header = () => {

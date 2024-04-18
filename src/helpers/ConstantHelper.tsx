@@ -23,6 +23,7 @@ export const Constants = {
         player: `${API}/player/`,
         player_poll: `${API}/player/poll`,
         news: `${API}/news/`,
+        schedule: `${API}/schedule/`,
         discord_authorize: `${API}/discord/authorize`,
         discord_exchange: `${API}/discord/exchange`,
         game: `${API}/game/`,
