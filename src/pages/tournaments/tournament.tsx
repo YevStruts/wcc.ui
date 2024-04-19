@@ -219,13 +219,13 @@ const Tournament = () => {
     }
 
     function OnGameDeleteConfirmed() {
-        DeleteGame(gameDelete).then((result) => {
-            /* result => true - leaved successfully */
-            // setShowLeave(!result);
-            // setShowJoin(result);
-            setConfirmationDialog(false);
-            window.location.reload();
-        });
+        // DeleteGame(gameDelete).then((result) => {
+        //     /* result => true - leaved successfully */
+        //     // setShowLeave(!result);
+        //     // setShowJoin(result);
+        //     setConfirmationDialog(false);
+        //     window.location.reload();
+        // });
     }
 
     function ConditionalSchedule(props: { isSwitz: boolean; }) {

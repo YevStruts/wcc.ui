@@ -29,9 +29,7 @@ export const EditGame = (id: number) => {
     }).then((response) => response.data);
 }
 
-export const DeleteGame = (id: number) => {
-    return axios.post(Constants.ApiUrls.game + `delete`,
-    {
-        id: id
-    }).then((response) => response.data);
+export const DeleteGame = (id: string) => {
+    return axios.delete(Constants.ApiUrls.game + encodeURIComponent(id))
+    .then((response) => response.data);
 }

@@ -8,6 +8,13 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import SmartDisplayIcon from '@mui/icons-material/SmartDisplay';
 import { format } from 'date-fns'
+import ConfirmationDialog from './ConfirmationDialog';
+import { useContext, useState } from 'react';
+import { DeleteGame } from '../services/GameService';
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { WhoAmIContext } from './WhoAmIContext';
+import { Constants } from '../helpers/ConstantHelper';
 
 export interface ScheduleProps {
   id: string,
@@ -21,10 +28,34 @@ export interface ScheduleProps {
 }
 
 type DenseTableProps = {
-  games: ScheduleProps[]
+  games: ScheduleProps[],
+  on_delete: (id : string) => void,
 }
 
-export default function DenseTable({ games } : DenseTableProps) {
+export default function DenseTable({ games, on_delete } : DenseTableProps) {
+  const whoAmI = useContext(WhoAmIContext);
+  
+  function deleteGameHeader() {
+    if (whoAmI === undefined || (whoAmI.role !== Constants.Roles.Admin && whoAmI.role !== Constants.Roles.Manager)) {
+        return;
+    }
+    return (
+      <TableCell></TableCell>
+    )
+  }
+
+  function deleteGameColumn(id : string) {
+    if (whoAmI === undefined || (whoAmI.role !== Constants.Roles.Admin && whoAmI.role !== Constants.Roles.Manager)) {
+        return;
+    }
+    return (
+      <TableCell align="center">
+        <IconButton aria-label="delete" onClick={() => on_delete(id)}>
+          <DeleteIcon />
+        </IconButton>
+      </TableCell>
+    )
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -36,6 +67,7 @@ export default function DenseTable({ games } : DenseTableProps) {
             <TableCell align="center">Game</TableCell>
             <TableCell align="left"></TableCell>
             <TableCell sx={{ width: 130 }} align="center">Youtube</TableCell>
+            {deleteGameHeader()}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -55,6 +87,7 @@ export default function DenseTable({ games } : DenseTableProps) {
                     </a>
                 ))}
               </TableCell>
+              {deleteGameColumn(row.id)}
             </TableRow>
           ))}
         </TableBody>

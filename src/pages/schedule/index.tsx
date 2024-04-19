@@ -6,6 +6,8 @@ import Layout from "../../layout/layout";
 import DenseTable, { ScheduleProps } from "../../components/DenseTable";
 import { GetSchedule, GetScheduleCount } from "../../services/ScheduleService";
 import { GetTournamentsList } from "../../services/TournamentsService";
+import { DeleteGame } from "../../services/GameService";
+import ConfirmationDialog from "../../components/ConfirmationDialog";
 
 const Title = Strings.schedule;
 
@@ -21,6 +23,9 @@ const Schedule = () => {
     const [pageCount, setPageCount] = useState<number>(1);
     const [games, setGames] = useState<ScheduleProps[]>([]);
 
+    const [confirmationDialog, setConfirmationDialog] = useState<boolean>(false);
+    const [gameDelete, setGameDelete] = useState<string>("");
+
     useEffect(() => {
         GetTournamentsList().then(tournaments => {
             setTournamentList(tournaments);
@@ -32,7 +37,6 @@ const Schedule = () => {
     }, []);
 
     function LoadSchedule(tournamentId: string, page: number, count: number) {
-        debugger;
         GetSchedule(tournamentId.toString(), page.toString(), count.toString())
         .then((data) => {
             GetScheduleCount(tournamentId).then(data => {
@@ -49,6 +53,19 @@ const Schedule = () => {
     function onTournamentChange(event: SyntheticEvent<Element, Event>, value: TournamentProps | null, reason: AutocompleteChangeReason, details?: AutocompleteChangeDetails<TournamentProps> | undefined): void {
         setTournament(value?.id ?? "");
         LoadSchedule(value?.id ?? "", 1, count);
+    }
+
+    function OnGameDelete(id : string) {
+        setGameDelete(id);
+        setConfirmationDialog(true);
+    }
+
+    function OnGameDeleteConfirmed() {
+        DeleteGame(gameDelete).then((result) => {
+            /* result => true - leaved successfully */
+            setConfirmationDialog(false);
+            window.location.reload();
+        });
     }
 
     return (
@@ -69,7 +86,8 @@ const Schedule = () => {
                     />
                 </Grid>
                 <Grid item xs={12} mb={1}>
-                    <DenseTable  games={games} />
+                    <DenseTable  games={games} on_delete={OnGameDelete}/>
+                    <ConfirmationDialog state={confirmationDialog} setState={setConfirmationDialog} callback={() => OnGameDeleteConfirmed()} />
                 </Grid>
                 <Grid item xs={12}>
                     <Stack alignItems="center">
