@@ -50,7 +50,7 @@ export default function DenseTable({ games, on_delete } : DenseTableProps) {
     }
     return (
       <TableCell align="center">
-        <IconButton aria-label="delete" onClick={() => on_delete(id)}>
+        <IconButton aria-label="delete" onClick={() => on_delete(id)} style={{ padding: 0 }}>
           <DeleteIcon />
         </IconButton>
       </TableCell>

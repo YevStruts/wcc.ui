@@ -28,7 +28,7 @@ const Schedule = () => {
 
     useEffect(() => {
         GetTournamentsList().then(tournaments => {
-            setTournamentList(tournaments);
+            setTournamentList(tournaments.reverse());
         })
     },[]);
 
