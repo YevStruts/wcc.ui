@@ -88,6 +88,21 @@ const RoundRobin = () => {
         });
     }, []);
 
+    var position = 0;
+    var positionState = ``;
+    var positionValue = 0;
+    function DeterminePosition(record: Standing) {
+        let newState = `${record.points}-${record.wl_wins}-${record.wl_losses}-${record.wins}-${record.losses}`;
+        position++;
+        if (positionState !== newState)
+        {
+            positionState = newState;
+            positionValue = position;
+            return positionValue;   
+        }
+        return positionValue;
+    }
+
     return (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -107,7 +122,7 @@ const RoundRobin = () => {
                 <TableRow
                     key={row.player}
                 >
-                    <TableCell align="right"></TableCell>
+                    <TableCell align="center">{DeterminePosition(row)}</TableCell>
                     <TableCell align="left">{row.player}</TableCell>
                     <TableCell align="right">{row.games}</TableCell>
                     <TableCell align="right">{row.wins}</TableCell>
