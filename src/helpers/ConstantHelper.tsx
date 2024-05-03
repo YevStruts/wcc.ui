@@ -33,6 +33,7 @@ export const Constants = {
         rating: `${API}/rating/`,
         user_whoami: `${API}/user/whoami`,
         country: `${API}/country`,
+        standing_roundrobin: `${API}/standing/roundrobin/`,
     },
     TournamentTypes: {
         Rating: 1,

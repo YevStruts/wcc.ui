@@ -12,6 +12,7 @@ import Profile from "../pages/profile";
 import Players from "../pages/manage/players";
 import Games from "../pages/manage/games";
 import Schedule from "../pages/schedule";
+import RoundRobin from "../pages/standing/roundrobin";
 
 (function () {
     let token = GetToken();
@@ -41,7 +42,8 @@ const Routes = () => {
         { path: "manage/players", element: <Players /> },
         { path: "settings", element: <Settings /> },
         { path: "profile/:id", element: <Profile /> },
-        { path: "schedule", element: <Schedule /> }
+        { path: "schedule", element: <Schedule /> },
+        { path: "standing/roundrobin/:id", element: <RoundRobin /> }
         // ...
     ]);
 };
