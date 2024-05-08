@@ -9,7 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 interface Standing {
     player: string;
@@ -70,9 +70,6 @@ const RoundRobin = () => {
                 } else if (scoreA < scoreB) {
                     teamB.wins++;
                     teamA.losses++;
-                } else {
-                    teamA.points++;
-                    teamB.points++;
                 }
                 teamA.wl_wins += scoreA;
                 teamA.wl_losses += scoreB;
@@ -104,36 +101,38 @@ const RoundRobin = () => {
     }
 
     return (
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-            <TableHead>
-                <TableRow>
-                <TableCell align="center"><Typography color="grey">#</Typography></TableCell>
-                <TableCell align="left"><Typography color="grey">name</Typography></TableCell>
-                <TableCell align="right"><Typography color="grey">g</Typography></TableCell>
-                <TableCell align="right"><Typography color="grey">w</Typography></TableCell>
-                <TableCell align="right"><Typography color="grey">l</Typography></TableCell>
-                <TableCell align="right"><Typography color="grey">w-l</Typography></TableCell>
-                <TableCell align="right"><Typography color="grey">p</Typography></TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                {standings.map((row) => (
-                <TableRow
-                    key={row.player}
-                >
-                    <TableCell align="center">{DeterminePosition(row)}</TableCell>
-                    <TableCell align="left">{row.player}</TableCell>
-                    <TableCell align="right">{row.games}</TableCell>
-                    <TableCell align="right">{row.wins}</TableCell>
-                    <TableCell align="right">{row.losses}</TableCell>
-                    <TableCell align="right">{row.wl_wins}-{row.wl_losses}</TableCell>
-                    <TableCell align="right">{row.points}</TableCell>
-                </TableRow>
-                ))}
-            </TableBody>
-            </Table>
-        </TableContainer>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <TableContainer component={Paper} sx={{ maxWidth:850 }}>
+                <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="center"><Typography color="grey">#</Typography></TableCell>
+                            <TableCell align="left"><Typography color="grey">name</Typography></TableCell>
+                            <TableCell align="right"><Typography color="grey">g</Typography></TableCell>
+                            <TableCell align="right"><Typography color="grey">w</Typography></TableCell>
+                            <TableCell align="right"><Typography color="grey">l</Typography></TableCell>
+                            <TableCell align="right"><Typography color="grey">w-l</Typography></TableCell>
+                            <TableCell align="right"><Typography color="grey">p</Typography></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {standings.map((row) => (
+                        <TableRow
+                            key={row.player}
+                        >
+                            <TableCell align="center">{DeterminePosition(row)}</TableCell>
+                            <TableCell align="left">{row.player}</TableCell>
+                            <TableCell align="right">{row.games}</TableCell>
+                            <TableCell align="right">{row.wins}</TableCell>
+                            <TableCell align="right">{row.losses}</TableCell>
+                            <TableCell align="right">{row.wl_wins}-{row.wl_losses}</TableCell>
+                            <TableCell align="right">{row.points}</TableCell>
+                        </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Box>
     );
 }
 export default RoundRobin;
