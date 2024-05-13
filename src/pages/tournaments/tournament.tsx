@@ -20,7 +20,7 @@ import EditGameDialog from "../../components/EditGameDialog";
 var decode = require('decode-html');
 
 export interface PlayerServerType {
-    id: number,
+    id: string,
     name: string,
     score: number
 }
@@ -63,12 +63,12 @@ const schedule_default : GameServerType[] = [{
     name: "",
     scheduled: Number(new Date()),
     home: {
-        id: 0,
+        id: ``,
         name: "TBD",
         score: 0
     },
     visitor: {
-        id: 0,
+        id: ``,
         name: "TBD",
         score: 0
     },
@@ -200,13 +200,13 @@ const Tournament = () => {
     }
 
     function OnGameEdit(id : number) {
-        GetGame(id).then((game) => {
-            console.log(game);
-            setGame(game);
-            // setTournament(tournament);
-            // setDisplayBracket(id !== 4);
-            setEditGameDialog(true);
-        });
+        // GetGame(id).then((game) => {
+        //     console.log(game);
+        //     setGame(game);
+        //     // setTournament(tournament);
+        //     // setDisplayBracket(id !== 4);
+        //     setEditGameDialog(true);
+        // });
     }
 
     function OnEditGameDialogClose() {
@@ -278,7 +278,7 @@ const Tournament = () => {
                     on_delete={OnGameDelete} />
             }
             <ConfirmationDialog state={confirmationDialog} setState={setConfirmationDialog} callback={() => OnGameDeleteConfirmed()} />
-            <EditGameDialog game={game ?? schedule_default[0]} state={editGameDialog} setState={setEditGameDialog} on_close_dialog={OnEditGameDialogClose}></EditGameDialog>
+            {/* <EditGameDialog game={game ?? schedule_default[0]} state={editGameDialog} setState={setEditGameDialog} on_close_dialog={OnEditGameDialogClose}></EditGameDialog> */}
           </>
         );
     }

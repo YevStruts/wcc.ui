@@ -12,9 +12,10 @@ import { useEffect, useState } from 'react';
 import { GetGame } from '../services/GameService';
 import { GameServerType } from '../pages/tournaments/tournament';
 import EditGame from './EditGame';
+import { ScheduleProps } from './DenseTable';
 
 interface EditGameDialogProps {
-    game: GameServerType,
+    game: ScheduleProps | undefined,
     state: boolean,
     setState: (value: boolean) => void,
     on_close_dialog: () => void

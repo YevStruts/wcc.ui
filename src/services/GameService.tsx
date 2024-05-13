@@ -10,10 +10,6 @@ export const SaveGame = (game : GameServerType) => {
     return axios.post(Constants.ApiUrls.game + `save`, game);
 };
 
-export const GetGame = (id: number) => {
-    return axios.get(Constants.ApiUrls.game + id).then((response) => response.data);
-}
-
 export const AddGame = (tournamentId: number, gametype: number) => {
     return axios.post(Constants.ApiUrls.game + `add`,
     {
@@ -22,8 +18,19 @@ export const AddGame = (tournamentId: number, gametype: number) => {
     }).then((response) => response.data);
 }
 
-export const EditGame = (id: number) => {
-    return axios.post(Constants.ApiUrls.game + `edit`,
+// export const EditGame = (id: number) => {
+//     return axios.post(Constants.ApiUrls.game + `edit`,
+//     {
+//         id: id
+//     }).then((response) => response.data);
+// }
+
+export const GetGame = (id: string) => {
+    return axios.get(Constants.ApiUrls.game + encodeURIComponent(id)).then((response) => response.data);
+}
+
+export const EditGame = (id: string) => {
+    return axios.post(Constants.ApiUrls.game + encodeURIComponent(id),
     {
         id: id
     }).then((response) => response.data);

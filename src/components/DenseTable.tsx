@@ -12,6 +12,7 @@ import ConfirmationDialog from './ConfirmationDialog';
 import { useContext, useState } from 'react';
 import { DeleteGame } from '../services/GameService';
 import { IconButton } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { WhoAmIContext } from './WhoAmIContext';
 import { Constants } from '../helpers/ConstantHelper';
@@ -29,10 +30,11 @@ export interface ScheduleProps {
 
 type DenseTableProps = {
   games: ScheduleProps[],
+  on_edit: (id: string) => void,
   on_delete: (id : string) => void,
 }
 
-export default function DenseTable({ games, on_delete } : DenseTableProps) {
+export default function DenseTable({ games, on_edit, on_delete } : DenseTableProps) {
   const whoAmI = useContext(WhoAmIContext);
   
   function deleteGameHeader() {
@@ -50,7 +52,10 @@ export default function DenseTable({ games, on_delete } : DenseTableProps) {
     }
     return (
       <TableCell align="center">
-        <IconButton aria-label="delete" onClick={() => on_delete(id)} style={{ padding: 0 }}>
+        <IconButton aria-label="edit" onClick={() => on_edit(id)} style={{ paddingTop: 0, paddingBottom: 0 }}>
+          <EditIcon />
+        </IconButton>
+        <IconButton aria-label="delete" onClick={() => on_delete(id)} style={{ paddingTop: 0, paddingBottom: 0 }}>
           <DeleteIcon />
         </IconButton>
       </TableCell>

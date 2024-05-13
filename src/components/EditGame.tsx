@@ -3,14 +3,15 @@ import { GameServerType, PlayerServerType } from "../pages/tournaments/tournamen
 import { Paper, Grid, TextField, Autocomplete, Button } from "@mui/material";
 import { SaveGame } from "../services/GameService";
 import { GetPlayers } from "../services/PlayerService";
+import { ScheduleProps } from "./DenseTable";
 
 interface EditGameProps {
-    game: GameServerType,
+    game: ScheduleProps | undefined,
     on_save_click: () => void
 }
 
 interface PlayerProps {
-    id: number,
+    id: string,
     name: string,
     avatarUrl: string
     score: number
@@ -18,11 +19,11 @@ interface PlayerProps {
 
 const EditGame = ({ game, on_save_click }: EditGameProps) => {
 
-    const [gameId, setGameId] = useState<number>();
+    const [gameId, setGameId] = useState<string>();
     const [gameName, setGameName] = useState<string>();
 
-    const [player1, setPlayer1] = useState<PlayerProps>({ id: 0, name: `TBD`, avatarUrl: ``, score: 0 });
-    const [player2, setPlayer2] = useState<PlayerProps>({ id: 0, name: `TBD`, avatarUrl: ``, score: 0 });
+    const [player1, setPlayer1] = useState<PlayerProps>({ id: '', name: `TBD`, avatarUrl: ``, score: 0 });
+    const [player2, setPlayer2] = useState<PlayerProps>({ id: '', name: `TBD`, avatarUrl: ``, score: 0 });
 
     const [score1, setScore1] = useState<number>();
     const [score2, setScore2] = useState<number>();
@@ -36,17 +37,17 @@ const EditGame = ({ game, on_save_click }: EditGameProps) => {
     useEffect(() => {
         if (game !== undefined) {
             setGameId(game.id);
-            setGameName(game.name);
+            // setGameName(game.name);
 
-            setPlayer1({ id: game.home.id, name: game.home.name, avatarUrl: ``, score: 0 });       
-            setPlayer2({ id: game.visitor.id, name: game.visitor.name, avatarUrl: ``, score: 0 });
+            setPlayer1({ id: game.id, name: game.sideA, avatarUrl: ``, score: 0 });       
+            setPlayer2({ id: game.id, name: game.sideB, avatarUrl: ``, score: 0 });
     
-            setScore1(game.home.score);
-            setScore2(game.visitor.score);
+            setScore1(game.scoreA);
+            setScore2(game.scoreB);
     
-            setYouTube1(game.youtubeUrls.length >= 1 ? game.youtubeUrls[0] : ``);
-            setYouTube2(game.youtubeUrls.length >= 2 ? game.youtubeUrls[1] : ``);
-            setYouTube3(game.youtubeUrls.length >= 3 ? game.youtubeUrls[2] : ``);
+            setYouTube1(game.youTube.length >= 1 ? game.youTube[0] : ``);
+            setYouTube2(game.youTube.length >= 2 ? game.youTube[1] : ``);
+            setYouTube3(game.youTube.length >= 3 ? game.youTube[2] : ``);
         }
 
         GetPlayers().then((data) => {
@@ -57,22 +58,22 @@ const EditGame = ({ game, on_save_click }: EditGameProps) => {
     function OnSaveClicked(): void {
         if (game === undefined || game === null) return;
 
-        game.name = gameName ?? game.name;
-        game.scheduled = new Date().getTime();
+        // game.name = gameName ?? game.name;
+        // game.date = new Date().getTime();
 
-        game.home.id = player1?.id ?? 0;
-        game.home.name = player1?.name ?? ``;
-        game.home.score = score1 ?? 0;
+        game.id = player1?.id ?? 0;
+        game.sideA = player1?.name ?? ``;
+        game.scoreA = score1 ?? 0;
 
-        game.visitor.id = player2?.id ?? 0;
-        game.visitor.name = player2?.name ?? ``;
-        game.visitor.score = score2 ?? 0;
+        game.id = player2?.id ?? 0;
+        game.sideB = player2?.name ?? ``;
+        game.scoreB = score2 ?? 0;
 
-        game.youtubeUrls[0] = youtube1 ?? ``;
-        game.youtubeUrls[1] = youtube2 ?? ``;
-        game.youtubeUrls[2] = youtube3 ?? ``;
+        game.youTube[0] = youtube1 ?? ``;
+        game.youTube[1] = youtube2 ?? ``;
+        game.youTube[2] = youtube3 ?? ``;
 
-        SaveGame(game);
+        // SaveGame(game);
 
         on_save_click();
     }
@@ -130,7 +131,7 @@ const EditGame = ({ game, on_save_click }: EditGameProps) => {
                                         <Autocomplete
                                             disablePortal
                                             id="cb-player-2"
-                                            options={players ?? []}
+                                            options={/*players ??*/ []}
                                             getOptionLabel={(option) => option.name}
                                             renderInput={(params) => <TextField {...params} label="Player" />}
                                             size="small"
