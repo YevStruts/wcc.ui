@@ -10,7 +10,7 @@ export const GetSchedule = (id : number) => {
 export const SaveGame = (game : ScheduleProps) => {
     return axios.post(Constants.ApiUrls.game, {
         id: game.id,
-        date: game.date,
+        scheduled: game.scheduled,
         gameType: 1,
         // Name: string,
         sideA: [ game.sideA ],
@@ -18,7 +18,7 @@ export const SaveGame = (game : ScheduleProps) => {
         scoreA: game.scoreA,
         scoreB: game.scoreB,
         tournamentId: game.tournamentId,
-        youtube: game.youtube 
+        youtube: game.youTube 
     });
 };
 

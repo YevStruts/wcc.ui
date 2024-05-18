@@ -19,7 +19,7 @@ import { Constants } from '../helpers/ConstantHelper';
 
 export interface ScheduleProps {
   id: string,
-  date: string,
+  scheduled: string,
   gameType: number,
   // Name: string,
   sideA: string,
@@ -27,7 +27,7 @@ export interface ScheduleProps {
   scoreA: number,
   scoreB: number,
   tournamentId: string,
-  youtube: string[] 
+  youTube: string[] 
 }
 
 type DenseTableProps = {
@@ -49,9 +49,9 @@ export default function DenseTable({ games, on_edit, on_delete } : DenseTablePro
   }
 
   function deleteGameColumn(id : string) {
-    if (whoAmI === undefined || (whoAmI.role !== Constants.Roles.Admin && whoAmI.role !== Constants.Roles.Manager)) {
-        return;
-    }
+    // if (whoAmI === undefined || (whoAmI.role !== Constants.Roles.Admin && whoAmI.role !== Constants.Roles.Manager)) {
+    //     return;
+    // }
     return (
       <TableCell align="center">
         <IconButton aria-label="edit" onClick={() => on_edit(id)} style={{ paddingTop: 0, paddingBottom: 0 }}>
@@ -83,12 +83,12 @@ export default function DenseTable({ games, on_edit, on_delete } : DenseTablePro
               key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">{format(new Date(row.date), 'MMMM dd, yyyy')}</TableCell>
+              <TableCell component="th" scope="row">{format(new Date(row.scheduled), 'MMMM dd, yyyy')}</TableCell>
               <TableCell align="right">{row.sideA}</TableCell>
               <TableCell align="center">{row.scoreA} - {row.scoreB}</TableCell>
               <TableCell align="left">{row.sideB}</TableCell>
               <TableCell align="center">
-                {row.youtube?.map((url, index) => (
+                {row.youTube?.map((url, index) => (
                     <a key={index} href={url} target="_blank">
                       <SmartDisplayIcon htmlColor='#F30F0A' />
                     </a>

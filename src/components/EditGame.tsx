@@ -56,9 +56,9 @@ const EditGame = ({ game, on_save_click }: EditGameProps) => {
                 setScore1(game.scoreA);
                 setScore2(game.scoreB);
         
-                setYouTube1(game.youtube.length >= 1 ? game.youtube[0] : ``);
-                setYouTube2(game.youtube.length >= 2 ? game.youtube[1] : ``);
-                setYouTube3(game.youtube.length >= 3 ? game.youtube[2] : ``);
+                setYouTube1(game.youTube.length >= 1 ? game.youTube[0] : ``);
+                setYouTube2(game.youTube.length >= 2 ? game.youTube[1] : ``);
+                setYouTube3(game.youTube.length >= 3 ? game.youTube[2] : ``);
             }
         });
     }, []);
@@ -84,7 +84,7 @@ const EditGame = ({ game, on_save_click }: EditGameProps) => {
 
         SaveGame({
             id: game.id,
-            date: game.date,
+            scheduled: game.scheduled,
             // Name: string,
             gameType: game.gameType,
             sideA: player1?.id ?? 0,
@@ -92,7 +92,7 @@ const EditGame = ({ game, on_save_click }: EditGameProps) => {
             scoreA: score1 ?? 0,
             scoreB: score2 ?? 0,
             tournamentId: game.tournamentId,
-            youtube: [
+            youTube: [
                 youtube1 ?? ``,
                 youtube2 ?? ``,
                 youtube3 ?? ``
