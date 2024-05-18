@@ -8,7 +8,6 @@ interface GameTypeProps {
 const GameType = ({ gametype, on_gametype_change } : GameTypeProps) => {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        debugger;
         var value = parseInt((event.target as HTMLInputElement).value);
         on_gametype_change(value);
     };

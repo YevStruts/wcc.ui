@@ -58,7 +58,7 @@ const Games = () => {
                 setPlayers(tmp);
             });
             // GetTournament(tournament.id).then((data) => {
-            //     debugger;
+            //     
             //     setTournament(data);
             //     let tmp : PlayerProps[] = [];
             //     data.participant.forEach((item : { id: number, name: string }) => {
@@ -100,28 +100,28 @@ const Games = () => {
     };
 
     function OnSaveClicked(): void {
-        if (gameId === undefined || gameId === null) return;
-        var game = schedule?.filter((element) => {
-            return element.id === gameId
-        })[0];
-        if (game === undefined || game === null) return;
+        // if (gameId === undefined || gameId === null) return;
+        // var game = schedule?.filter((element) => {
+        //     return element.id === gameId
+        // })[0];
+        // if (game === undefined || game === null) return;
 
-        game.name = gameName ?? game.name;
-        game.scheduled = new Date().getTime();
+        // game.name = gameName ?? game.name;
+        // game.scheduled = new Date().getTime();
 
-        game.home.id = player1?.id ?? 0;
-        game.home.name = player1?.name ?? ``;
-        game.home.score = score1 ?? 0;
+        // game.home.id = player1?.id ?? 0;
+        // game.home.name = player1?.name ?? ``;
+        // game.home.score = score1 ?? 0;
 
-        game.visitor.id = player2?.id ?? 0;
-        game.visitor.name = player2?.name ?? ``;
-        game.visitor.score = score2 ?? 0;
+        // game.visitor.id = player2?.id ?? 0;
+        // game.visitor.name = player2?.name ?? ``;
+        // game.visitor.score = score2 ?? 0;
 
-        game.youtubeUrls[0] = youtube1 ?? ``;
-        game.youtubeUrls[1] = youtube2 ?? ``;
-        game.youtubeUrls[2] = youtube3 ?? ``;
+        // game.youtubeUrls[0] = youtube1 ?? ``;
+        // game.youtubeUrls[1] = youtube2 ?? ``;
+        // game.youtubeUrls[2] = youtube3 ?? ``;
 
-        SaveGame(game);
+        // SaveGame(game);
     }
 
     return (
