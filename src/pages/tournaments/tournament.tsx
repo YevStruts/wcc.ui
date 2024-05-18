@@ -348,7 +348,6 @@ const Tournament = () => {
     function OnAddGameClicked(): void {
         if (tournament !== undefined) {
             AddGame(tournament.id, gameType).then((result) => {
-                // debugger;
                 /* result => true - leaved successfully */
                 // setShowLeave(!result);
                 // setShowJoin(result);

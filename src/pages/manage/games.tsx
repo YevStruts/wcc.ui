@@ -58,7 +58,7 @@ const Games = () => {
                 setPlayers(tmp);
             });
             // GetTournament(tournament.id).then((data) => {
-            //     debugger;
+            //     
             //     setTournament(data);
             //     let tmp : PlayerProps[] = [];
             //     data.participant.forEach((item : { id: number, name: string }) => {

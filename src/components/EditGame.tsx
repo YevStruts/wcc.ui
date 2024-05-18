@@ -35,23 +35,31 @@ const EditGame = ({ game, on_save_click }: EditGameProps) => {
     const [players, setPlayers] = useState<PlayerServerType[]>();
 
     useEffect(() => {
-        if (game !== undefined) {
-            setGameId(game.id);
-            // setGameName(game.name);
-
-            setPlayer1({ id: game.id, name: game.sideA, avatarUrl: ``, score: 0 });       
-            setPlayer2({ id: game.id, name: game.sideB, avatarUrl: ``, score: 0 });
-    
-            setScore1(game.scoreA);
-            setScore2(game.scoreB);
-    
-            setYouTube1(game.youTube.length >= 1 ? game.youTube[0] : ``);
-            setYouTube2(game.youTube.length >= 2 ? game.youTube[1] : ``);
-            setYouTube3(game.youTube.length >= 3 ? game.youTube[2] : ``);
-        }
-
         GetPlayers().then((data) => {
             setPlayers(data);
+
+            if (game !== undefined) {
+                setGameId(game.id);
+                // setGameName(game.name);
+
+                var playerA = data.find((player: { id: string; name: string }) => {
+                    return player.id === game.sideA[0]
+                });
+
+                var playerB = data.find((player: { id: string; name: string }) => {
+                    return player.id === game.sideB[0]
+                });
+
+                setPlayer1({ id: playerA.id, name: playerA.name, avatarUrl: ``, score: 0 });       
+                setPlayer2({ id: playerB.id, name: playerB.name, avatarUrl: ``, score: 0 });
+        
+                setScore1(game.scoreA);
+                setScore2(game.scoreB);
+        
+                setYouTube1(game.youtube.length >= 1 ? game.youtube[0] : ``);
+                setYouTube2(game.youtube.length >= 2 ? game.youtube[1] : ``);
+                setYouTube3(game.youtube.length >= 3 ? game.youtube[2] : ``);
+            }
         });
     }, []);
 
@@ -61,19 +69,35 @@ const EditGame = ({ game, on_save_click }: EditGameProps) => {
         // game.name = gameName ?? game.name;
         // game.date = new Date().getTime();
 
-        game.id = player1?.id ?? 0;
-        game.sideA = player1?.name ?? ``;
-        game.scoreA = score1 ?? 0;
+        // game.id = player1?.id ?? 0;
+        // game.sideA = player1?.name ?? ``;
+        // game.scoreA = score1 ?? 0;
 
-        game.id = player2?.id ?? 0;
-        game.sideB = player2?.name ?? ``;
-        game.scoreB = score2 ?? 0;
+        // game.id = player2?.id ?? 0;
+        // game.sideB = player2?.name ?? ``;
+        // game.scoreB = score2 ?? 0;
 
-        game.youTube[0] = youtube1 ?? ``;
-        game.youTube[1] = youtube2 ?? ``;
-        game.youTube[2] = youtube3 ?? ``;
+        // game.youtube[0] = youtube1 ?? ``;
+        // game.youtube[1] = youtube2 ?? ``;
+        // game.youtube[2] = youtube3 ?? ``;
+        debugger;
 
-        // SaveGame(game);
+        SaveGame({
+            id: game.id,
+            date: game.date,
+            // Name: string,
+            gameType: game.gameType,
+            sideA: player1?.id ?? 0,
+            sideB: player2?.id ?? 0,
+            scoreA: score1 ?? 0,
+            scoreB: score2 ?? 0,
+            tournamentId: game.tournamentId,
+            youtube: [
+                youtube1 ?? ``,
+                youtube2 ?? ``,
+                youtube3 ?? ``
+            ] 
+        });
 
         on_save_click();
     }

@@ -60,10 +60,9 @@ const Schedule = () => {
     }
 
     function OnGameEdit(id : string) {
-        GetGame(id).then((id) => {
-            debugger;
+        GetGame(id).then((game) => {
             // console.log(game);
-            // setGame(game);
+            setGame(game);
 
             setEditGameDialog(true);
         });

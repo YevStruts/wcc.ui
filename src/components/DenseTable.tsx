@@ -20,12 +20,14 @@ import { Constants } from '../helpers/ConstantHelper';
 export interface ScheduleProps {
   id: string,
   date: string,
+  gameType: number,
   // Name: string,
   sideA: string,
   sideB: string,
   scoreA: number,
   scoreB: number,
-  youTube: string[] 
+  tournamentId: string,
+  youtube: string[] 
 }
 
 type DenseTableProps = {
@@ -86,7 +88,7 @@ export default function DenseTable({ games, on_edit, on_delete } : DenseTablePro
               <TableCell align="center">{row.scoreA} - {row.scoreB}</TableCell>
               <TableCell align="left">{row.sideB}</TableCell>
               <TableCell align="center">
-                {row.youTube?.map((url, index) => (
+                {row.youtube?.map((url, index) => (
                     <a key={index} href={url} target="_blank">
                       <SmartDisplayIcon htmlColor='#F30F0A' />
                     </a>

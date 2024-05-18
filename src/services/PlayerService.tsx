@@ -11,7 +11,7 @@ export const GetProfile = (id : string) => {
 };
 
 export const GetPlayers = () => {
-    return axios.get(Constants.ApiUrls.player + 'list').then((response) => response.data);
+    return axios.get(Constants.ApiUrls.player).then((response) => response.data);
 };
 
 export const UpdatePlayer = (player : PlayersProps) => {
