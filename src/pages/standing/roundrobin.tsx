@@ -34,9 +34,9 @@ const RoundRobin = () => {
                 const result = match.result.split('-').map(Number);
                 const scoreA = result[0];
                 const scoreB = result[1];
-                if (!standingsMap.has(match.sideA[0])) {
-                    standingsMap.set(match.sideA[0], {
-                        player: match.sideA[0],
+                if (!standingsMap.has(match.sideA)) {
+                    standingsMap.set(match.sideA, {
+                        player: match.sideA,
                         games: 0,
                         wins: 0,
                         losses: 0,
@@ -45,9 +45,9 @@ const RoundRobin = () => {
                         points: 0
                     });
                 }
-                if (!standingsMap.has(match.sideB[0])) {
-                    standingsMap.set(match.sideB[0], {
-                        player: match.sideB[0],
+                if (!standingsMap.has(match.sideB)) {
+                    standingsMap.set(match.sideB, {
+                        player: match.sideB,
                         games: 0,
                         wins: 0,
                         losses: 0,
@@ -56,8 +56,8 @@ const RoundRobin = () => {
                         points: 0
                     });
                 }
-                const teamA = standingsMap.get(match.sideA[0])!;
-                const teamB = standingsMap.get(match.sideB[0])!;
+                const teamA = standingsMap.get(match.sideA)!;
+                const teamB = standingsMap.get(match.sideB)!;
                 teamA.games++;
                 teamB.games++;
 

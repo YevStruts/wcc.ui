@@ -80,7 +80,6 @@ const EditGame = ({ game, on_save_click }: EditGameProps) => {
         // game.youtube[0] = youtube1 ?? ``;
         // game.youtube[1] = youtube2 ?? ``;
         // game.youtube[2] = youtube3 ?? ``;
-        debugger;
 
         SaveGame({
             id: game.id,
