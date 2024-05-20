@@ -49,9 +49,9 @@ export default function DenseTable({ games, on_edit, on_delete } : DenseTablePro
   }
 
   function deleteGameColumn(id : string) {
-    // if (whoAmI === undefined || (whoAmI.role !== Constants.Roles.Admin && whoAmI.role !== Constants.Roles.Manager)) {
-    //     return;
-    // }
+    if (whoAmI === undefined || (whoAmI.role !== Constants.Roles.Admin && whoAmI.role !== Constants.Roles.Manager)) {
+        return;
+    }
     return (
       <TableCell align="center">
         <IconButton aria-label="edit" onClick={() => on_edit(id)} style={{ paddingTop: 0, paddingBottom: 0 }}>
