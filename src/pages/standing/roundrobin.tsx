@@ -15,6 +15,7 @@ interface Standing {
     player: string;
     games: number;
     wins: number;
+    draws: number;
     losses: number;
     wl_wins: number;
     wl_losses: number;
@@ -39,6 +40,7 @@ const RoundRobin = () => {
                         player: match.sideA,
                         games: 0,
                         wins: 0,
+                        draws: 0,
                         losses: 0,
                         wl_wins: 0,
                         wl_losses: 0,
@@ -50,6 +52,7 @@ const RoundRobin = () => {
                         player: match.sideB,
                         games: 0,
                         wins: 0,
+                        draws: 0,
                         losses: 0,
                         wl_wins: 0,
                         wl_losses: 0,
@@ -70,6 +73,9 @@ const RoundRobin = () => {
                 } else if (scoreA < scoreB) {
                     teamB.wins++;
                     teamA.losses++;
+                } else {
+                    teamB.draws++;
+                    teamA.draws++;
                 }
                 teamA.wl_wins += scoreA;
                 teamA.wl_losses += scoreB;
@@ -77,8 +83,8 @@ const RoundRobin = () => {
                 teamB.wl_losses += scoreA;
             });
             const standings: Standing[] = Array.from(standingsMap.values());
-            standings.sort((a, b) => a.wl_losses - b.wl_losses);
-            standings.sort((a, b) => b.wl_wins - a.wl_wins);
+            standings.sort((a, b) => a.losses - b.losses);
+            standings.sort((a, b) => b.wins - a.wins);
             standings.sort((a, b) => (b.wl_wins - b.wl_losses) - (a.wl_wins - a.wl_losses));
             standings.sort((a, b) => b.points - a.points);
             setStandings(standings);
@@ -110,6 +116,7 @@ const RoundRobin = () => {
                             <TableCell align="left"><Typography color="grey">name</Typography></TableCell>
                             <TableCell align="right"><Typography color="grey">g</Typography></TableCell>
                             <TableCell align="right"><Typography color="grey">w</Typography></TableCell>
+                            <TableCell align="right"><Typography color="grey">d</Typography></TableCell>
                             <TableCell align="right"><Typography color="grey">l</Typography></TableCell>
                             <TableCell align="right"><Typography color="grey">w-l</Typography></TableCell>
                             <TableCell align="right"><Typography color="grey">p</Typography></TableCell>
@@ -124,6 +131,7 @@ const RoundRobin = () => {
                             <TableCell align="left">{row.player}</TableCell>
                             <TableCell align="right">{row.games}</TableCell>
                             <TableCell align="right">{row.wins}</TableCell>
+                            <TableCell align="right">{row.draws}</TableCell>
                             <TableCell align="right">{row.losses}</TableCell>
                             <TableCell align="right">{row.wl_wins}-{row.wl_losses}</TableCell>
                             <TableCell align="right">{row.points}</TableCell>
