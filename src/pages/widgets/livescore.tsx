@@ -4,7 +4,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import { GetLiveScore } from "../../services/WidgetService";
 import { useParams } from "react-router-dom";
 
-interface LiveScoreType {
+export interface LiveScoreType {
     id: string,
     sideA: string,
     sideB: string,
@@ -17,15 +17,35 @@ interface LiveScoreType {
 
 const LiveScore = () => {
     const params = useParams();
-    const [liveScore, setLiveScore] = useState<LiveScoreType>();
+    const [id, setId] = useState<string>(``);
+    const [liveScore, setLiveScore] = useState<LiveScoreType>({
+        id: ``,
+        sideA: ``,
+        sideB: ``,
+        scoreA: 0,
+        scoreB: 0,
+        width: 150,
+        marginTop: 0,
+        marginRight: 0
+    });
 
     useEffect(() => {
-        let id = params.id;
-        if (id === null || id === undefined) return;
-        GetLiveScore(id).then(data => {
+        let paramId = params.id;
+        if (paramId === null || paramId === undefined) return;
+        GetLiveScore(paramId).then(data => {
             setLiveScore(data);
+            setId(data.id);
         })
     }, []);
+
+    useEffect(() => {
+        const interval = setInterval(function() {
+            GetLiveScore(id).then(data => {
+                setLiveScore(data);
+            })
+        }, 10000);        
+        return () => clearInterval(interval);
+    }, [ id ]);
 
     return (
         <Box sx={{ display: 'flex', justifyContent: 'right', marginTop: liveScore?.marginTop, marginRight: liveScore?.marginRight }}>

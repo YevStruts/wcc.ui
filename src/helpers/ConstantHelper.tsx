@@ -34,6 +34,7 @@ export const Constants = {
         user_whoami: `${API}/user/whoami`,
         country: `${API}/country`,
         standing_roundrobin: `${API}/standing/roundrobin/`,
+        widget: `${API}/widget`,
         widget_livescore: `${API}/widget/livescore/`,
     },
     TournamentTypes: {

@@ -14,6 +14,7 @@ import Games from "../pages/manage/games";
 import Schedule from "../pages/schedule";
 import RoundRobin from "../pages/standing/roundrobin";
 import LiveScore from "../pages/widgets/livescore";
+import Widgets from "../pages/widgets";
 
 (function () {
     let token = GetToken();
@@ -45,6 +46,7 @@ const Routes = () => {
         { path: "profile/:id", element: <Profile /> },
         { path: "schedule", element: <Schedule /> },
         { path: "standing/roundrobin/:id", element: <RoundRobin /> },
+        { path: "widgets/:id", element: <Widgets /> },
         { path: "widgets/livescore/:id", element: <LiveScore /> }
         // ...
     ]);
