@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRoutes } from "react-router-dom";
 import { GetLanguage, GetToken } from "../helpers/AuthHelper";
-import Ratings from "../pages/ratings";
+import Ratings from "../pages/rating";
 import News from "../pages/news";
 import Article from "../pages/news/article";
 import Tournaments from "../pages/tournaments";

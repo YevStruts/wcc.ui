@@ -75,6 +75,9 @@ const GridRating = ({ players }: GridRatingProps) => {
                             positionCounter++;
                             samePointsCount++;
                         }
+                        if (id == "players/40-A") {
+                            comment = "Champion in Vacation"
+                        }
                         return (
                             <StyledTableRow key={id}>
                                 <StyledTableCell>{positionCounter - samePointsCount}</StyledTableCell>
