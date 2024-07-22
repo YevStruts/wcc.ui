@@ -16,7 +16,7 @@ const Ratings = () => {
 
     useEffect(() => {
         GetRating().then((players) => {
-            var playersDefault = players.filter((p: PlayerProps) => p.name != "");
+            var playersDefault = players.filter((p: PlayerProps) => p.name != "[KR.S]Antoxa");
             setPlayers(playersDefault);
             setPlayersDefault(playersDefault);
         });
@@ -123,10 +123,9 @@ const Ratings = () => {
                                         <Typography fontSize={16} ml={1}>{Strings.ratings_worldchampion}</Typography>
                                     </Box>
                                     <Box sx={{ display: 'flex', flexDirection: 'row', minWidth: 210,  alignItems: "center" }}>
-                                        {/* <Avatar alt={"[-UNION-]Artempro"} src={"https://cdn.discordapp.com/avatars/328305220582899712/f46b07356d766b5c228dc3fcae3a29b6.png"} sx={{ width: 24, height: 24 }}/>
-                                        <Link href={"/profile/41"} underline="none" fontSize={16} color="white" ml={1} mr={1}>[-UNION-]Artempro</Link>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="13"><path d="m0 0h15v18H0" fill="#fff"/><path d="m0 4h15v5H0" fill="#0083d6"/></svg> */}
-                                        <Typography color={grey}>vacant</Typography>
+                                        <Avatar alt={"[KR.S]Antoxa"} src={"https://cdn.discordapp.com/avatars/356877087782600704/24ea6fbe221a226a5760a7c7824dfb10.png"} sx={{ width: 24, height: 24 }}/>
+                                        <Link href={"/profile/27"} underline="none" fontSize={16} color="white" ml={1} mr={1}>[KR.S]Antoxa</Link>
+                                        <span className="fi fi-xx"></span>
                                     </Box>
                                 </Box>
                             </Grid>
